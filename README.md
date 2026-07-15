@@ -1,6 +1,105 @@
 ## Table of Contents
-* [1. Installation](#installation)
-* [2. Manual Update](#manual-update)
+* [1. Features](#features)
+* [2. Installation](#installation)
+* [3. Manual Update](#manual-update)
+
+# Features
+- General
+  - Auto login (make sure to use DBMS credentials)
+  - Redirect from pilot menu to ALPA menu
+  - Skip all pilot advisories
+  - Bypass timeout page (automatically log back in)
+  - Go back to previous page instead of main menu (works from `MOTS` and `SCHS → MOTS`)
+  - Skip confirmation pages (works with `DTC`)
+  - Select a starting page (instead of the main menu)
+  - All *Better iCrew* popups can be minimized
+- `SCHS`
+  - Make action default (specify a value) or sticky (remember last value)
+  - Make bid period sticky (remember last value)
+  - Add bid period drop down selector
+- `SCHS → i`
+  - Make rotation numbers links
+  - View/print/copy schedule
+  - View/print/copy schedule + timecard
+  - Open SLP in new tab with current employee number
+  - Open SWAP in new tab with current employee number
+- `SCHS → n`
+  - View/print/copy schedule history
+  - Search for date or date range
+- `SCHS → i → rotation`
+  - View/print/copy rotation
+  - Open ROTS in new tab
+  - Open RPH in new tab
+  - Open MPI in new tab
+- `MOTS`
+  - Make bid period sticky (remember last value)
+  - Insert 'A' for option
+  - View/print/copy timecard
+  - Add bid period drop down selector
+- `MOTV`
+  - Add bid period drop down selector
+- `PRES`
+  - Add bid period drop down selector
+- `ROTS`
+  - Insert 'Y' for history
+- `ROTS → history`
+  - View/print/copy ROTS history
+- `ROTS → reserve open time`
+  - Insert 'D' for option
+- `23M7 (ROTS → Prev → o)`
+  - View/print/copy 23M7
+  - Search for employee number and/or date or date range and/or rotation number
+- `VTSS`
+  - Insert 'X' for displays
+  - Add bid period drop down selector
+  - Add bid period end drop down selector
+- `UDD`
+  - Make action sticky (remember last value)
+- `SLP`
+  - Add bid period drop down selector
+- `SWAP`
+  - Add bid period drop down selector
+- `LEAV`
+  - Add bid period drop down selector
+- `DTY`
+  - Add bid period drop down selector
+- `RS/RR`
+  - Add bid period drop down selector
+- `RPH`
+  - Print/copy RPH
+- `MPI`
+  - Print/copy MPI
+- `LAY-IOE`
+  - Add bid period drop down selector
+- `PMR`
+  - Add bid period drop down selector
+- `SC-SKED`
+  - Add bid period drop down selector
+- `CONF`
+  - Add bid period drop down selector
+- `FXDAY`
+  - Add bid period drop down selector
+- `LAYOVER`
+  - Add bid period drop down selector
+- `NQPS`
+  - Add bid period drop down selector
+- `OBWS`
+  - Add bid period drop down selector
+- `PSCR`
+  - Add bid period drop down selector
+- `DTC`
+  - Make base sticky (remember last value)
+  - Make equipment sticky (remember last value)
+  - Make position sticky (remember last value)
+  - Make begin date sticky (remember last value)
+  - Insert 'scre' for download
+  - Search for date or date range
+- `INVERSE`
+  - Add bid period drop down selector
+- `MAX-SC`
+  - Add bid period drop down selector
+- `SCHSOME`
+  - Add bid period drop down selector
 
 # Installation
 
