@@ -21,6 +21,7 @@
   - Make rotation numbers links
   - View/print/copy schedule
   - View/print/copy schedule + timecard
+  - View/print/copy schedule + vacation
   - Open SLP in new tab with current employee number
   - Open SWAP in new tab with current employee number
 - `SCHS → n`
@@ -38,6 +39,7 @@
   - Add bid period drop down selector
 - `MOTV`
   - Add bid period drop down selector
+  - View/print/copy vacation
 - `PRES`
   - Add bid period drop down selector
 - `ROTS`
