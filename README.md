@@ -19,37 +19,37 @@
   - Add bid period drop down selector
 - `SCHS → i`
   - Make rotation numbers links
-  - View/print/copy schedule
-  - View/print/copy schedule + timecard
-  - View/print/copy schedule + vacation
+  - View/print/copy/save schedule
+  - View/print/copy/save schedule + timecard
+  - View/print/copy/save schedule + vacation
   - Open SLP in new tab with current employee number
   - Open SWAP in new tab with current employee number
 - `SCHS → n`
-  - View/print/copy schedule history
+  - View/print/copy/save schedule history
   - Search for date or date range
 - `SCHS → i → rotation`
-  - View/print/copy rotation
+  - View/print/copy/save rotation
   - Open ROTS in new tab
   - Open RPH in new tab
   - Open MPI in new tab
 - `MOTS`
   - Make bid period sticky (remember last value)
   - Insert 'A' for option
-  - View/print/copy timecard
+  - View/print/copy/save timecard
   - Add bid period drop down selector
 - `MOTV`
   - Add bid period drop down selector
-  - View/print/copy vacation
+  - View/print/copy/save vacation
 - `PRES`
   - Add bid period drop down selector
 - `ROTS`
   - Insert 'Y' for history
 - `ROTS → history`
-  - View/print/copy ROTS history
+  - View/print/copy/save ROTS history
 - `ROTS → reserve open time`
   - Insert 'D' for option
 - `23M7 (ROTS → Prev → o)`
-  - View/print/copy 23M7
+  - View/print/copy/save 23M7
   - Search for employee number and/or date or date range and/or rotation number
 - `VTSS`
   - Insert 'X' for displays
@@ -68,9 +68,9 @@
 - `RS/RR`
   - Add bid period drop down selector
 - `RPH`
-  - Print/copy RPH
+  - Print/copy/save RPH
 - `MPI`
-  - Print/copy MPI
+  - Print/copy/save MPI
 - `LAY-IOE`
   - Add bid period drop down selector
 - `PMR`
