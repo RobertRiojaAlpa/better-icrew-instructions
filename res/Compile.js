@@ -1,4 +1,4 @@
-//v1
+//v2
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -30,7 +30,7 @@ class Compile {
     }
 
     static printString(textBlocks, fontSize = "100%") {
-        let textToPrint = TextBlock.getTextFromTextBlocks(textBlocks);
+        let textToPrint = TextBlock.getHtmlFromTextBlocks(textBlocks);
 
         // Create a temporary hidden iframe
         const iframe = document.createElement("iframe");
