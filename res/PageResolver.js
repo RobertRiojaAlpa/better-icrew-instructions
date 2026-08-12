@@ -1,4 +1,4 @@
-//v2
+//v3
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -26,7 +26,7 @@ class PageResolver {
 
     static isOnLoginPage(menu) {
         return menu === Menus.NONE
-               && $("#Frame_MainContainer")[0].innerText.trim() === "To change your password CLICK HERE";
+               && $("#Frame_MainContainer")[0]?.innerText?.trim() === "To change your password CLICK HERE";
     }
 
     static isOnLogoutPage(menu) {
