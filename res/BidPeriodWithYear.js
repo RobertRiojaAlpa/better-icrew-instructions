@@ -1,4 +1,4 @@
-//v4
+//v5
 class BidPeriodWithYear {
     constructor(bidPeriod, year) {
         this.bidPeriod = bidPeriod;
@@ -19,13 +19,13 @@ class BidPeriodWithYear {
 
     getEndDatePilotFormat() { return DateUtils.dateToPilotFormat(this.bidPeriod.getEndDate(this.year)); }
 
-    year4Digit() { return this.year < 100 ? 2000 + this.year : this.year; }
-
-    year2Digit() { return this.year < 100 ? this.year : this.year % 100; }
+    year2Digit() { return this.year % 100; }
 
     previous() { return this.bidPeriod.value > BidPeriods.JAN.value ? new BidPeriodWithYear(this.bidPeriod.previous(), this.year) : new BidPeriodWithYear(BidPeriods.DEC, this.year - 1); }
 
     next() { return this.bidPeriod.value < BidPeriods.DEC.value ? new BidPeriodWithYear(this.bidPeriod.next(), this.year) : new BidPeriodWithYear(BidPeriods.JAN, this.year + 1); }
+	
+	toString() { return this.bidPeriod.get3LetterCode() + (this.year2Digit() + "").padStart(2, "0"); }
 	
 	equals(bidPeriodWithYear) { return this.bidPeriod.value === bidPeriodWithYear.bidPeriod.value && this.year === bidPeriodWithYear.year; }
 }
