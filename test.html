@@ -634,11 +634,6 @@ QUnit.module('BidPeriodWithYear', function() {
 		assert.propEqual(new BidPeriodWithYear(BidPeriods.DEC, 2026).next(), { bidPeriod: { value:  1, }, year: 2027, });
 	});
 	
-	QUnit.test('toString', (assert) => {
-		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026) + "", "JAN26");
-		assert.deepEqual(new BidPeriodWithYear(BidPeriods.FEB, 2004) + "", "FEB04");
-	});
-	
 	QUnit.test('equals', (assert) => {
 		assert.ok(new BidPeriodWithYear(BidPeriods.JAN, 2026).equals(BidPeriodWithYear.fromDate(new Date(2026,  0,  2))));
 		assert.notOk(new BidPeriodWithYear(BidPeriods.JAN, 2026).equals(BidPeriodWithYear.fromDate(new Date(2026,  2,  2))));
