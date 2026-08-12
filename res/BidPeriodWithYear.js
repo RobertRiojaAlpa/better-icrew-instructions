@@ -1,4 +1,4 @@
-//v5
+//v6
 class BidPeriodWithYear {
     constructor(bidPeriod, year) {
         this.bidPeriod = bidPeriod;
@@ -24,8 +24,6 @@ class BidPeriodWithYear {
     previous() { return this.bidPeriod.value > BidPeriods.JAN.value ? new BidPeriodWithYear(this.bidPeriod.previous(), this.year) : new BidPeriodWithYear(BidPeriods.DEC, this.year - 1); }
 
     next() { return this.bidPeriod.value < BidPeriods.DEC.value ? new BidPeriodWithYear(this.bidPeriod.next(), this.year) : new BidPeriodWithYear(BidPeriods.JAN, this.year + 1); }
-	
-	toString() { return this.bidPeriod.get3LetterCode() + (this.year2Digit() + "").padStart(2, "0"); }
 	
 	equals(bidPeriodWithYear) { return this.bidPeriod.value === bidPeriodWithYear.bidPeriod.value && this.year === bidPeriodWithYear.year; }
 }
