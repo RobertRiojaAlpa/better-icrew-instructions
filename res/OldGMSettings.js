@@ -1,4 +1,4 @@
-//v3
+//v4
 class OldGMSettings {
     static SettingMigration = class {
         constructor(oldValue, newValue, versionChanged) {
@@ -142,6 +142,9 @@ class OldGMSettings {
     static get PRE_3_0_SCHS_ACTION_INSERT_VALUE() { return new this.SettingMigration("schsActionInsertValue", "schsActionDefaultValue", "3.0"); }
     static get PRE_3_0_TEST_PAGE_RESOLVERS_PAGE() { return new this.SettingMigration("testPageResolversPage", "", "3.0"); }
     static get PRE_3_0_SAVE_ALL_SCHS_DATA_CURRENT_FILE_SAVED() { return new this.SettingMigration("saveAllSchsDataCurrentFileSaved", "", "3.0"); }
+    static get PRE_3_0_PAGE_VALUE_MOTV_EMPLOYEE_NUMBER() { return new this.SettingMigration("pageValueMotvEmployeeNumber", "pageValueMotvDataEmployeeNumber", "3.0"); }
+    static get PRE_3_0_PAGE_VALUE_MOTV_BEGIN_BID_PERIOD() { return new this.SettingMigration("pageValueMotvBeginBidPeriod", "pageValueMotvDataBeginBidPeriod", "3.0"); }
+    static get PRE_3_0_PAGE_VALUE_MOTV_CURRENT_BID_PERIOD() { return new this.SettingMigration("pageValueMotvCurrentBidPeriod", "pageValueMotvDataCurrentBidPeriod", "3.0"); }
 
     static ALL_MIGRATIONS() { return Object.entries(Object.getOwnPropertyDescriptors(OldGMSettings))
                                          .filter(([key, descriptor]) => typeof descriptor.get === "function")

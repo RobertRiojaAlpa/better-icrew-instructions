@@ -1,4 +1,4 @@
-//v11
+//v12
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -158,9 +158,11 @@ class GMSettings {
     static get PAGE_VALUE_MOTS_EMPLOYEE_NUMBER() { return new this.GMSetting("pageValueMotsEmployeeNumber", ""); }
     static get PAGE_VALUE_MOTS_BID_PERIOD() { return new this.GMSetting("pageValueMotsBidPeriod", ""); }
 
-    static get PAGE_VALUE_MOTV_EMPLOYEE_NUMBER() { return new this.GMSetting("pageValueMotvEmployeeNumber", ""); }
-    static get PAGE_VALUE_MOTV_BEGIN_BID_PERIOD() { return new this.GMSetting("pageValueMotvBeginBidPeriod", ""); }
-    static get PAGE_VALUE_MOTV_CURRENT_BID_PERIOD() { return new this.GMSetting("pageValueMotvCurrentBidPeriod", ""); }
+    static get PAGE_VALUE_MOTV_BID_PERIOD() { return new this.GMSetting("pageValueMotvBidPeriod", ""); }
+	
+    static get PAGE_VALUE_MOTV_DATA_EMPLOYEE_NUMBER() { return new this.GMSetting("pageValueMotvDataEmployeeNumber", ""); }
+    static get PAGE_VALUE_MOTV_DATA_BEGIN_BID_PERIOD() { return new this.GMSetting("pageValueMotvDataBeginBidPeriod", ""); }
+    static get PAGE_VALUE_MOTV_DATA_CURRENT_BID_PERIOD() { return new this.GMSetting("pageValueMotvDataCurrentBidPeriod", ""); }
 
     static get PAGE_VALUE_SICK_EMPLOYEE_NUMBER() { return new this.GMSetting("pageValueSickEmployeeNumber", ""); }
 
