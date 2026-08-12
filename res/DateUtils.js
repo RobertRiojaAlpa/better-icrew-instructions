@@ -1,10 +1,10 @@
-//v1
+//v2
 class DateUtils {
     static get $3_LETTER_CODES() { return ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]; }
 
     static dateMonthTo3LetterCode(month) { return this.$3_LETTER_CODES[month] }
 
-    static $3LetterCodeToDateMonth(code) { return this.$3_LETTER_CODES.indexOf(code) }
+    static $3LetterCodeToDateMonth(code) { return this.$3_LETTER_CODES.findIndex(c => c.toLowerCase() === code.toLowerCase()) }
 
     static dateToPilotFormat(date) {
         return String(date.getDate()).padStart(2, "0") + this.dateMonthTo3LetterCode(date.getMonth()) + String(date.getFullYear()).slice(2);
