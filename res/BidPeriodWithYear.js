@@ -1,4 +1,4 @@
-//v6
+//v7
 class BidPeriodWithYear {
     constructor(bidPeriod, year) {
         this.bidPeriod = bidPeriod;
@@ -7,7 +7,7 @@ class BidPeriodWithYear {
 
     static fromDate(date) { return new BidPeriodWithYear(BidPeriod.fromDate(date), date.getFullYear()); }
 	
-	static now() { return new BidPeriodWithYear(BidPeriods.now(), new Date().getFullYear()); }
+	static now() { return new BidPeriodWithYear(BidPeriod.now(), new Date().getFullYear()); }
 
     getDateRange() { return this.bidPeriod.getDateRange(this.year); }
 
