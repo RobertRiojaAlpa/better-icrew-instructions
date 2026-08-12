@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>QUnit</title>
+		<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.26.0.css">
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+		<script src="https://code.jquery.com/qunit/qunit-2.26.0.js"></script>
+		<script src="res/DateUtils.js"></script>
+		<script src="res/BidPeriod.js"></script>
+		<script src="res/BidPeriods.js"></script>
+		<script src="res/BidPeriodWithYear.js"></script>
+	</body>
+</html>
+<script>
+QUnit.module('DateUtils', function() {
+	QUnit.test('dateMonthTo3LetterCode', (assert) => {
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 0), "JAN");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 1), "FEB");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 2), "MAR");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 3), "APR");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 4), "MAY");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 5), "JUN");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 6), "JUL");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 7), "AUG");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 8), "SEP");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode( 9), "OCT");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode(10), "NOV");
+		assert.deepEqual(DateUtils.dateMonthTo3LetterCode(11), "DEC");
+	});
+	
+	QUnit.test('$3LetterCodeToDateMonth', (assert) => {
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("JAN"),  0);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("FEB"),  1);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("MAR"),  2);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("APR"),  3);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("MAY"),  4);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("JUN"),  5);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("JUL"),  6);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("AUG"),  7);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("SEP"),  8);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("OCT"),  9);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("NOV"), 10);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("DEC"), 11);
+		
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("jan"),  0);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("feb"),  1);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("mar"),  2);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("apr"),  3);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("may"),  4);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("jun"),  5);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("jul"),  6);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("aug"),  7);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("sep"),  8);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("oct"),  9);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("nov"), 10);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("dec"), 11);
+		                                                    
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("JaN"),  0);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("fEb"),  1);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("mAr"),  2);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("apr"),  3);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("May"),  4);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("juN"),  5);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("jul"),  6);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("aUG"),  7);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("sep"),  8);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("oCT"),  9);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("nov"), 10);
+		assert.deepEqual(DateUtils.$3LetterCodeToDateMonth("DeC"), 11);
+	})
+	
+	QUnit.test('dateToPilotFormat', (assert) => {
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  0, 26)), "26JAN26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  1, 19)), "19FEB26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  2, 14)), "14MAR26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  3,  9)), "09APR26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  4,  2)), "02MAY26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  5,  5)), "05JUN26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  6, 12)), "12JUL26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  7,  4)), "04AUG26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  8,  6)), "06SEP26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026,  9, 23)), "23OCT26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026, 10, 16)), "16NOV26");
+		assert.deepEqual(DateUtils.dateToPilotFormat(new Date(2026, 11, 27)), "27DEC26");
+	});
+	
+	QUnit.test('pilotFormatToDate', (assert) => {
+		assert.deepEqual(DateUtils.pilotFormatToDate("26JAN26"), new Date(2026,  0, 26));
+		assert.deepEqual(DateUtils.pilotFormatToDate("19FEB26"), new Date(2026,  1, 19));
+		assert.deepEqual(DateUtils.pilotFormatToDate("14MAR26"), new Date(2026,  2, 14));
+		assert.deepEqual(DateUtils.pilotFormatToDate("09APR26"), new Date(2026,  3,  9));
+		assert.deepEqual(DateUtils.pilotFormatToDate("02MAY26"), new Date(2026,  4,  2));
+		assert.deepEqual(DateUtils.pilotFormatToDate("05JUN26"), new Date(2026,  5,  5));
+		assert.deepEqual(DateUtils.pilotFormatToDate("12JUL26"), new Date(2026,  6, 12));
+		assert.deepEqual(DateUtils.pilotFormatToDate("04AUG26"), new Date(2026,  7,  4));
+		assert.deepEqual(DateUtils.pilotFormatToDate("06SEP26"), new Date(2026,  8,  6));
+		assert.deepEqual(DateUtils.pilotFormatToDate("23OCT26"), new Date(2026,  9, 23));
+		assert.deepEqual(DateUtils.pilotFormatToDate("16NOV26"), new Date(2026, 10, 16));
+		assert.deepEqual(DateUtils.pilotFormatToDate("27DEC26"), new Date(2026, 11, 27));
+		
+		assert.deepEqual(DateUtils.pilotFormatToDate("26jan26"), new Date(2026,  0, 26));
+		assert.deepEqual(DateUtils.pilotFormatToDate("19feb26"), new Date(2026,  1, 19));
+		assert.deepEqual(DateUtils.pilotFormatToDate("14mar26"), new Date(2026,  2, 14));
+		assert.deepEqual(DateUtils.pilotFormatToDate("09apr26"), new Date(2026,  3,  9));
+		assert.deepEqual(DateUtils.pilotFormatToDate("02may26"), new Date(2026,  4,  2));
+		assert.deepEqual(DateUtils.pilotFormatToDate("05jun26"), new Date(2026,  5,  5));
+		assert.deepEqual(DateUtils.pilotFormatToDate("12jul26"), new Date(2026,  6, 12));
+		assert.deepEqual(DateUtils.pilotFormatToDate("04aug26"), new Date(2026,  7,  4));
+		assert.deepEqual(DateUtils.pilotFormatToDate("06sep26"), new Date(2026,  8,  6));
+		assert.deepEqual(DateUtils.pilotFormatToDate("23oct26"), new Date(2026,  9, 23));
+		assert.deepEqual(DateUtils.pilotFormatToDate("16nov26"), new Date(2026, 10, 16));
+		assert.deepEqual(DateUtils.pilotFormatToDate("27dec26"), new Date(2026, 11, 27));
+		
+		assert.deepEqual(DateUtils.pilotFormatToDate("26JaN26"), new Date(2026,  0, 26));
+		assert.deepEqual(DateUtils.pilotFormatToDate("19fEb26"), new Date(2026,  1, 19));
+		assert.deepEqual(DateUtils.pilotFormatToDate("14mAr26"), new Date(2026,  2, 14));
+		assert.deepEqual(DateUtils.pilotFormatToDate("09apr26"), new Date(2026,  3,  9));
+		assert.deepEqual(DateUtils.pilotFormatToDate("02May26"), new Date(2026,  4,  2));
+		assert.deepEqual(DateUtils.pilotFormatToDate("05juN26"), new Date(2026,  5,  5));
+		assert.deepEqual(DateUtils.pilotFormatToDate("12jul26"), new Date(2026,  6, 12));
+		assert.deepEqual(DateUtils.pilotFormatToDate("04aUG26"), new Date(2026,  7,  4));
+		assert.deepEqual(DateUtils.pilotFormatToDate("06sep26"), new Date(2026,  8,  6));
+		assert.deepEqual(DateUtils.pilotFormatToDate("23oCT26"), new Date(2026,  9, 23));
+		assert.deepEqual(DateUtils.pilotFormatToDate("16nov26"), new Date(2026, 10, 16));
+		assert.deepEqual(DateUtils.pilotFormatToDate("27DeC26"), new Date(2026, 11, 27));
+	});
+	
+	QUnit.test('getDateRange', (assert) => {
+	    assert.deepEqual(DateUtils.getDateRange(new Date(2026,  0,  1), new Date(2026,  0,  1)), [ new Date(2026,  0,  1), ]);
+	    assert.deepEqual(DateUtils.getDateRange(new Date(2026,  0,  1), new Date(2026,  0,  2)), [ new Date(2026,  0,  1), new Date(2026,  0,  2), ]);
+	    assert.deepEqual(DateUtils.getDateRange(new Date(2026,  0,  2), new Date(2026,  0,  1)), [ ]);
+	
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 0]), [ new Date(2026,  0,  1), new Date(2026,  0,  2), new Date(2026,  0,  3),
+																					    new Date(2026,  0,  4), new Date(2026,  0,  5), new Date(2026,  0,  6),
+																					    new Date(2026,  0,  7), new Date(2026,  0,  8), new Date(2026,  0,  9),
+																					    new Date(2026,  0, 10), new Date(2026,  0, 11), new Date(2026,  0, 12),
+																					    new Date(2026,  0, 13), new Date(2026,  0, 14), new Date(2026,  0, 15),
+																					    new Date(2026,  0, 16), new Date(2026,  0, 17), new Date(2026,  0, 18),
+																					    new Date(2026,  0, 19), new Date(2026,  0, 20), new Date(2026,  0, 21),
+																					    new Date(2026,  0, 22), new Date(2026,  0, 23), new Date(2026,  0, 24),
+																					    new Date(2026,  0, 25), new Date(2026,  0, 26), new Date(2026,  0, 27),
+																					    new Date(2026,  0, 28), new Date(2026,  0, 29), new Date(2026,  0, 30), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 1]), [ new Date(2026,  0, 31),
+																						new Date(2026,  1,  1), new Date(2026,  1,  2), new Date(2026,  1,  3),
+																					    new Date(2026,  1,  4), new Date(2026,  1,  5), new Date(2026,  1,  6),
+																					    new Date(2026,  1,  7), new Date(2026,  1,  8), new Date(2026,  1,  9),
+																					    new Date(2026,  1, 10), new Date(2026,  1, 11), new Date(2026,  1, 12),
+																					    new Date(2026,  1, 13), new Date(2026,  1, 14), new Date(2026,  1, 15),
+																					    new Date(2026,  1, 16), new Date(2026,  1, 17), new Date(2026,  1, 18),
+																					    new Date(2026,  1, 19), new Date(2026,  1, 20), new Date(2026,  1, 21),
+																					    new Date(2026,  1, 22), new Date(2026,  1, 23), new Date(2026,  1, 24),
+																					    new Date(2026,  1, 25), new Date(2026,  1, 26), new Date(2026,  1, 27),
+																					    new Date(2026,  1, 28), new Date(2026,  2,  1), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 2]), [ new Date(2026,  2,  2), new Date(2026,  2,  3),
+																					    new Date(2026,  2,  4), new Date(2026,  2,  5), new Date(2026,  2,  6),
+																					    new Date(2026,  2,  7), new Date(2026,  2,  8), new Date(2026,  2,  9),
+																					    new Date(2026,  2, 10), new Date(2026,  2, 11), new Date(2026,  2, 12),
+																					    new Date(2026,  2, 13), new Date(2026,  2, 14), new Date(2026,  2, 15),
+																					    new Date(2026,  2, 16), new Date(2026,  2, 17), new Date(2026,  2, 18),
+																					    new Date(2026,  2, 19), new Date(2026,  2, 20), new Date(2026,  2, 21),
+																					    new Date(2026,  2, 22), new Date(2026,  2, 23), new Date(2026,  2, 24),
+																					    new Date(2026,  2, 25), new Date(2026,  2, 26), new Date(2026,  2, 27),
+																					    new Date(2026,  2, 28), new Date(2026,  2, 29), new Date(2026,  2, 30),
+																						new Date(2026,  2, 31),	]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 3]), [ new Date(2026,  3,  1), new Date(2026,  3,  2), new Date(2026,  3,  3),
+																					    new Date(2026,  3,  4), new Date(2026,  3,  5), new Date(2026,  3,  6),
+																					    new Date(2026,  3,  7), new Date(2026,  3,  8), new Date(2026,  3,  9),
+																					    new Date(2026,  3, 10), new Date(2026,  3, 11), new Date(2026,  3, 12),
+																					    new Date(2026,  3, 13), new Date(2026,  3, 14), new Date(2026,  3, 15),
+																					    new Date(2026,  3, 16), new Date(2026,  3, 17), new Date(2026,  3, 18),
+																					    new Date(2026,  3, 19), new Date(2026,  3, 20), new Date(2026,  3, 21),
+																					    new Date(2026,  3, 22), new Date(2026,  3, 23), new Date(2026,  3, 24),
+																					    new Date(2026,  3, 25), new Date(2026,  3, 26), new Date(2026,  3, 27),
+																					    new Date(2026,  3, 28), new Date(2026,  3, 29), new Date(2026,  3, 30),
+																						new Date(2026,  4,  1), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 4]), [ new Date(2026,  4,  2), new Date(2026,  4,  3),
+																					    new Date(2026,  4,  4), new Date(2026,  4,  5), new Date(2026,  4,  6),
+																					    new Date(2026,  4,  7), new Date(2026,  4,  8), new Date(2026,  4,  9),
+																					    new Date(2026,  4, 10), new Date(2026,  4, 11), new Date(2026,  4, 12),
+																					    new Date(2026,  4, 13), new Date(2026,  4, 14), new Date(2026,  4, 15),
+																					    new Date(2026,  4, 16), new Date(2026,  4, 17), new Date(2026,  4, 18),
+																					    new Date(2026,  4, 19), new Date(2026,  4, 20), new Date(2026,  4, 21),
+																					    new Date(2026,  4, 22), new Date(2026,  4, 23), new Date(2026,  4, 24),
+																					    new Date(2026,  4, 25), new Date(2026,  4, 26), new Date(2026,  4, 27),
+																					    new Date(2026,  4, 28), new Date(2026,  4, 29), new Date(2026,  4, 30),
+																						new Date(2026,  4, 31), new Date(2026,  5,  1), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 5]), [ new Date(2026,  5,  2), new Date(2026,  5,  3),
+																					    new Date(2026,  5,  4), new Date(2026,  5,  5), new Date(2026,  5,  6),
+																					    new Date(2026,  5,  7), new Date(2026,  5,  8), new Date(2026,  5,  9),
+																					    new Date(2026,  5, 10), new Date(2026,  5, 11), new Date(2026,  5, 12),
+																					    new Date(2026,  5, 13), new Date(2026,  5, 14), new Date(2026,  5, 15),
+																					    new Date(2026,  5, 16), new Date(2026,  5, 17), new Date(2026,  5, 18),
+																					    new Date(2026,  5, 19), new Date(2026,  5, 20), new Date(2026,  5, 21),
+																					    new Date(2026,  5, 22), new Date(2026,  5, 23), new Date(2026,  5, 24),
+																					    new Date(2026,  5, 25), new Date(2026,  5, 26), new Date(2026,  5, 27),
+																					    new Date(2026,  5, 28), new Date(2026,  5, 29), new Date(2026,  5, 30),
+																						new Date(2026,  6,  1), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 6]), [ new Date(2026,  6,  2), new Date(2026,  6,  3),
+																					    new Date(2026,  6,  4), new Date(2026,  6,  5), new Date(2026,  6,  6),
+																					    new Date(2026,  6,  7), new Date(2026,  6,  8), new Date(2026,  6,  9),
+																					    new Date(2026,  6, 10), new Date(2026,  6, 11), new Date(2026,  6, 12),
+																					    new Date(2026,  6, 13), new Date(2026,  6, 14), new Date(2026,  6, 15),
+																					    new Date(2026,  6, 16), new Date(2026,  6, 17), new Date(2026,  6, 18),
+																					    new Date(2026,  6, 19), new Date(2026,  6, 20), new Date(2026,  6, 21),
+																					    new Date(2026,  6, 22), new Date(2026,  6, 23), new Date(2026,  6, 24),
+																					    new Date(2026,  6, 25), new Date(2026,  6, 26), new Date(2026,  6, 27),
+																					    new Date(2026,  6, 28), new Date(2026,  6, 29), new Date(2026,  6, 30),
+																						new Date(2026,  6, 31), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 7]), [ new Date(2026,  7,  1), new Date(2026,  7,  2), new Date(2026,  7,  3),
+																					    new Date(2026,  7,  4), new Date(2026,  7,  5), new Date(2026,  7,  6),
+																					    new Date(2026,  7,  7), new Date(2026,  7,  8), new Date(2026,  7,  9),
+																					    new Date(2026,  7, 10), new Date(2026,  7, 11), new Date(2026,  7, 12),
+																					    new Date(2026,  7, 13), new Date(2026,  7, 14), new Date(2026,  7, 15),
+																					    new Date(2026,  7, 16), new Date(2026,  7, 17), new Date(2026,  7, 18),
+																					    new Date(2026,  7, 19), new Date(2026,  7, 20), new Date(2026,  7, 21),
+																					    new Date(2026,  7, 22), new Date(2026,  7, 23), new Date(2026,  7, 24),
+																					    new Date(2026,  7, 25), new Date(2026,  7, 26), new Date(2026,  7, 27),
+																					    new Date(2026,  7, 28), new Date(2026,  7, 29), new Date(2026,  7, 30), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 8]), [ new Date(2026,  7, 31),
+																						new Date(2026,  8,  1), new Date(2026,  8,  2), new Date(2026,  8,  3),
+																					    new Date(2026,  8,  4), new Date(2026,  8,  5), new Date(2026,  8,  6),
+																					    new Date(2026,  8,  7), new Date(2026,  8,  8), new Date(2026,  8,  9),
+																					    new Date(2026,  8, 10), new Date(2026,  8, 11), new Date(2026,  8, 12),
+																					    new Date(2026,  8, 13), new Date(2026,  8, 14), new Date(2026,  8, 15),
+																					    new Date(2026,  8, 16), new Date(2026,  8, 17), new Date(2026,  8, 18),
+																					    new Date(2026,  8, 19), new Date(2026,  8, 20), new Date(2026,  8, 21),
+																					    new Date(2026,  8, 22), new Date(2026,  8, 23), new Date(2026,  8, 24),
+																					    new Date(2026,  8, 25), new Date(2026,  8, 26), new Date(2026,  8, 27),
+																					    new Date(2026,  8, 28), new Date(2026,  8, 29), new Date(2026,  8, 30), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[ 9]), [ new Date(2026,  9,  1), new Date(2026,  9,  2), new Date(2026,  9,  3),
+																					    new Date(2026,  9,  4), new Date(2026,  9,  5), new Date(2026,  9,  6),
+																					    new Date(2026,  9,  7), new Date(2026,  9,  8), new Date(2026,  9,  9),
+																					    new Date(2026,  9, 10), new Date(2026,  9, 11), new Date(2026,  9, 12),
+																					    new Date(2026,  9, 13), new Date(2026,  9, 14), new Date(2026,  9, 15),
+																					    new Date(2026,  9, 16), new Date(2026,  9, 17), new Date(2026,  9, 18),
+																					    new Date(2026,  9, 19), new Date(2026,  9, 20), new Date(2026,  9, 21),
+																					    new Date(2026,  9, 22), new Date(2026,  9, 23), new Date(2026,  9, 24),
+																					    new Date(2026,  9, 25), new Date(2026,  9, 26), new Date(2026,  9, 27),
+																					    new Date(2026,  9, 28), new Date(2026,  9, 29), new Date(2026,  9, 30),
+																						new Date(2026,  9, 31), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[10]), [ new Date(2026, 10,  1), new Date(2026, 10,  2), new Date(2026, 10,  3),
+																					    new Date(2026, 10,  4), new Date(2026, 10,  5), new Date(2026, 10,  6),
+																					    new Date(2026, 10,  7), new Date(2026, 10,  8), new Date(2026, 10,  9),
+																					    new Date(2026, 10, 10), new Date(2026, 10, 11), new Date(2026, 10, 12),
+																					    new Date(2026, 10, 13), new Date(2026, 10, 14), new Date(2026, 10, 15),
+																					    new Date(2026, 10, 16), new Date(2026, 10, 17), new Date(2026, 10, 18),
+																					    new Date(2026, 10, 19), new Date(2026, 10, 20), new Date(2026, 10, 21),
+																					    new Date(2026, 10, 22), new Date(2026, 10, 23), new Date(2026, 10, 24),
+																					    new Date(2026, 10, 25), new Date(2026, 10, 26), new Date(2026, 10, 27),
+																					    new Date(2026, 10, 28), new Date(2026, 10, 29), new Date(2026, 10, 30), ]);
+																						
+		assert.deepEqual(DateUtils.getDateRange(...BidPeriods.DATE_RANGES(2026)[11]), [ new Date(2026, 11,  1), new Date(2026, 11,  2), new Date(2026, 11,  3),
+																					    new Date(2026, 11,  4), new Date(2026, 11,  5), new Date(2026, 11,  6),
+																					    new Date(2026, 11,  7), new Date(2026, 11,  8), new Date(2026, 11,  9),
+																					    new Date(2026, 11, 10), new Date(2026, 11, 11), new Date(2026, 11, 12),
+																					    new Date(2026, 11, 13), new Date(2026, 11, 14), new Date(2026, 11, 15),
+																					    new Date(2026, 11, 16), new Date(2026, 11, 17), new Date(2026, 11, 18),
+																					    new Date(2026, 11, 19), new Date(2026, 11, 20), new Date(2026, 11, 21),
+																					    new Date(2026, 11, 22), new Date(2026, 11, 23), new Date(2026, 11, 24),
+																					    new Date(2026, 11, 25), new Date(2026, 11, 26), new Date(2026, 11, 27),
+																					    new Date(2026, 11, 28), new Date(2026, 11, 29), new Date(2026, 11, 30),
+																						new Date(2026, 11, 31), ]);
+	});
+});
+
+QUnit.module('BidPeriods', function() {
+	QUnit.test('static variables', (assert) => {
+		assert.propEqual(BidPeriods.JAN, { value:  1, });
+		assert.propEqual(BidPeriods.FEB, { value:  2, });
+		assert.propEqual(BidPeriods.MAR, { value:  3, });
+		assert.propEqual(BidPeriods.APR, { value:  4, });
+		assert.propEqual(BidPeriods.MAY, { value:  5, });
+		assert.propEqual(BidPeriods.JUN, { value:  6, });
+		assert.propEqual(BidPeriods.JUL, { value:  7, });
+		assert.propEqual(BidPeriods.AUG, { value:  8, });
+		assert.propEqual(BidPeriods.SEP, { value:  9, });
+		assert.propEqual(BidPeriods.OCT, { value: 10, });
+		assert.propEqual(BidPeriods.NOV, { value: 11, });
+		assert.propEqual(BidPeriods.DEC, { value: 12, });
+	});
+	
+	QUnit.test('getDateRangeForDate', (assert) => {
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  0, 15)), [new Date(2026,  0,  1), new Date(2026,  0, 30)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  1, 15)), [new Date(2026,  0, 31), new Date(2026,  2,  1)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  2, 15)), [new Date(2026,  2,  2), new Date(2026,  2, 31)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  3, 15)), [new Date(2026,  3,  1), new Date(2026,  4,  1)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  4, 15)), [new Date(2026,  4,  2), new Date(2026,  5,  1)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  5, 15)), [new Date(2026,  5,  2), new Date(2026,  6,  1)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  6, 15)), [new Date(2026,  6,  2), new Date(2026,  6, 31)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  7, 15)), [new Date(2026,  7,  1), new Date(2026,  7, 30)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  8, 15)), [new Date(2026,  7, 31), new Date(2026,  8, 30)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026,  9, 15)), [new Date(2026,  9,  1), new Date(2026,  9, 31)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026, 10, 15)), [new Date(2026, 10,  1), new Date(2026, 10, 30)]);
+		assert.deepEqual(BidPeriods.getDateRangeForDate(new Date(2026, 11, 15)), [new Date(2026, 11,  1), new Date(2026, 11, 31)]);
+	});
+	
+	QUnit.test('getStartDateForDate', (assert) => {
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  0, 15)), new Date(2026,  0,  1));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  1, 15)), new Date(2026,  0, 31));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  2, 15)), new Date(2026,  2,  2));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  3, 15)), new Date(2026,  3,  1));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  4, 15)), new Date(2026,  4,  2));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  5, 15)), new Date(2026,  5,  2));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  6, 15)), new Date(2026,  6,  2));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  7, 15)), new Date(2026,  7,  1));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  8, 15)), new Date(2026,  7, 31));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026,  9, 15)), new Date(2026,  9,  1));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026, 10, 15)), new Date(2026, 10,  1));
+		assert.deepEqual(BidPeriods.getStartDateForDate(new Date(2026, 11, 15)), new Date(2026, 11,  1));
+	});
+	
+	QUnit.test('getEndDateForDate', (assert) => {
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  0, 15)), new Date(2026,  0, 30));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  1, 15)), new Date(2026,  2,  1));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  2, 15)), new Date(2026,  2, 31));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  3, 15)), new Date(2026,  4,  1));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  4, 15)), new Date(2026,  5,  1));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  5, 15)), new Date(2026,  6,  1));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  6, 15)), new Date(2026,  6, 31));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  7, 15)), new Date(2026,  7, 30));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  8, 15)), new Date(2026,  8, 30));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026,  9, 15)), new Date(2026,  9, 31));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026, 10, 15)), new Date(2026, 10, 30));
+		assert.deepEqual(BidPeriods.getEndDateForDate(new Date(2026, 11, 15)), new Date(2026, 11, 31));
+	});
+});
+
+QUnit.module('BidPeriod', function() {
+	QUnit.test('constructor', (assert) => {
+		assert.propEqual(new BidPeriod(1), { value:  1, });
+	});
+	
+	QUnit.test('from3LetterCode', (assert) => {
+		assert.propEqual(BidPeriod.from3LetterCode("JAN"), { value:  1, });
+		assert.propEqual(BidPeriod.from3LetterCode("FEB"), { value:  2, });
+		assert.propEqual(BidPeriod.from3LetterCode("MAR"), { value:  3, });
+		assert.propEqual(BidPeriod.from3LetterCode("APR"), { value:  4, });
+		assert.propEqual(BidPeriod.from3LetterCode("MAY"), { value:  5, });
+		assert.propEqual(BidPeriod.from3LetterCode("JUN"), { value:  6, });
+		assert.propEqual(BidPeriod.from3LetterCode("JUL"), { value:  7, });
+		assert.propEqual(BidPeriod.from3LetterCode("AUG"), { value:  8, });
+		assert.propEqual(BidPeriod.from3LetterCode("SEP"), { value:  9, });
+		assert.propEqual(BidPeriod.from3LetterCode("OCT"), { value: 10, });
+		assert.propEqual(BidPeriod.from3LetterCode("NOV"), { value: 11, });
+		assert.propEqual(BidPeriod.from3LetterCode("DEC"), { value: 12, });
+		
+		assert.propEqual(BidPeriod.from3LetterCode("jan"), { value:  1, });
+		assert.propEqual(BidPeriod.from3LetterCode("feb"), { value:  2, });
+		assert.propEqual(BidPeriod.from3LetterCode("mar"), { value:  3, });
+		assert.propEqual(BidPeriod.from3LetterCode("apr"), { value:  4, });
+		assert.propEqual(BidPeriod.from3LetterCode("may"), { value:  5, });
+		assert.propEqual(BidPeriod.from3LetterCode("jun"), { value:  6, });
+		assert.propEqual(BidPeriod.from3LetterCode("jul"), { value:  7, });
+		assert.propEqual(BidPeriod.from3LetterCode("aug"), { value:  8, });
+		assert.propEqual(BidPeriod.from3LetterCode("sep"), { value:  9, });
+		assert.propEqual(BidPeriod.from3LetterCode("oct"), { value: 10, });
+		assert.propEqual(BidPeriod.from3LetterCode("nov"), { value: 11, });
+		assert.propEqual(BidPeriod.from3LetterCode("dec"), { value: 12, });
+		
+		assert.propEqual(BidPeriod.from3LetterCode("JaN"), { value:  1, });
+		assert.propEqual(BidPeriod.from3LetterCode("fEb"), { value:  2, });
+		assert.propEqual(BidPeriod.from3LetterCode("mAr"), { value:  3, });
+		assert.propEqual(BidPeriod.from3LetterCode("apr"), { value:  4, });
+		assert.propEqual(BidPeriod.from3LetterCode("May"), { value:  5, });
+		assert.propEqual(BidPeriod.from3LetterCode("juN"), { value:  6, });
+		assert.propEqual(BidPeriod.from3LetterCode("jul"), { value:  7, });
+		assert.propEqual(BidPeriod.from3LetterCode("aUG"), { value:  8, });
+		assert.propEqual(BidPeriod.from3LetterCode("sep"), { value:  9, });
+		assert.propEqual(BidPeriod.from3LetterCode("oCT"), { value: 10, });
+		assert.propEqual(BidPeriod.from3LetterCode("nov"), { value: 11, });
+		assert.propEqual(BidPeriod.from3LetterCode("DeC"), { value: 12, });
+	});
+	
+	QUnit.test('fromDateMonth', (assert) => {
+		assert.propEqual(BidPeriod.fromDateMonth( 0), { value:  1, });
+		assert.propEqual(BidPeriod.fromDateMonth( 1), { value:  2, });
+		assert.propEqual(BidPeriod.fromDateMonth( 2), { value:  3, });
+		assert.propEqual(BidPeriod.fromDateMonth( 3), { value:  4, });
+		assert.propEqual(BidPeriod.fromDateMonth( 4), { value:  5, });
+		assert.propEqual(BidPeriod.fromDateMonth( 5), { value:  6, });
+		assert.propEqual(BidPeriod.fromDateMonth( 6), { value:  7, });
+		assert.propEqual(BidPeriod.fromDateMonth( 7), { value:  8, });
+		assert.propEqual(BidPeriod.fromDateMonth( 8), { value:  9, });
+		assert.propEqual(BidPeriod.fromDateMonth( 9), { value: 10, });
+		assert.propEqual(BidPeriod.fromDateMonth(10), { value: 11, });
+		assert.propEqual(BidPeriod.fromDateMonth(11), { value: 12, });
+	});
+	
+	QUnit.test('fromDate', (assert) => {
+		//Start of bid period
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  0,  1)), { value:  1, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  0, 31)), { value:  2, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  2,  2)), { value:  3, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  3,  1)), { value:  4, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  4,  2)), { value:  5, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  5,  2)), { value:  6, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  6,  2)), { value:  7, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  7,  1)), { value:  8, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  7, 31)), { value:  9, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  9,  1)), { value: 10, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 10,  1)), { value: 11, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 11,  1)), { value: 12, });
+		
+		//End of bid period
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  0, 30)), { value:  1, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  2,  1)), { value:  2, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  2, 31)), { value:  3, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  4,  1)), { value:  4, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  5,  1)), { value:  5, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  6,  1)), { value:  6, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  6, 31)), { value:  7, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  7, 30)), { value:  8, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  8, 30)), { value:  9, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  9, 31)), { value: 10, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 10, 30)), { value: 11, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 11, 31)), { value: 12, });
+		
+		//Middle of bid period
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  0, 15)), { value:  1, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  1, 15)), { value:  2, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  2, 15)), { value:  3, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  3, 15)), { value:  4, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  4, 15)), { value:  5, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  5, 15)), { value:  6, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  6, 15)), { value:  7, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  7, 15)), { value:  8, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  8, 15)), { value:  9, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026,  9, 15)), { value: 10, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 10, 15)), { value: 11, });
+		assert.propEqual(BidPeriod.fromDate(new Date(2026, 11, 15)), { value: 12, });
+	});
+	
+	QUnit.test('toInt', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.toInt(),  1);
+		assert.deepEqual(BidPeriods.FEB.toInt(),  2);
+		assert.deepEqual(BidPeriods.MAR.toInt(),  3);
+		assert.deepEqual(BidPeriods.APR.toInt(),  4);
+		assert.deepEqual(BidPeriods.MAY.toInt(),  5);
+		assert.deepEqual(BidPeriods.JUN.toInt(),  6);
+		assert.deepEqual(BidPeriods.JUL.toInt(),  7);
+		assert.deepEqual(BidPeriods.AUG.toInt(),  8);
+		assert.deepEqual(BidPeriods.SEP.toInt(),  9);
+		assert.deepEqual(BidPeriods.OCT.toInt(), 10);
+		assert.deepEqual(BidPeriods.NOV.toInt(), 11);
+		assert.deepEqual(BidPeriods.DEC.toInt(), 12);
+	});
+	
+	QUnit.test('get3LetterCode', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.get3LetterCode(), "JAN");
+		assert.deepEqual(BidPeriods.FEB.get3LetterCode(), "FEB");
+		assert.deepEqual(BidPeriods.MAR.get3LetterCode(), "MAR");
+		assert.deepEqual(BidPeriods.APR.get3LetterCode(), "APR");
+		assert.deepEqual(BidPeriods.MAY.get3LetterCode(), "MAY");
+		assert.deepEqual(BidPeriods.JUN.get3LetterCode(), "JUN");
+		assert.deepEqual(BidPeriods.JUL.get3LetterCode(), "JUL");
+		assert.deepEqual(BidPeriods.AUG.get3LetterCode(), "AUG");
+		assert.deepEqual(BidPeriods.SEP.get3LetterCode(), "SEP");
+		assert.deepEqual(BidPeriods.OCT.get3LetterCode(), "OCT");
+		assert.deepEqual(BidPeriods.NOV.get3LetterCode(), "NOV");
+		assert.deepEqual(BidPeriods.DEC.get3LetterCode(), "DEC");
+	});
+	
+	QUnit.test('getDateRange', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.getDateRange(2026), [new Date(2026,  0,  1), new Date(2026,  0, 30)]);
+		assert.deepEqual(BidPeriods.FEB.getDateRange(2026), [new Date(2026,  0, 31), new Date(2026,  2,  1)]);
+		assert.deepEqual(BidPeriods.MAR.getDateRange(2026), [new Date(2026,  2,  2), new Date(2026,  2, 31)]);
+		assert.deepEqual(BidPeriods.APR.getDateRange(2026), [new Date(2026,  3,  1), new Date(2026,  4,  1)]);
+		assert.deepEqual(BidPeriods.MAY.getDateRange(2026), [new Date(2026,  4,  2), new Date(2026,  5,  1)]);
+		assert.deepEqual(BidPeriods.JUN.getDateRange(2026), [new Date(2026,  5,  2), new Date(2026,  6,  1)]);
+		assert.deepEqual(BidPeriods.JUL.getDateRange(2026), [new Date(2026,  6,  2), new Date(2026,  6, 31)]);
+		assert.deepEqual(BidPeriods.AUG.getDateRange(2026), [new Date(2026,  7,  1), new Date(2026,  7, 30)]);
+		assert.deepEqual(BidPeriods.SEP.getDateRange(2026), [new Date(2026,  7, 31), new Date(2026,  8, 30)]);
+		assert.deepEqual(BidPeriods.OCT.getDateRange(2026), [new Date(2026,  9,  1), new Date(2026,  9, 31)]);
+		assert.deepEqual(BidPeriods.NOV.getDateRange(2026), [new Date(2026, 10,  1), new Date(2026, 10, 30)]);
+		assert.deepEqual(BidPeriods.DEC.getDateRange(2026), [new Date(2026, 11,  1), new Date(2026, 11, 31)]);
+	});
+	
+	QUnit.test('getStartDate', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.getStartDate(2026), new Date(2026,  0,  1));
+		assert.deepEqual(BidPeriods.FEB.getStartDate(2026), new Date(2026,  0, 31));
+		assert.deepEqual(BidPeriods.MAR.getStartDate(2026), new Date(2026,  2,  2));
+		assert.deepEqual(BidPeriods.APR.getStartDate(2026), new Date(2026,  3,  1));
+		assert.deepEqual(BidPeriods.MAY.getStartDate(2026), new Date(2026,  4,  2));
+		assert.deepEqual(BidPeriods.JUN.getStartDate(2026), new Date(2026,  5,  2));
+		assert.deepEqual(BidPeriods.JUL.getStartDate(2026), new Date(2026,  6,  2));
+		assert.deepEqual(BidPeriods.AUG.getStartDate(2026), new Date(2026,  7,  1));
+		assert.deepEqual(BidPeriods.SEP.getStartDate(2026), new Date(2026,  7, 31));
+		assert.deepEqual(BidPeriods.OCT.getStartDate(2026), new Date(2026,  9,  1));
+		assert.deepEqual(BidPeriods.NOV.getStartDate(2026), new Date(2026, 10,  1));
+		assert.deepEqual(BidPeriods.DEC.getStartDate(2026), new Date(2026, 11,  1));
+	});
+	
+	QUnit.test('getEndDate', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.getEndDate(2026), new Date(2026,  0, 30));
+		assert.deepEqual(BidPeriods.FEB.getEndDate(2026), new Date(2026,  2,  1));
+		assert.deepEqual(BidPeriods.MAR.getEndDate(2026), new Date(2026,  2, 31));
+		assert.deepEqual(BidPeriods.APR.getEndDate(2026), new Date(2026,  4,  1));
+		assert.deepEqual(BidPeriods.MAY.getEndDate(2026), new Date(2026,  5,  1));
+		assert.deepEqual(BidPeriods.JUN.getEndDate(2026), new Date(2026,  6,  1));
+		assert.deepEqual(BidPeriods.JUL.getEndDate(2026), new Date(2026,  6, 31));
+		assert.deepEqual(BidPeriods.AUG.getEndDate(2026), new Date(2026,  7, 30));
+		assert.deepEqual(BidPeriods.SEP.getEndDate(2026), new Date(2026,  8, 30));
+		assert.deepEqual(BidPeriods.OCT.getEndDate(2026), new Date(2026,  9, 31));
+		assert.deepEqual(BidPeriods.NOV.getEndDate(2026), new Date(2026, 10, 30));
+		assert.deepEqual(BidPeriods.DEC.getEndDate(2026), new Date(2026, 11, 31));
+	});
+	
+	QUnit.test('getDateMonth', (assert) => {
+		assert.deepEqual(BidPeriods.JAN.getDateMonth(),  0);
+		assert.deepEqual(BidPeriods.FEB.getDateMonth(),  1);
+		assert.deepEqual(BidPeriods.MAR.getDateMonth(),  2);
+		assert.deepEqual(BidPeriods.APR.getDateMonth(),  3);
+		assert.deepEqual(BidPeriods.MAY.getDateMonth(),  4);
+		assert.deepEqual(BidPeriods.JUN.getDateMonth(),  5);
+		assert.deepEqual(BidPeriods.JUL.getDateMonth(),  6);
+		assert.deepEqual(BidPeriods.AUG.getDateMonth(),  7);
+		assert.deepEqual(BidPeriods.SEP.getDateMonth(),  8);
+		assert.deepEqual(BidPeriods.OCT.getDateMonth(),  9);
+		assert.deepEqual(BidPeriods.NOV.getDateMonth(), 10);
+		assert.deepEqual(BidPeriods.DEC.getDateMonth(), 11);
+	});
+	
+	QUnit.test('previous', (assert) => {
+		assert.propEqual(BidPeriods.JAN.previous(), { value: 12, });
+		assert.propEqual(BidPeriods.FEB.previous(), { value:  1, });
+		assert.propEqual(BidPeriods.MAR.previous(), { value:  2, });
+		assert.propEqual(BidPeriods.APR.previous(), { value:  3, });
+		assert.propEqual(BidPeriods.MAY.previous(), { value:  4, });
+		assert.propEqual(BidPeriods.JUN.previous(), { value:  5, });
+		assert.propEqual(BidPeriods.JUL.previous(), { value:  6, });
+		assert.propEqual(BidPeriods.AUG.previous(), { value:  7, });
+		assert.propEqual(BidPeriods.SEP.previous(), { value:  8, });
+		assert.propEqual(BidPeriods.OCT.previous(), { value:  9, });
+		assert.propEqual(BidPeriods.NOV.previous(), { value: 10, });
+		assert.propEqual(BidPeriods.DEC.previous(), { value: 11, });
+	});
+	
+	QUnit.test('next', (assert) => {
+		assert.propEqual(BidPeriods.JAN.next(), { value:  2, });
+		assert.propEqual(BidPeriods.FEB.next(), { value:  3, });
+		assert.propEqual(BidPeriods.MAR.next(), { value:  4, });
+		assert.propEqual(BidPeriods.APR.next(), { value:  5, });
+		assert.propEqual(BidPeriods.MAY.next(), { value:  6, });
+		assert.propEqual(BidPeriods.JUN.next(), { value:  7, });
+		assert.propEqual(BidPeriods.JUL.next(), { value:  8, });
+		assert.propEqual(BidPeriods.AUG.next(), { value:  9, });
+		assert.propEqual(BidPeriods.SEP.next(), { value: 10, });
+		assert.propEqual(BidPeriods.OCT.next(), { value: 11, });
+		assert.propEqual(BidPeriods.NOV.next(), { value: 12, });
+		assert.propEqual(BidPeriods.DEC.next(), { value:  1, });
+	});
+	
+	QUnit.test('equals', (assert) => {
+		assert.ok(new BidPeriod(1).equals(BidPeriod.fromDateMonth(0)));
+		assert.notOk(new BidPeriod(1).equals(BidPeriod.fromDateMonth(2)));
+	});
+});
+
+QUnit.module('BidPeriodWithYear', function() {
+	QUnit.test('constructor', (assert) => {
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026), { bidPeriod: { value:  1, }, year: 2026, });
+	});
+	
+	QUnit.test('fromDate', (assert) => {
+		assert.propEqual(BidPeriodWithYear.fromDate(new Date(2026,  7, 24)), { bidPeriod: { value: 8, }, year: 2026, });
+	});
+	
+	QUnit.test('getDateRange', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.AUG, 2026).getDateRange(), [new Date(2026, 7,  1), new Date(2026,  7, 30)]);
+	});
+	
+	QUnit.test('getStartDate', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.SEP, 2026).getStartDate(), new Date(2026, 7, 31));
+	});
+	
+	QUnit.test('getEndDate', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.OCT, 2026).getEndDate(), new Date(2026, 9, 31));
+	});
+	
+	QUnit.test('getStartDatePilotFormat', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.FEB, 2026).getStartDatePilotFormat(), "31JAN26");
+	});
+	
+	QUnit.test('getEndDatePilotFormat', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.MAR, 2026).getEndDatePilotFormat(), "31MAR26");
+	});
+	
+	QUnit.test('year4Digit', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2004).year4Digit(), 2004);
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).year4Digit(), 2026);
+	});
+	
+	QUnit.test('year2Digit', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2004).year2Digit(),  4);
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).year2Digit(), 26);
+	});
+	
+	QUnit.test('previous', (assert) => {
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).previous(), { bidPeriod: { value: 12, }, year: 2025, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.FEB, 2026).previous(), { bidPeriod: { value:  1, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.MAR, 2026).previous(), { bidPeriod: { value:  2, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.APR, 2026).previous(), { bidPeriod: { value:  3, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.MAY, 2026).previous(), { bidPeriod: { value:  4, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JUN, 2026).previous(), { bidPeriod: { value:  5, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JUL, 2026).previous(), { bidPeriod: { value:  6, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.AUG, 2026).previous(), { bidPeriod: { value:  7, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.SEP, 2026).previous(), { bidPeriod: { value:  8, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.OCT, 2026).previous(), { bidPeriod: { value:  9, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.NOV, 2026).previous(), { bidPeriod: { value: 10, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.DEC, 2026).previous(), { bidPeriod: { value: 11, }, year: 2026, });
+	});
+	
+	QUnit.test('next', (assert) => {
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).next(), { bidPeriod: { value:  2, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.FEB, 2026).next(), { bidPeriod: { value:  3, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.MAR, 2026).next(), { bidPeriod: { value:  4, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.APR, 2026).next(), { bidPeriod: { value:  5, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.MAY, 2026).next(), { bidPeriod: { value:  6, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JUN, 2026).next(), { bidPeriod: { value:  7, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.JUL, 2026).next(), { bidPeriod: { value:  8, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.AUG, 2026).next(), { bidPeriod: { value:  9, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.SEP, 2026).next(), { bidPeriod: { value: 10, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.OCT, 2026).next(), { bidPeriod: { value: 11, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.NOV, 2026).next(), { bidPeriod: { value: 12, }, year: 2026, });
+		assert.propEqual(new BidPeriodWithYear(BidPeriods.DEC, 2026).next(), { bidPeriod: { value:  1, }, year: 2027, });
+	});
+	
+	QUnit.test('equals', (assert) => {
+		assert.ok(new BidPeriodWithYear(BidPeriods.JAN, 2026).equals(BidPeriodWithYear.fromDate(new Date(2026,  0,  2))));
+		assert.notOk(new BidPeriodWithYear(BidPeriods.JAN, 2026).equals(BidPeriodWithYear.fromDate(new Date(2026,  2,  2))));
+	});
+});
+</script>
