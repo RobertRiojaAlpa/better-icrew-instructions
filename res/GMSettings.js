@@ -1,4 +1,4 @@
-//v10
+//v11
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -49,6 +49,8 @@ class GMSettings {
 
     static get MOTS_BID_PERIOD_STICKY_ENABLE() { return new this.GMSetting("motsBidPeriodStickyEnable", false); }
     static get MOTS_INSERT_A_ENABLE() { return new this.GMSetting("motsInsertAEnable", false); }
+
+    static get MOTV_BID_PERIOD_STICKY_ENABLE() { return new this.GMSetting("motvBidPeriodStickyEnable", false); }
 
     static get ROTS_INSERT_Y_ENABLE() { return new this.GMSetting("rotsInsertYEnable", false); }
 
