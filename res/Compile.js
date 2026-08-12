@@ -1,4 +1,4 @@
-//v2
+//v3
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -409,7 +409,6 @@ class Compile {
         let finalMatchingLineInNewIndex = -1;
 
         for(let i = 0; i < newLines.length; i++) {
-            console.log("LF new", i)
             if(matchingLineInExistingIndex >= 0 && matchingLineInNewIndex >= 0) {
                 for(let j = 1; j < existingLines.length - matchingLineInExistingIndex; j++) {
                     if(existingLines[matchingLineInExistingIndex + j].trim() !== newLines[matchingLineInNewIndex + j].trim()) {
