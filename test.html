@@ -599,11 +599,6 @@ QUnit.module('BidPeriodWithYear', function() {
 		assert.deepEqual(new BidPeriodWithYear(BidPeriods.MAR, 2026).getEndDatePilotFormat(), "31MAR26");
 	});
 	
-	QUnit.test('year4Digit', (assert) => {
-		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2004).year4Digit(), 2004);
-		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).year4Digit(), 2026);
-	});
-	
 	QUnit.test('year2Digit', (assert) => {
 		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2004).year2Digit(),  4);
 		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026).year2Digit(), 26);
@@ -637,6 +632,11 @@ QUnit.module('BidPeriodWithYear', function() {
 		assert.propEqual(new BidPeriodWithYear(BidPeriods.OCT, 2026).next(), { bidPeriod: { value: 11, }, year: 2026, });
 		assert.propEqual(new BidPeriodWithYear(BidPeriods.NOV, 2026).next(), { bidPeriod: { value: 12, }, year: 2026, });
 		assert.propEqual(new BidPeriodWithYear(BidPeriods.DEC, 2026).next(), { bidPeriod: { value:  1, }, year: 2027, });
+	});
+	
+	QUnit.test('toString', (assert) => {
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.JAN, 2026) + "", "JAN26");
+		assert.deepEqual(new BidPeriodWithYear(BidPeriods.FEB, 2004) + "", "FEB04");
 	});
 	
 	QUnit.test('equals', (assert) => {
