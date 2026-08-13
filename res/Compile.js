@@ -1,4 +1,4 @@
-//v13
+//v14
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -211,11 +211,11 @@ class Compile {
 			if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop < 2) {
 				let lastLineLength = textBlockText.split("\n").at(-1).length;
 				textBlockText += " ".repeat(numSpacesToAdd - lastLineLength);
-				textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 			} else {
-				textBlockText += " ".repeat(numSpacesToAdd);
-				textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ") + "\n";
+				textBlockText += "\n" + " ".repeat(numSpacesToAdd);
 			}
+
+            textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 
             if(lineElements[i].innerText.includes("MOVEUPS:")) {
                 textBlockText += "\n\n";
