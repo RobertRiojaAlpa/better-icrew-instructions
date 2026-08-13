@@ -1,4 +1,4 @@
-//v5
+//v6
 class PageAction {
     static get NAME_SKIP_TIMEOUT() { return "skipTimeout"; }
     static get NAME_AUTO_LOGIN() { return "autoLogin"; }
@@ -27,22 +27,17 @@ class PageAction {
     }
 	
 	static shouldRun(parseAction, page) {
-		let evalOnPage = eval(parseAction.onPage);
-		
-		if(typeof evalOnPage === "string") {
-			return evalOnPage === page;
-		} else if(typeof evalOnPage === "function") {
-			let result = evalOnPage(page);
-			
-			if(typeof result === "boolean") {
-				return result;
-			}
-			
-			console.error("Better: PageAction.onPage is a function that does not return a boolean");
-			return false;
+		if(parseAction.onPage.indexOf("(") === -1) {
+			return parseAction.onPage === page;
 		}
 		
-		console.error("Better: PageAction.onPage is not a string or function");
+		let result = eval(parseAction.onPage)(page);
+		
+		if(typeof result === "boolean") {
+			return result;
+		}
+		
+		console.error("Better: PageAction.onPage is a function that does not return a boolean");
 		return false;
 	}
 
