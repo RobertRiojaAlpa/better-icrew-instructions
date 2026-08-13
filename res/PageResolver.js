@@ -1,4 +1,4 @@
-//v8
+//v9
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -380,7 +380,7 @@ class PageResolver {
             return Pages.SCHS_HISTORY_SCROLL_MESSAGE;
         }
 
-        if(PageResolver.isOnSchsHistoryAlternatePage(menu)) {
+        if(await PageResolver.isOnSchsHistoryAlternatePage(menu)) {
             return Pages.SCHS_HISTORY_ALTERNATE;
         }
 
