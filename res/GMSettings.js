@@ -1,4 +1,4 @@
-//v12
+//v13
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -272,7 +272,7 @@ class GMSettings {
             return true;
         });
 
-        let skipPilotAdvisoriesAction = new PageAction(PageAction.NAME_SKIP_PILOT_ADVISORIES, -90, "", async (pageAction) => {
+        let skipPilotAdvisoriesAction = new PageAction(PageAction.NAME_SKIP_PILOT_ADVISORIES, -90, (p) => Pages.isPilotMenuAdvisory(p), async (pageAction) => {
             if(!Pages.isPilotMenuAdvisory(currentPage)) {
                 return false;
             }
@@ -308,6 +308,8 @@ class GMSettings {
         });
 
         let resetTaskFlagsAction = new PageAction(PageAction.NAME_RESET_TASK_FLAGS, -70, Pages.MAIN_MENU, async (pageAction) => {
+			console.log("Better: Resetting task flags");
+			
 			await GMSettings.COMPILED_SCHS_DATA_RUNNING.set(false);
 			await GMSettings.COMPILED_SCHS_DATA_AND_MOTS_RUNNING.set(false);
 			await GMSettings.COMPILED_SCHS_DATA_AND_MOTV_RUNNING.set(false);
@@ -337,7 +339,7 @@ class GMSettings {
                 return false;
             }
 
-            console.log("Better: Skipping DTC confirmation page");
+            console.log("Better: Skipping confirmation page");
             $("#var_OK").click();
             return true;
         });
