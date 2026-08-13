@@ -1,4 +1,4 @@
-//v16
+//v17
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -217,7 +217,7 @@ class Compile {
 
             textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 			
-			if(parseInt(lineElements.eq(i + 1).css("top")) - lastTop > 10) {
+			if(parseInt(lineElements.eq(i + 1).css("top")) - parseInt(lineElements.eq(i).css("top")) > 10) {
 				textBlockText += "\n";
 			}
 
