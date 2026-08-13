@@ -1,4 +1,4 @@
-//v2
+//v3
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -83,6 +83,11 @@ class Pages {
                || page === Pages.PILOT_AURVR
                || page === Pages.PILOT_DPPS;
     }
+	
+	static isSkippable(page) {
+		return page === Pages.SCHS_HISTORY_SCROLL_MESSAGE
+		       || page === Pages.DTC;
+	}
 
     static hasCompile(page) {
         return page === Pages.SCHS_DATA
