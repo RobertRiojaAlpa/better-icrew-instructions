@@ -1,4 +1,4 @@
-//v19
+//v20
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -200,7 +200,7 @@ class Compile {
 
 			//Start new TextBlock when there's at least a 1 line gap in text
             if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop > 30) {
-				let numGapLines = (parseInt(lineElements[i].style.top, 10) - lastTop) / 18;
+				let numGapLines = ((parseInt(lineElements[i].style.top, 10) - lastTop) / 18) - 1;
                 textBlockText += "\n".repeat(numGapLines);
                 outputTextBlocks.push(new TextBlock(textBlockText, false));
                 textBlockText = "";
