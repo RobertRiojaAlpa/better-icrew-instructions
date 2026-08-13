@@ -1,4 +1,4 @@
-//v4
+//v5
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -31,12 +31,12 @@ class PageResolver {
 
     static isOnLogoutPage(menu) {
         return menu === Menus.NONE
-               && document.body.innerHTML.replace(/\r?\n|\r/g, " ").indexOf("Please close this window to complete the logoff process.") !== -1;
+               && document.body.innerHTML.replace(/\r?\n|\r/g, " ").includes("Please close this window to complete the logoff process.");
     }
 
     static isOnLockedOutPage(menu) {
         return menu === Menus.NONE
-               && document.body.innerHTML.replace(/\r?\n|\r/g, " ").indexOf("Your iCrew account has been locked.") !== -1;
+               && document.body.innerHTML.replace(/\r?\n|\r/g, " ").includes("Your iCrew account has been locked.");
     }
 
     static isOnMainMenuPage(menu) {
@@ -46,29 +46,39 @@ class PageResolver {
 
     static isOnSchsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("CHANGE/DISPLAY PILOT SCHEDULE") !== -1
-               && document.body.innerHTML.indexOf("(SCHC)") !== -1;
+               && document.body.innerHTML.includes("CHANGE/DISPLAY PILOT SCHEDULE")
+               && document.body.innerHTML.includes("(SCHC)");
     }
 
     static isOnSchsDataPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DTE OR DES OFF  STAT  ROT1 D R1 STAT  ROT2 D R2 RPT1 RPT2 E/L R CALL BLKN DTE") !== -1;
+               && document.body.innerHTML.includes("DTE OR DES OFF  STAT  ROT1 D R1 STAT  ROT2 D R2 RPT1 RPT2 E/L R CALL BLKN DTE");
     }
 
-    static isOnSchsHistoryPage(menu) {
+    static async isOnSchsHistoryPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PILOT SCHEDULE HISTORY") !== -1;
+               && (
+			       document.body.innerHTML.includes("PILOT SCHEDULE HISTORY")
+			       || (
+				       //This is the previous page since it hasn't been updated yet
+                       await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_SCROLL_MESSAGE
+				       && (
+					       $("#frmHiddenControls").next().text().includes("BY:")
+						   || $(".tbl1").text().includes("BY:")
+					   )
+				   )
+			   );
     }
 
     static isOnSchsHistoryScrollMessagePage(menu) {
         return menu === Menus.ALPA_MENU
-               && $(".tbl1").eq(0).text().indexOf("UNABLE TO USE SCROLL FUNCTION") !== -1
-               && $(".tbl1").eq(0).text().indexOf("HIT ENTER TO VIEW SCHEDULE HISTORY") !== -1;
+               && $(".tbl1").eq(0).text().includes("UNABLE TO USE SCROLL FUNCTION")
+               && $(".tbl1").eq(0).text().includes("HIT ENTER TO VIEW SCHEDULE HISTORY");
     }
 
     static isOnMustBeNOrLPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("MUST BE ' ', 'N' OR 'L'") !== -1;
+               && document.body.innerHTML.includes("MUST BE ' ', 'N' OR 'L'");
     }
 
     static isOnRotationPage(menu) {
@@ -78,7 +88,7 @@ class PageResolver {
 
     static isOnMotsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DISPLAY MONTHLY TIME DATA") !== -1;
+               && document.body.innerHTML.includes("DISPLAY MONTHLY TIME DATA");
     }
 
     static isOnMotsDataPage(menu) {
@@ -88,18 +98,18 @@ class PageResolver {
 
     static isOnMotvPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DISPLAY USAGE AND BALANCES FOR VACATION/BANK/PAYBACK DAYS") !== -1
-               && document.body.innerHTML.indexOf("TO IGNORE THIS SCREEN, PRESS 'PF1' FOR MAIN MENU OR 'PF2' FOR PREVIOUS MENU") !== -1;
+               && document.body.innerHTML.includes("DISPLAY USAGE AND BALANCES FOR VACATION/BANK/PAYBACK DAYS")
+               && document.body.innerHTML.includes("TO IGNORE THIS SCREEN, PRESS 'PF1' FOR MAIN MENU OR 'PF2' FOR PREVIOUS MENU");
     }
 
     static async isOnMotvDataPage(menu) {
         return menu === Menus.ALPA_MENU
                && (
                    (
-                       document.body.innerHTML.indexOf("DISPLAY USAGE AND BALANCES FOR VACATION/BANK/PAYBACK DAYS") !== -1
-                       && document.body.innerHTML.indexOf("NAME:") !== -1
+                       document.body.innerHTML.includes("DISPLAY USAGE AND BALANCES FOR VACATION/BANK/PAYBACK DAYS")
+                       && document.body.innerHTML.includes("NAME:")
                    ) || (
-                       document.body.innerHTML.indexOf("END OF DISPLAY - PRESS ENTER TO RETURN TO PREVIOUS MENU") !== -1
+                       document.body.innerHTML.includes("END OF DISPLAY - PRESS ENTER TO RETURN TO PREVIOUS MENU")
                        //This is the previous page since it hasn't been updated yet
                        && await GMSettings.PAGE_CURRENT.get() === Pages.MOTV_DATA
                    )
@@ -108,98 +118,98 @@ class PageResolver {
 
     static isOnSickPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("Display Sick Time Usage And Balances") !== -1;
+               && document.body.innerHTML.includes("Display Sick Time Usage And Balances");
     }
 
     static isOnSickOccurrencesPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("UPDATE PILOT SICK OCCURRENCE DATA") !== -1;
+               && document.body.innerHTML.includes("UPDATE PILOT SICK OCCURRENCE DATA");
     }
 
     static isOnPcsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("OPEN TIME - PCS") !== -1;
+               && document.body.innerHTML.includes("OPEN TIME - PCS");
     }
 
     static isOn23M7Page(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DISPLAY 23M7 DATA") !== -1;
+               && document.body.innerHTML.includes("DISPLAY 23M7 DATA");
     }
 
     static isOn23M7DataPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("23M7 LOGS FOR BID PERIOD") !== -1;
+               && document.body.innerHTML.includes("23M7 LOGS FOR BID PERIOD");
     }
 
     static isOnPresPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("DISPLAY PILOT RESERVE LEVELS") !== -1
-               && document.body.innerHTML.indexOf("PRESM") !== -1;
+               && document.body.innerHTML.includes("DISPLAY PILOT RESERVE LEVELS")
+               && document.body.innerHTML.includes("PRESM");
     }
 
     static isOnRotsPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("DISPLAY ROTATION OPEN TIME FILE") !== -1;
+               && document.body.innerHTML.includes("DISPLAY ROTATION OPEN TIME FILE");
     }
 
     static isOnRotsHistoryPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("ROTATION OPEN TIME HISTORY") !== -1;
+               && document.body.innerHTML.includes("ROTATION OPEN TIME HISTORY");
     }
 
     static isOnReserveOpenTimePage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnRotsPage(menu)
-               && document.body.innerHTML.indexOf("RESERVE OPEN TIME") !== -1;
+               && document.body.innerHTML.includes("RESERVE OPEN TIME");
     }
 
     static isOnScAwdsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DISPLAY SC AWARDS/ASSIGNMENTS") !== -1;
+               && document.body.innerHTML.includes("DISPLAY SC AWARDS/ASSIGNMENTS");
     }
 
     static isOnVtssPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("DISPLAY V.T.S.") !== -1;
+               && document.body.innerHTML.includes("DISPLAY V.T.S.");
     }
 
     static isOnUddPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("CHANGE / DISPLAY DUE DATE INFORMATION") !== -1;
+               && document.body.innerHTML.includes("CHANGE / DISPLAY DUE DATE INFORMATION");
     }
 
     static isOnSlpPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("PILOT SLIP REQUESTS") !== -1;
+               && document.body.innerHTML.includes("PILOT SLIP REQUESTS");
     }
 
     static isOnSwapPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("SWAP WITH POT") !== -1;
+               && document.body.innerHTML.includes("SWAP WITH POT");
     }
 
     static isOnLeavPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("LEAVE REQUEST") !== -1
-               && document.body.innerHTML.indexOf("(LEAV)") !== -1;
+               && document.body.innerHTML.includes("LEAVE REQUEST")
+               && document.body.innerHTML.includes("(LEAV)");
     }
 
     static isOnDtyPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRINT SUMMARY OF DUTY PERIODS OF ASSIGNMENTS") !== -1
-               && document.body.innerHTML.indexOf("FOR A SPECIFIED BID PERIOD BEGIN DATE") !== -1;
+               && document.body.innerHTML.includes("PRINT SUMMARY OF DUTY PERIODS OF ASSIGNMENTS")
+               && document.body.innerHTML.includes("FOR A SPECIFIED BID PERIOD BEGIN DATE");
     }
 
     static isOnRsRrPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRODUCE COUNT OF PILOTS WITH EXTENDED/SHORTENED ROTATIONS") !== -1
-               && document.body.innerHTML.indexOf("(I.E. THOSE PILOTS WITH 'RR' AND 'RS' DATE FRAME ORIGIN CODES)") !== -1
-               && document.body.innerHTML.indexOf("SPILLOVER ROTATIONS ARE COUNTED IN BID PERIOD ASSOCIATED WITH ROTATION DATE") !== -1;
+               && document.body.innerHTML.includes("PRODUCE COUNT OF PILOTS WITH EXTENDED/SHORTENED ROTATIONS")
+               && document.body.innerHTML.includes("(I.E. THOSE PILOTS WITH 'RR' AND 'RS' DATE FRAME ORIGIN CODES)")
+               && document.body.innerHTML.includes("SPILLOVER ROTATIONS ARE COUNTED IN BID PERIOD ASSOCIATED WITH ROTATION DATE");
     }
 
     static isOnRphPage(menu) {
@@ -228,86 +238,86 @@ class PageResolver {
 
     static isOnDtcConfirmPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("To see report online, type SCRE else press") !== -1;
+               && document.body.innerHTML.includes("To see report online, type SCRE else press");
     }
 
     static isOnLayIoePage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("REPORT OF ALL IOE DUTY PERIODS THAT LAYOVER IN DOMICILE") !== -1;
+               && document.body.innerHTML.includes("REPORT OF ALL IOE DUTY PERIODS THAT LAYOVER IN DOMICILE");
     }
 
     static isOnPmrPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRINT PILOT MONTHLY RESERVE REPORT") !== -1;
+               && document.body.innerHTML.includes("PRINT PILOT MONTHLY RESERVE REPORT");
     }
 
     static isOnScSkedPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PILOT SHORT CALL COUNTS BY CATEGORY AND BID PERIOD") !== -1;
+               && document.body.innerHTML.includes("PILOT SHORT CALL COUNTS BY CATEGORY AND BID PERIOD");
     }
 
     static isOnConfPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRINT REGULAR LINE PILOTS") !== -1
-               && document.body.innerHTML.indexOf("WITH A GREEN SLIP/INVERSE ASSIGNMENT CONFLICT") !== -1
-               && document.body.innerHTML.indexOf("FOR A SPECIFIED BID PERIOD BEGIN DATE") !== -1;
+               && document.body.innerHTML.includes("PRINT REGULAR LINE PILOTS")
+               && document.body.innerHTML.includes("WITH A GREEN SLIP/INVERSE ASSIGNMENT CONFLICT")
+               && document.body.innerHTML.includes("FOR A SPECIFIED BID PERIOD BEGIN DATE");
     }
 
     static isOnFxdayPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("REPORT FLOATING XDAY DUE") !== -1;
+               && document.body.innerHTML.includes("REPORT FLOATING XDAY DUE");
     }
 
     static isOnLayoverPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("REPORT OF ALL DUTY PERIODS THAT LAYOVER IN DOMICILE") !== -1;
+               && document.body.innerHTML.includes("REPORT OF ALL DUTY PERIODS THAT LAYOVER IN DOMICILE");
     }
 
     static isOnNqpsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("NON-QUALIFIED PILOTS") !== -1
-               && document.body.innerHTML.indexOf("(NQPS)") !== -1;
+               && document.body.innerHTML.includes("NON-QUALIFIED PILOTS")
+               && document.body.innerHTML.includes("(NQPS)");
     }
 
     static isOnObwsPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("OUT OF BASE WHITE SLIP REPORT") !== -1
-               && document.body.innerHTML.indexOf("(OBWS)") !== -1;
+               && document.body.innerHTML.includes("OUT OF BASE WHITE SLIP REPORT")
+               && document.body.innerHTML.includes("(OBWS)");
     }
 
     static isOnPscrPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRODUCE REPORT OF PILOTS WITH SPECIFIED SCHEDULE CODES") !== -1
-               && document.body.innerHTML.indexOf("TO PRODUCE REPORT OF PILOTS WITH SPECIFIED SCHEDULES CODES, ENTER:") !== -1;
+               && document.body.innerHTML.includes("PRODUCE REPORT OF PILOTS WITH SPECIFIED SCHEDULE CODES")
+               && document.body.innerHTML.includes("TO PRODUCE REPORT OF PILOTS WITH SPECIFIED SCHEDULES CODES, ENTER:");
     }
 
     static isOnInversePage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("PRINT REGULAR OR RESERVE LINE PILOTS WITH AN INVERSE ASSIGNMENT") !== -1
-               && document.body.innerHTML.indexOf("FOR A SPECIFIED BID PERIOD BEGIN DATE") !== -1;
+               && document.body.innerHTML.includes("PRINT REGULAR OR RESERVE LINE PILOTS WITH AN INVERSE ASSIGNMENT")
+               && document.body.innerHTML.includes("FOR A SPECIFIED BID PERIOD BEGIN DATE");
     }
 
     static isOnMaxScPage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("COUNT OF ALL SHORT CALLS THAT EXCEED MAXIMUM ALLOWED") !== -1;
+               && document.body.innerHTML.includes("COUNT OF ALL SHORT CALLS THAT EXCEED MAXIMUM ALLOWED");
     }
 
     static isOnSchsomePage(menu) {
         return menu === Menus.ALPA_MENU
-               && document.body.innerHTML.indexOf("SCHEDULES FOR REQUESTED PILOTS") !== -1;
+               && document.body.innerHTML.includes("SCHEDULES FOR REQUESTED PILOTS");
     }
 
     static isOnDtcPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnDtcConfirmPage(menu)
                && !PageResolver.isOnPcsPage(menu)
-               && document.body.innerHTML.indexOf("DAILY TRIP COVERAGE") !== -1;
+               && document.body.innerHTML.includes("DAILY TRIP COVERAGE");
     }
 
     static isOnDtcDataPage(menu) {
         return menu === Menus.ALPA_MENU
                && !PageResolver.isOnDtcConfirmPage(menu)
-               && document.body.innerHTML.indexOf("Daily Trip Coverage") !== -1;
+               && document.body.innerHTML.includes("Daily Trip Coverage");
     }
 
     static ALL() { return Object.entries(Object.getOwnPropertyDescriptors(PageResolver))
