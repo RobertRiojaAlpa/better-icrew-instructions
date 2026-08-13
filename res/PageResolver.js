@@ -1,4 +1,4 @@
-//v6
+//v7
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -60,9 +60,11 @@ class PageResolver {
                && (
 			       document.body.innerHTML.includes("PILOT SCHEDULE HISTORY")
 			       || (
-				       //This is the previous page since it hasn't been updated yet
-                       await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_SCROLL_MESSAGE
-				       && (
+				       (
+				           //This is the previous page since it hasn't been updated yet
+                           await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_SCROLL_MESSAGE
+                           || await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY
+					   ) && (
 					       $("#frmHiddenControls").next().text().includes("BY:")
 						   || $(".tbl1").text().includes("BY:")
 					   )
