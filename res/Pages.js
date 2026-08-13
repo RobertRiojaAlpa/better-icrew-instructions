@@ -1,4 +1,4 @@
-//v3
+//v4
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -86,7 +86,7 @@ class Pages {
 	
 	static isSkippable(page) {
 		return page === Pages.SCHS_HISTORY_SCROLL_MESSAGE
-		       || page === Pages.DTC;
+		       || page === Pages.DTC_CONFIRM;
 	}
 
     static hasCompile(page) {
