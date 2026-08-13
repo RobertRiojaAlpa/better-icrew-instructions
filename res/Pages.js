@@ -1,4 +1,4 @@
-//v4
+//v5
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -15,8 +15,11 @@ class Pages {
 
     static get SCHS() { return "SCHS"; }
     static get SCHS_DATA() { return "SCHS data"; }
+	
     static get SCHS_HISTORY() { return "SCHS history" }
     static get SCHS_HISTORY_SCROLL_MESSAGE() { return "SCHS history scroll message" }
+    static get SCHS_HISTORY_ALTERNATE() { return "SCHS history alternate" }
+	
     static get MUST_BE_N_OR_L() { return "Must be N or L"; }
 
     static get ROTATION() { return "Rotation"; }

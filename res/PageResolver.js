@@ -1,4 +1,4 @@
-//v7
+//v8
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -55,27 +55,28 @@ class PageResolver {
                && document.body.innerHTML.includes("DTE OR DES OFF  STAT  ROT1 D R1 STAT  ROT2 D R2 RPT1 RPT2 E/L R CALL BLKN DTE");
     }
 
-    static async isOnSchsHistoryPage(menu) {
+    static isOnSchsHistoryPage(menu) {
         return menu === Menus.ALPA_MENU
-               && (
-			       document.body.innerHTML.includes("PILOT SCHEDULE HISTORY")
-			       || (
-				       (
-				           //This is the previous page since it hasn't been updated yet
-                           await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_SCROLL_MESSAGE
-                           || await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY
-					   ) && (
-					       $("#frmHiddenControls").next().text().includes("BY:")
-						   || $(".tbl1").text().includes("BY:")
-					   )
-				   )
-			   );
+               && document.body.innerHTML.includes("PILOT SCHEDULE HISTORY")
+			   && $(".btn9").length === 4;
     }
 
     static isOnSchsHistoryScrollMessagePage(menu) {
         return menu === Menus.ALPA_MENU
                && $(".tbl1").eq(0).text().includes("UNABLE TO USE SCROLL FUNCTION")
                && $(".tbl1").eq(0).text().includes("HIT ENTER TO VIEW SCHEDULE HISTORY");
+    }
+
+    static async isOnSchsHistoryAlternatePage(menu) {
+        return menu === Menus.ALPA_MENU
+               && (
+			       //This is the previous page since it hasn't been updated yet
+                   await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_SCROLL_MESSAGE
+                   || await GMSettings.PAGE_CURRENT.get() === Pages.SCHS_HISTORY_ALTERNATE
+			   ) && (
+			       $("#frmHiddenControls").next().text().includes("BY:")
+			       || $(".tbl1").text().includes("BY:")
+			   ) && $(".btn9").length === 0;
     }
 
     static isOnMustBeNOrLPage(menu) {
@@ -371,12 +372,16 @@ class PageResolver {
             return Pages.SCHS_DATA;
         }
 
-        if(await PageResolver.isOnSchsHistoryPage(menu)) {
+        if(PageResolver.isOnSchsHistoryPage(menu)) {
             return Pages.SCHS_HISTORY;
         }
 
         if(PageResolver.isOnSchsHistoryScrollMessagePage(menu)) {
             return Pages.SCHS_HISTORY_SCROLL_MESSAGE;
+        }
+
+        if(PageResolver.isOnSchsHistoryAlternatePage(menu)) {
+            return Pages.SCHS_HISTORY_ALTERNATE;
         }
 
         if(PageResolver.isOnMustBeNOrLPage(menu)) {
