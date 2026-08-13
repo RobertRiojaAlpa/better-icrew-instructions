@@ -1,4 +1,4 @@
-//v12
+//v13
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -198,6 +198,7 @@ class Compile {
 				continue;
 			}
 
+			//Start new TextBlock when there's a 1 line gap in text
             if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop > 30) {
                 textBlockText += "\n\n";
                 outputTextBlocks.push(new TextBlock(textBlockText, false));
@@ -210,11 +211,11 @@ class Compile {
 			if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop < 2) {
 				let lastLineLength = textBlockText.split("\n").at(-1).length;
 				textBlockText += " ".repeat(numSpacesToAdd - lastLineLength);
+				textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 			} else {
-				textBlockText += " ".repeat(numSpacesToAdd) + "\n";;
+				textBlockText += " ".repeat(numSpacesToAdd);
+				textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ") + "\n";
 			}
-
-            textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 
             if(lineElements[i].innerText.includes("MOVEUPS:")) {
                 textBlockText += "\n\n";
