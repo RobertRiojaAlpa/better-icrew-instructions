@@ -1,4 +1,4 @@
-//v5
+//v6
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -369,7 +369,7 @@ class PageResolver {
             return Pages.SCHS_DATA;
         }
 
-        if(PageResolver.isOnSchsHistoryPage(menu)) {
+        if(await PageResolver.isOnSchsHistoryPage(menu)) {
             return Pages.SCHS_HISTORY;
         }
 
