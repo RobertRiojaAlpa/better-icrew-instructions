@@ -1,4 +1,4 @@
-//v3
+//v4
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -58,6 +58,12 @@ class PageResolver {
     static isOnSchsHistoryPage(menu) {
         return menu === Menus.ALPA_MENU
                && document.body.innerHTML.indexOf("PILOT SCHEDULE HISTORY") !== -1;
+    }
+
+    static isOnSchsHistoryScrollMessagePage(menu) {
+        return menu === Menus.ALPA_MENU
+               && $(".tbl1").eq(0).text().indexOf("UNABLE TO USE SCROLL FUNCTION") !== -1
+               && $(".tbl1").eq(0).text().indexOf("HIT ENTER TO VIEW SCHEDULE HISTORY") !== -1;
     }
 
     static isOnMustBeNOrLPage(menu) {
@@ -355,6 +361,10 @@ class PageResolver {
 
         if(PageResolver.isOnSchsHistoryPage(menu)) {
             return Pages.SCHS_HISTORY;
+        }
+
+        if(PageResolver.isOnSchsHistoryScrollMessagePage(menu)) {
+            return Pages.SCHS_HISTORY_SCROLL_MESSAGE;
         }
 
         if(PageResolver.isOnMustBeNOrLPage(menu)) {
