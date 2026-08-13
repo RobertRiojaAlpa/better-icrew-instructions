@@ -1,4 +1,4 @@
-//v21
+//v22
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -221,12 +221,6 @@ class Compile {
 			if(parseInt(lineElements.eq(i + 1).css("top")) - parseInt(lineElements.eq(i).css("top")) > 10) {
 				textBlockText += "\n";
 			}
-
-            if(lineElements[i].innerText.includes("MOVEUPS:")) {
-                textBlockText += "\n\n";
-                outputTextBlocks.push(new TextBlock(textBlockText, false));
-                textBlockText = "";
-            }
 
             lastTop = parseInt(lineElements[i].style.top, 10);
         }
