@@ -1,4 +1,4 @@
-//v4
+//v5
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -227,7 +227,7 @@ class Compile {
     }
 	
 	static getSchsHistoryAlternateTextBlocks(includeHeader = false, startOnNewPage = false) {
-		if($("#frmHiddenControls").next().find("span") > 0) {
+		if($("#frmHiddenControls").next().find("span").length > 0) {
 			return getSchsHistoryTextBlocks(includeHeader, startOnNewPage);
 		}
 		
