@@ -1,4 +1,4 @@
-//v3
+//v4
 class PageAction {
     static get NAME_SKIP_TIMEOUT() { return "skipTimeout"; }
     static get NAME_AUTO_LOGIN() { return "autoLogin"; }
@@ -11,7 +11,7 @@ class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
         this.order = order;
-        this.onPage = onPage;
+        this.onPage = onPage.toString();
         this.action = action.toString();
     }
 
@@ -25,6 +25,25 @@ class PageAction {
         this.data = data;
         return this;
     }
+	
+	static shouldRun(parseAction, page) {
+		let evalOnPage = eval(parseAction.onPage);
+		
+		if(typeof evalOnPage === "string") {
+			return evalOnPage === page;
+		} else if(typeof evalOnPage === "function") {
+			let result = evalOnPage(page);
+			
+			if(typeof result === "boolean") {
+				return result;
+			}
+			
+			console.error("Better: PageAction.onPage is a function that does not return a boolean");
+			return;
+		}
+		
+		console.error("Better: PageAction.onPage is not a string or function");
+	}
 
     static async runAction(parseAction) {
         return await eval(parseAction.action)(parseAction);
