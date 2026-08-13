@@ -1,4 +1,4 @@
-//v4
+//v5
 class PageAction {
     static get NAME_SKIP_TIMEOUT() { return "skipTimeout"; }
     static get NAME_AUTO_LOGIN() { return "autoLogin"; }
@@ -39,10 +39,11 @@ class PageAction {
 			}
 			
 			console.error("Better: PageAction.onPage is a function that does not return a boolean");
-			return;
+			return false;
 		}
 		
 		console.error("Better: PageAction.onPage is not a string or function");
+		return false;
 	}
 
     static async runAction(parseAction) {
