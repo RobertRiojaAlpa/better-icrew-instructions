@@ -1,4 +1,4 @@
-//v8
+//v9
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -180,8 +180,7 @@ class Compile {
     }
 
     static getSchsHistoryTextBlocks(includeHeader = false, startOnNewPage = false) {
-        let parentElement = document.getElementById("frmHiddenControls").nextElementSibling;
-        let lineElements = parentElement.querySelectorAll("span");
+        let lineElements = $("#frmHiddenControls").next().find("span");
         let leftMargin = parseInt(lineElements[1].style.left, 10);
         let charWidth = lineElements[1].offsetWidth / lineElements[1].innerText.length;
 
@@ -191,9 +190,13 @@ class Compile {
         let outputTextBlocks = [];
 
         for(let i = startIndex; i < lineElements.length; i++) {
-            if(lineElements[i].innerText.indexOf("*** MORE DATA NEXT SCREEN ***") !== -1 || lineElements[i].innerText.indexOf("Enter-PF1---") !== -1) {
+            if(lineElements[i].innerText.includes("*** MORE DATA NEXT SCREEN ***") || lineElements[i].innerText.includes("Enter-PF1---")) {
                 break;
             }
+			
+			if(lineElements.eq(i).text().trim() === "VVVV") {
+				continue;
+			}
 
             if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop > 30) {
                 textBlockText += "\n";
