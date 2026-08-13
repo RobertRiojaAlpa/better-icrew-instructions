@@ -1,4 +1,4 @@
-//v11
+//v12
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -211,7 +211,7 @@ class Compile {
 				let lastLineLength = textBlockText.split("\n").at(-1).length;
 				textBlockText += " ".repeat(numSpacesToAdd - lastLineLength);
 			} else {
-				textBlockText += " ".repeat(numSpacesToAdd);
+				textBlockText += " ".repeat(numSpacesToAdd) + "\n";;
 			}
 
             textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
