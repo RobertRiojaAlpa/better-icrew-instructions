@@ -1,4 +1,4 @@
-//v20
+//v21
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -253,7 +253,7 @@ class Compile {
 			return [];
 		}
 		
-		return $(".tbl1 tr").map((i, e) => $(e).text().trim()).toArray().join("\n").trimEnd().split("\n\n").map(e => new TextBlock(e + "\n\n", false));
+		return $(".tbl1 tr").map((i, e) => $(e).text().replaceAll("\n", "")).toArray().join("\n").trimEnd().split("\n \n").map(e => new TextBlock(e + "\n\n", false));
 	}
 
     static getMotsDataTextBlocks(includeHeader = false, startOnNewPage = false, employeeNumber = "", name = "") {
