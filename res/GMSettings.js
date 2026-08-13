@@ -1,4 +1,4 @@
-//v13
+//v14
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -331,7 +331,7 @@ class GMSettings {
             return false;
         });
 
-        let skipConfirmationPageAction = new PageAction(PageAction.NAME_SKIP_CONFIRMATION_PAGE, 90, Pages.DTC_CONFIRM, async (pageAction) => {
+        let skipConfirmationPageAction = new PageAction(PageAction.NAME_SKIP_CONFIRMATION_PAGE, 90, (p) => Pages.isSkippable(p), async (pageAction) => {
             console.log("Better: Handling skip confirmation page");
 
             if(!await GMSettings.SKIP_CONFIRM_ENABLE.get()) {
