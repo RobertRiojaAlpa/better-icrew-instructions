@@ -1,4 +1,4 @@
-//v10
+//v11
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -199,18 +199,25 @@ class Compile {
 			}
 
             if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop > 30) {
-                textBlockText += "\n";
+                textBlockText += "\n\n";
                 outputTextBlocks.push(new TextBlock(textBlockText, false));
                 textBlockText = "";
             }
 
             let numSpacesToAdd = (parseInt(lineElements[i].style.left, 10) - leftMargin) / charWidth;
+			
+			//Handle multiple elements on the same line
+			if(lastTop >= 0 && parseInt(lineElements[i].style.top, 10) - lastTop < 2) {
+				let lastLineLength = textBlockText.split("\n").at(-1).length;
+				textBlockText += " ".repeat(numSpacesToAdd - lastLineLength);
+			} else {
+				textBlockText += " ".repeat(numSpacesToAdd);
+			}
 
-            textBlockText += " ".repeat(numSpacesToAdd);
-            textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ") + "\n";
+            textBlockText += lineElements[i].innerText.replaceAll("\xa0", " ");
 
-            if(lineElements[i].innerText.indexOf("MOVEUPS:") !== -1) {
-                textBlockText += "\n";
+            if(lineElements[i].innerText.includes("MOVEUPS:")) {
+                textBlockText += "\n\n";
                 outputTextBlocks.push(new TextBlock(textBlockText, false));
                 textBlockText = "";
             }
