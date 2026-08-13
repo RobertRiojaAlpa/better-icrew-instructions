@@ -1,4 +1,4 @@
-//v5
+//v6
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -95,6 +95,7 @@ class Pages {
     static hasCompile(page) {
         return page === Pages.SCHS_DATA
                || page === Pages.SCHS_HISTORY
+               || page === Pages.SCHS_HISTORY_ALTERNATE
                || page === Pages.ROTATION
                || page === Pages.MOTS_DATA
                || page === Pages.MOTV_DATA
@@ -110,7 +111,9 @@ class Pages {
     }
 
     static hasDateSearch(page) {
-        return page === Pages.DTC_DATA || page === Pages.SCHS_HISTORY;
+        return page === Pages.DTC_DATA
+		       || page === Pages.SCHS_HISTORY
+		       || page === Pages.SCHS_HISTORY_ALTERNATE;
     }
 
     static hasOpenInNewTab(page) {
