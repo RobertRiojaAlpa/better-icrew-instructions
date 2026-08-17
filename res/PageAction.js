@@ -1,4 +1,4 @@
-//v13
+//v14
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -778,6 +778,15 @@ class PageAction {
 				
 				if(pageAction.nextUnknownPage !== undefined) {
 					Pages.clickMenu(pageAction.nextUnknownPage[0], pageAction.nextUnknownPage[1]);
+				} else {
+					let resolversResult = await GMSettings.TEST_PAGE_RESOLVERS_RESULT.get();
+					let usedResolvers = [...new Set(resolversResult.split("\n").map(r => TextUtils.skipIncluding(r, ": ")))];
+					let unusedResolvers = PageResolver.ALL().map(r => r.name.slice(4, -4).toUpperCase()).filter(r => !usedResolvers.includes(r));
+
+					console.log("Resolver test results:\n" + resolversResult);
+					console.log("Used resolvers:", usedResolvers);
+					console.log("Unused resolvers:", unusedResolvers);
+					alert("Results logged to console");
 				}
 				return true;
 			}).withData({ currentUnknownPage: unknownPages[i], nextUnknownPage: unknownPages[i + 1], continuityFunction: continuityFunction.toString(), }));
