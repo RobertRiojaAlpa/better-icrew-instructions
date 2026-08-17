@@ -1,4 +1,4 @@
-//v12
+//v13
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -763,17 +763,24 @@ class PageAction {
 			[8, 12],
 		];
 		
+		actions.push(new PageAction("testPageResolverGoToFirstUnknown", index += 0.1, "", async (pageAction) => {
+			if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
+			
+			Pages.clickMenu(pageAction.firstUnknownPage[0], pageAction.firstUnknownPage[1]);
+			return true;
+		}).withData({ firstUnknownPage: unknownPages[0], continuityFunction: continuityFunction.toString(), }));
+		
 		for(let i = 0; i < unknownPages.length; i++) {
 			actions.push(new PageAction(`testPageResolverRecordResultUnknown(${unknownPages[i][0]},${unknownPages[i][1]})`, index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.UNKNOWN)) return true;
 				
-				GMSettings.addPageResolverTestResult(`${pageAction.currentPage[0]}, ${pageAction.currentPage[1]}`);
+				GMSettings.addPageResolverTestResult(`${pageAction.currentUnknownPage[0]}, ${pageAction.currentUnknownPage[1]}`);
 				
-				if(pageAction.nextPage !== undefined) {
-					Pages.clickMenu(pageAction.nextPage[0], pageAction.nextPage[1]);
+				if(pageAction.nextUnknownPage !== undefined) {
+					Pages.clickMenu(pageAction.nextUnknownPage[0], pageAction.nextUnknownPage[1]);
 				}
 				return true;
-			}).withData({ currentPage: unknownPages[i], nextPage: unknownPages[i + 1], continuityFunction: continuityFunction.toString(), }));
+			}).withData({ currentUnknownPage: unknownPages[i], nextUnknownPage: unknownPages[i + 1], continuityFunction: continuityFunction.toString(), }));
 		}
 		
 		return actions;
