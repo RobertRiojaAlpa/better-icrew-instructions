@@ -1,4 +1,4 @@
-//v15
+//v16
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -212,7 +212,7 @@ class GMSettings {
     static async setupPersistentActions() {
         console.log("Better: Running persistent actions setup");
 		
-        await GMSettings.ACTIONS_PERSISTENT.set(PageActions.getPersistentActions());
+        await GMSettings.ACTIONS_PERSISTENT.set(PageAction.getPersistentActions());
 		
         console.log("Better: Done");
     }
