@@ -1,4 +1,4 @@
-//v11
+//v12
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -198,7 +198,7 @@ class PageAction {
 	static getPageResolverTestActions() {
 		let continuityFunction = async (page) => {
 			if(await PageResolver.getPage(Menus.getMenu()) !== page) {
-				console.log("Better: Unexpected page in page resolver test action");
+				alert("Unexpected page in page resolver test action - see console for more information");
 				await GMSettings.ACTIONS_CONSUMABLE.set([]);
 				return true;
 			}
@@ -208,7 +208,7 @@ class PageAction {
 		
 		let index = 0;
 		
-		return [
+		let actions = [
 			new PageAction("testPageResolverRecordResultMainMenu", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
 				
@@ -700,8 +700,82 @@ class PageAction {
 				
 				GMSettings.addPageResolverTestResult(Pages.DTC_DATA);
 				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
 		];
+		
+		let unknownPages = [
+			[0, 3],
+			[0, 4],
+			//[0, 5],
+			[1, 0],
+			[1, 3],
+			[1, 4],
+			[2, 0],
+			[2, 1],
+			[2, 2],
+			[2, 3],
+			[2, 5],
+			//[2, 6],
+			[3, 0],
+			[3, 1],
+			[3, 3],
+			[3, 4],
+			[4, 2],
+			[4, 5],
+			[4, 6],
+			[4, 7],
+			[5, 0],
+			[5, 1],
+			[5, 3],
+			[5, 4],
+			[5, 5],
+			[5, 6],
+			[6, 0],
+			[6, 2],
+			[6, 4],
+			[6, 5],
+			[6, 6],
+			[6, 7],
+			[6, 8],
+			[6, 9],
+			[6, 10],
+			[6, 11],
+			[6, 12],
+			[6, 13],
+			[6, 14],
+			//[6, 15],
+			[7, 0],
+			[7, 2],
+			[7, 4],
+			[7, 6],
+			[7, 11],
+			[7, 12],
+			[7, 13],
+			[8, 0],
+			//[8, 1],
+			[8, 2],
+			//[8, 5],
+			[8, 6],
+			[8, 10],
+			[8, 12],
+		];
+		
+		for(let i = 0; i < unknownPages.length; i++) {
+			actions.push(new PageAction(`testPageResolverRecordResultUnknown(${unknownPages[i][0]},${unknownPages[i][1]})`, index += 0.1, "", async (pageAction) => {
+				if(await eval(pageAction.data.continuityFunction)(Pages.UNKNOWN)) return true;
+				
+				GMSettings.addPageResolverTestResult(`${pageAction.currentPage[0]}, ${pageAction.currentPage[1]}`);
+				
+				if(pageAction.nextPage !== undefined) {
+					Pages.clickMenu(pageAction.nextPage[0], pageAction.nextPage[1]);
+				}
+				return true;
+			}).withData({ currentPage: unknownPages[i], nextPage: unknownPages[i + 1], continuityFunction: continuityFunction.toString(), }));
+		}
+		
+		return actions;
 	}
 }
