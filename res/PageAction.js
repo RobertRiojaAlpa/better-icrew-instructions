@@ -1,4 +1,4 @@
-//v9
+//v10
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -19,6 +19,10 @@ class PageAction {
     }
 	
 	static shouldRun(parseAction, page) {
+		if(parseAction.onPage.length === 0) {
+			return true;
+		}
+		
 		if(parseAction.onPage.indexOf("(") === -1) {
 			return parseAction.onPage === page;
 		}
