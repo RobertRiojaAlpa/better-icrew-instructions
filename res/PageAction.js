@@ -1,4 +1,4 @@
-//v7
+//v8
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -192,85 +192,402 @@ class PageAction {
 	}
 	
 	static getPageResolverTestActions() {
+		let continuityFunction = async (page) => {
+			if(await PageResolver.getPage(Menus.getMenu()) !== page) {
+				console.log("Better: Unexpected page in page resolver test action");
+				await GMSettings.ACTIONS_CONSUMABLE.set([]);
+				return true;
+			}
+			
+			return false;
+		}
+		
 		let index = 0;
 		
 		return [
 			new PageAction("testPageResolverRecordResultMainMenu", index += 0.1, "", async (pageAction) => {
+				if(await eval(pageAction.data.continuityFunction)(pageAction.data.page)) return true;
+				
 				GMSettings.addPageResolverTestResult(Pages.MAIN_MENU);
 				
 				Pages.clickMenu(0, 0);
                 return true;
-			}),
-			new PageAction("testPageResolverRecordResultSchs", index += 0.1, "", async (pageAction) => {
+			}).withData({ page: Pages.MAIN_MENU, continuityFunction: continuityFunction.toString(), });,
+			/*new PageAction("testPageResolverRecordResultSchs", index += 0.1, Pages.SCHS, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
 				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUN26");
+				$(".txt5").eq(1).val("02JUL26");
 				$(".txt5").eq(2).val("i");
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultSchsData", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultSchsData", index += 0.1, Pages.SCHS_DATA, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS_DATA);
 				
 				$(".better-rotation-number").eq(0).click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultRotation", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultRotation", index += 0.1, Pages.ROTATION, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.ROTATION);
 				
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverGoToSchs", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverGoToSchs", index += 0.1, Pages.SCHS_DATA, async (pageAction) => {
 				Pages.clickMenu(0, 0);
 				return true;
 			}),
-			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultMustBeNOrL", index += 0.1, Pages.MUST_BE_N_OR_L, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MUST_BE_N_OR_L);
+				
+				Pages.clickMenu(0, 0);
+				return true;
+			}),
+			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, Pages.SCHS, async (pageAction) => {
 				$(".txt5").eq(0).val("504483");
 				$(".txt5").eq(1).val("02JUN26");
 				$(".txt5").eq(2).val("n");
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultSchsHistory", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultSchsHistory", index += 0.1, Pages.SCHS_HISTORY, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY);
 				
-				Pages.clickMenu(0, 0);
+				$(".btn9").eq(0).click();
 				return true;
 			}),
-			new PageAction("testPageResolverGoToSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverGoToSchsHistoryScrollMessage", index += 0.1, Pages.SCHS, async (pageAction) => {
 				$(".txt5").eq(0).val("792096");
 				$(".txt5").eq(1).val("01NOV25");
 				$(".txt5").eq(2).val("n");
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultSchsHistoryScrollMessage", index += 0.1, Pages.SCHS_HISTORY_SCROLL_MESSAGE, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_SCROLL_MESSAGE);
 				
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultSchsHistoryAlternate", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultSchsHistoryAlternate", index += 0.1, Pages.SCHS_HISTORY_ALTERNATE, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_ALTERNATE);
 				
 				Pages.clickMenu(0, 1);
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultMots", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageResolverRecordResultMots", index += 0.1, Pages.MOTS, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.MOTS);
+				
+				$(".txt5").eq(0).val("504483");
+				$(".txt5").eq(1).val("02JUN26");
+				$(".txt5").eq(2).val("a");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultMotsData", index += 0.1, Pages.MOTS_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MOTS_DATA);
+				
+				Pages.clickMenu(0, 2);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultMotv", index += 0.1, Pages.MOTV, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MOTV);
 				
 				$(".txt5").eq(0).val("504483");
 				$(".txt5").eq(1).val("02JUN26");
 				$("#var_OK").click();
 				return true;
 			}),
-			new PageAction("testPageResolverRecordResultMotsData", index += 0.1, "", async (pageAction) => {
-				GMSettings.addPageResolverTestResult(Pages.MOTS_DATA);
+			new PageAction("testPageResolverRecordResultMotvData", index += 0.1, Pages.MOTV_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MOTV_DATA);
 				
+				Pages.clickMenu(0, 0);
 				return true;
 			}),
+			new PageAction("testPageResolverGoToSchsData", index += 0.1, Pages.SCHS, async (pageAction) => {
+				$(".txt5").eq(0).val("504483");
+				$(".txt5").eq(1).val("02JUN26");
+				$(".txt5").eq(2).val("i");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverGoToSick", index += 0.1, Pages.SCHS_DATA, async (pageAction) => {
+				$("#PictureButton006").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultSick", index += 0.1, Pages.SICK, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SICK);
+				
+				$(".btn16").eq(0).click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultSickOccurrences", index += 0.1, Pages.SICK_OCCURRENCES, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SICK_OCCURRENCES);
+				
+				$(".btn9").eq(1).click();
+				return true;
+			}),
+			new PageAction("testPageResolverGoToRots", index += 0.1, Pages.SICK, async (pageAction) => {
+				Pages.clickMenu(1, 2);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultRots", index += 0.1, Pages.ROTS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.ROTS);
+				
+				$(".btn9").eq(1).click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultPcs", index += 0.1, Pages.PCS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.PCS);
+				
+				$(".txt5").eq(0).val("o");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResult23m7", index += 0.1, Pages.$23M7, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.$23M7);
+				
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResult23m7Data", index += 0.1, Pages.$23M7_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.$23M7_DATA);
+				
+				Pages.clickMenu(1, 1);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultPres", index += 0.1, Pages.PRES, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.PRES);
+				
+				Pages.clickMenu(1, 2);
+				return true;
+			}),
+			new PageAction("testPageResolverGoToRotsHistory", index += 0.1, Pages.ROTS, async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("330");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("02JUN26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("n");
+				$(".txt5").eq(6).val("a102");
+				$(".txt5").eq(7).val("");
+				$(".txt5").eq(8).val("");
+				$(".txt5").eq(9).val("y");
+				$(".txt5").eq(10).val("");
+				$(".txt5").eq(11).val("");
+				$(".txt5").eq(12).val("");
+				$(".txt5").eq(13).val("");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultRotsHistory", index += 0.1, Pages.ROTS_HISTORY, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.ROTS_HISTORY);
+				
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverGoToReserveOpenTime", index += 0.1, Pages.ROTS, async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("330");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("y");
+				$(".txt5").eq(6).val("a102");
+				$(".txt5").eq(7).val("");
+				$(".txt5").eq(8).val("");
+				$(".txt5").eq(9).val("");
+				$(".txt5").eq(10).val("");
+				$(".txt5").eq(11).val("");
+				$(".txt5").eq(12).val("");
+				$(".txt5").eq(13).val("");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultReserveOpenTime", index += 0.1, Pages.RESERVE_OPEN_TIME, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
+				
+				$(".txt5").eq(0).val("atl330a");
+				$(".txt5").eq(1).val("02JUN26");
+				$(".txt5").eq(2).val("d");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultScAwds", index += 0.1, Pages.SC_AWDS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SC_AWDS);
+				
+				Pages.clickMenu(2, 4);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultVtss", index += 0.1, Pages.VTSS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.VTSS);
+				
+				Pages.clickMenu(3, 2);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultUdd", index += 0.1, Pages.UDD, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.UDD);
+				
+				Pages.clickMenu(4, 0);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultSlp", index += 0.1, Pages.SLP, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SLP);
+				
+				Pages.clickMenu(4, 1);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultSwap", index += 0.1, Pages.SWAP, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SWAP);
+				
+				Pages.clickMenu(4, 3);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultLeav", index += 0.1, Pages.LEAV, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.LEAV);
+				
+				Pages.clickMenu(4, 4);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultDty", index += 0.1, Pages.DTY, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.DTY);
+				
+				Pages.clickMenu(5, 2);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultRsRr", index += 0.1, Pages.RS_RR, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.RS_RR);
+				
+				Pages.clickMenu(6, 1);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultRph", index += 0.1, Pages.RPH, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.RPH);
+				
+				$(".txt2").eq(0).val("03JUL");
+				$(".txt2").eq(1).val("ATL");
+				$(".txt2").eq(2).val("A100");
+				$("#btnOK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultRphData", index += 0.1, Pages.RPH_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.RPH_DATA);
+				
+				Pages.clickMenu(6, 3);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultMpi", index += 0.1, Pages.MPI, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MPI);
+				
+				$(".txt2").eq(0).val("ATL");
+				$(".txt2").eq(1).val("A100");
+				$(".txt2").eq(2).val("p");
+				$("#btnOK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultMpiData", index += 0.1, Pages.MPI_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MPI_DATA);
+				
+				Pages.clickMenu(7, 1);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultLayIoe", index += 0.1, Pages.LAY_IOE, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.LAY_IOE);
+				
+				Pages.clickMenu(7, 3);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultPmr", index += 0.1, Pages.PMR, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.PMR);
+				
+				Pages.clickMenu(7, 5);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultScSked", index += 0.1, Pages.SC_SKED, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SC_SKED);
+				
+				Pages.clickMenu(7, 7);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultConf", index += 0.1, Pages.CONF, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.CONF);
+				
+				Pages.clickMenu(7, 8);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultFxday", index += 0.1, Pages.FXDAY, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.FXDAY);
+				
+				Pages.clickMenu(7, 9);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultLayover", index += 0.1, Pages.LAYOVER, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.LAYOVER);
+				
+				Pages.clickMenu(7, 10);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultNqps", index += 0.1, Pages.NQPS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.NQPS);
+				
+				Pages.clickMenu(8, 3);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultObws", index += 0.1, Pages.OBWS, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.OBWS);
+				
+				Pages.clickMenu(8, 4);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultPscr", index += 0.1, Pages.PSCR, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.PSCR);
+				
+				Pages.clickMenu(8, 8);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultInverse", index += 0.1, Pages.INVERSE, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.INVERSE);
+				
+				Pages.clickMenu(8, 9);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultMaxSc", index += 0.1, Pages.MAX_SC, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.MAX_SC);
+				
+				Pages.clickMenu(8, 11);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultSchsome", index += 0.1, Pages.SCHSOME, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.SCHSOME);
+				
+				Pages.clickMenu(8, 7);
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultDtc", index += 0.1, Pages.DTC, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.DTC);
+				
+				$(".txt5").eq(0).val("ATL");
+				$(".txt5").eq(1).val("7ER");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("01MAY26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("N");
+				$(".txt5").eq(6).val("scre");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultDtcConfirm", index += 0.1, Pages.DTC_CONFIRM, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.DTC_CONFIRM);
+				
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageResolverRecordResultDtcData", index += 0.1, Pages.DTC_DATA, async (pageAction) => {
+				GMSettings.addPageResolverTestResult(Pages.DTC_DATA);
+				
+				return true;
+			}),*/
 		];
 	}
 }
