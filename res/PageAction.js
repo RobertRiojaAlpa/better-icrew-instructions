@@ -1,4 +1,4 @@
-//v14
+//v15
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -766,7 +766,7 @@ class PageAction {
 		actions.push(new PageAction("testPageResolverGoToFirstUnknown", index += 0.1, "", async (pageAction) => {
 			if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
 			
-			Pages.clickMenu(pageAction.firstUnknownPage[0], pageAction.firstUnknownPage[1]);
+			Pages.clickMenu(pageAction.data.firstUnknownPage[0], pageAction.data.firstUnknownPage[1]);
 			return true;
 		}).withData({ firstUnknownPage: unknownPages[0], continuityFunction: continuityFunction.toString(), }));
 		
@@ -774,10 +774,10 @@ class PageAction {
 			actions.push(new PageAction(`testPageResolverRecordResultUnknown(${unknownPages[i][0]},${unknownPages[i][1]})`, index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.UNKNOWN)) return true;
 				
-				GMSettings.addPageResolverTestResult(`${pageAction.currentUnknownPage[0]}, ${pageAction.currentUnknownPage[1]}`);
+				GMSettings.addPageResolverTestResult(`${pageAction.data.currentUnknownPage[0]}, ${pageAction.data.currentUnknownPage[1]}`);
 				
-				if(pageAction.nextUnknownPage !== undefined) {
-					Pages.clickMenu(pageAction.nextUnknownPage[0], pageAction.nextUnknownPage[1]);
+				if(pageAction.data.nextUnknownPage !== undefined) {
+					Pages.clickMenu(pageAction.data.nextUnknownPage[0], pageAction.data.nextUnknownPage[1]);
 				} else {
 					let resolversResult = await GMSettings.TEST_PAGE_RESOLVERS_RESULT.get();
 					let usedResolvers = [...new Set(resolversResult.split("\n").map(r => TextUtils.skipIncluding(r, ": ")))];
