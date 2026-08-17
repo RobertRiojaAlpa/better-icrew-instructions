@@ -1,4 +1,4 @@
-//v8
+//v9
 class PageAction {
     constructor(name, order, onPage, action) {
         this.name = name;
@@ -212,7 +212,7 @@ class PageAction {
 				
 				Pages.clickMenu(0, 0);
                 return true;
-			}).withData({ page: Pages.MAIN_MENU, continuityFunction: continuityFunction.toString(), });,
+			}).withData({ page: Pages.MAIN_MENU, continuityFunction: continuityFunction.toString(), }),
 			/*new PageAction("testPageResolverRecordResultSchs", index += 0.1, Pages.SCHS, async (pageAction) => {
 				GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
