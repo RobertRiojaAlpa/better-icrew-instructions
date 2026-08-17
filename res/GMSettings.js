@@ -1,4 +1,4 @@
-//v14
+//v15
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -211,165 +211,9 @@ class GMSettings {
 
     static async setupPersistentActions() {
         console.log("Better: Running persistent actions setup");
-
-        let skipLogoutAction = new PageAction(PageAction.NAME_SKIP_TIMEOUT, -110, Pages.LOGOUT, async (pageAction) => {
-            console.log("Better: Handling logout/timeout page");
-
-            //Manually clicked logout
-            if(await GMSettings.LOGOUT_CLICKED.get()) {
-                console.log("Better: Logout was clicked");
-                await GMSettings.LOGOUT_CLICKED.set(false);
-                return true;
-            }
-
-            //Skip timeout disabled
-            if(!await GMSettings.SKIP_TIMEOUT_ENABLE.get()) {
-                console.log("Better: Skip timeout disabled");
-                return false;
-            }
-
-            //Prevent loop
-            if(await GMSettings.PAGE_PREVIOUS.get() === Pages.LOGOUT) {
-                console.log("Better: Preventing skip timeout loop");
-                return true;
-            }
-
-            console.log("Better: On timeout page - refreshing");
-            window.location.href = Pages.getRefreshUrl();
-            return true;
-        });
-
-        let autoLoginAction = new PageAction(PageAction.NAME_AUTO_LOGIN, -100, Pages.LOGIN, async (pageAction) => {
-            console.log("Better: Handling auto login");
-
-            if(!await GMSettings.AUTO_LOGIN_ENABLE.get()) {
-                console.log("Better: Auto login disabled");
-                return false;
-            }
-
-            let mainframeUsername = $("#var_EmployeeName");
-            let mainframePassword = $("#var_Password");
-
-            let username = await GMSettings.AUTO_LOGIN_USERNAME.get();
-            let password = await GMSettings.AUTO_LOGIN_PASSWORD.get();
-
-            if(username != null && password != null) {
-                mainframeUsername.val(username);
-                mainframePassword.val(password);
-            }
-
-            if(await GMSettings.PAGE_PREVIOUS.get() === Pages.LOGIN) {
-                console.log("Better: Preventing login loop");
-                return true;
-            }
-
-            if(username != null && password != null) {
-                console.log("Better: Auto login firing");
-                $("#var_OK").click();
-                return true;
-            }
-
-            return true;
-        });
-
-        let skipPilotAdvisoriesAction = new PageAction(PageAction.NAME_SKIP_PILOT_ADVISORIES, -90, (p) => Pages.isPilotMenuAdvisory(p), async (pageAction) => {
-            if(!Pages.isPilotMenuAdvisory(currentPage)) {
-                return false;
-            }
-
-            if(!await GMSettings.SKIP_PILOT_MENU_ADVISORIES_ENABLE.get()) {
-                console.log("Better: Skip pilot advisories disabled");
-                return false;
-            }
-
-            if(currentPage === Pages.PILOT_AURVR) {
-                $(".cbo3")[0].selectedIndex = 1;
-            }
-
-            console.log("Better: Skipping pilot menu advisory page - " + currentPage);
-            $("#var_OK").click();
-            return true;
-        });
-
-        let redirectToAlpaMenuAction = new PageAction(PageAction.NAME_REDIRECT_TO_ALPA_MENU, -80, Pages.PILOT_MAIN_MENU, async (pageAction) => {
-            if(!await GMSettings.REDIRECT_TO_ALPA_MENU_ENABLE.get()) {
-                console.log("Better: Redirect to ALPA menu disabled");
-                return false;
-            }
-
-            if(await GMSettings.PAGE_PREVIOUS.get() === Pages.PILOT_MAIN_MENU) {
-                console.log("Better: Preventing ALPA menu page loop");
-                return false;
-            }
-
-            console.log("Better: Redirecting from pilot menu to ALPA menu");
-            Pages.clickMenu(12, 2);
-            return true;
-        });
-
-        let resetTaskFlagsAction = new PageAction(PageAction.NAME_RESET_TASK_FLAGS, -70, Pages.MAIN_MENU, async (pageAction) => {
-			console.log("Better: Resetting task flags");
-			
-			await GMSettings.COMPILED_SCHS_DATA_RUNNING.set(false);
-			await GMSettings.COMPILED_SCHS_DATA_AND_MOTS_RUNNING.set(false);
-			await GMSettings.COMPILED_SCHS_DATA_AND_MOTV_RUNNING.set(false);
-			await GMSettings.COMPILED_SCHS_HISTORY_RUNNING.set(false);
-			await GMSettings.COMPILED_ROTATION_RUNNING.set(false);
-			await GMSettings.COMPILED_MOTS_RUNNING.set(false);
-			await GMSettings.COMPILED_MOTV_RUNNING.set(false);
-			await GMSettings.COMPILED_ROTS_HISTORY_RUNNING.set(false);
-			await GMSettings.COMPILED_23M7_RUNNING.set(false);
-
-			await GMSettings.COMPILED_MANY_SCHS_DATA_AND_MOTS_RUNNING.set(false);
-			await GMSettings.COMPILED_MANY_SCHS_HISTORY_RUNNING.set(false);
-			
-			await GMSettings.SAVE_ALL_SCHS_DATA_LIST.set([]);
-
-			await GMSettings.DATE_SEARCH_RUNNING.set(false);
-			await GMSettings.$23M7_SEARCH_RUNNING.set(false);
-			
-            return false;
-        });
-
-        let skipConfirmationPageAction = new PageAction(PageAction.NAME_SKIP_CONFIRMATION_PAGE, 90, (p) => Pages.isSkippable(p), async (pageAction) => {
-            console.log("Better: Handling skip confirmation page");
-
-            if(!await GMSettings.SKIP_CONFIRM_ENABLE.get()) {
-                console.log("Better: Skip confirmation page disabled");
-                return false;
-            }
-
-            console.log("Better: Skipping confirmation page");
-            $("#var_OK").click();
-            return true;
-        });
-
-        let startingPageAction = new PageAction(PageAction.NAME_STARTING_PAGE, 100, Pages.MAIN_MENU, async (pageAction) => {
-            console.log("Better: Handling main menu");
-
-            if(await GMSettings.PAGE_PREVIOUS.get() === Pages.MAIN_MENU) {
-                console.log("Better: Preventing main menu loop");
-                return false;
-            }
-
-            let startingPage = await GMSettings.STARTING_PAGE_VALUE.get();
-
-            if(startingPage === "") {
-                console.log("Better: No start page set");
-                return false;
-            }
-
-            let firstPart = startingPage.split(",")[0];
-            let secondPart = startingPage.split(",")[1];
-
-            console.log("Better: Starting page firing");
-
-            Pages.clickMenu(firstPart, secondPart);
-			return true;
-        });
-
-        let persistentActions = [skipLogoutAction, autoLoginAction, skipPilotAdvisoriesAction, redirectToAlpaMenuAction, resetTaskFlagsAction, skipConfirmationPageAction, startingPageAction];
-        await GMSettings.ACTIONS_PERSISTENT.set(persistentActions);
+		
+        await GMSettings.ACTIONS_PERSISTENT.set(PageActions.getPersistentActions());
+		
         console.log("Better: Done");
     }
 	
@@ -377,6 +221,11 @@ class GMSettings {
 		let actions = await GMSettings.ACTIONS_CONSUMABLE.get();
 		actions.push(action);
 		await GMSettings.ACTIONS_CONSUMABLE.set(actions);
+	}
+	
+	static async addPageResolverTestResult(page) {
+		let result = (await GMSettings.TEST_PAGE_RESOLVERS_RESULT.get() + "\n" + page + ": " + (await PageResolver.getMatchingPages(Menus.getMenu()))).trim();
+        await GMSettings.TEST_PAGE_RESOLVERS_RESULT.set(result);
 	}
 
     static async getAllGMValues() {
