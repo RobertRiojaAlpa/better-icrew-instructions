@@ -1,4 +1,4 @@
-//v16
+//v17
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -22,6 +22,7 @@ class GMSettings {
     //Pane settings
     static get PANE_SETTINGS_TOGGLED() { return new this.GMSetting("paneSettingsToggled", true); }
     static get PANE_SETTINGS_DEBUG_TOGGLED() { return new this.GMSetting("paneSettingsDebugToggled", false); }
+    static get PANE_APPEARANCE_TOGGLED() { return new this.GMSetting("paneAppearanceToggled", true); }
     static get PANE_LIST_ENTRY_TOGGLED() { return new this.GMSetting("paneListEntryToggled", true); }
     static get PANE_COMPILE_TOGGLED() { return new this.GMSetting("paneCompileToggled", true); }
     static get PANE_COMPILE_MANY_TOGGLED() { return new this.GMSetting("paneCompileManyToggled", true); }
@@ -72,6 +73,10 @@ class GMSettings {
     static get DTC_INSERT_SCRE_ENABLE() { return new this.GMSetting("dtcInsertScreEnable", false); }
 
     static get TEST_PAGE_RESOLVERS_RESULT() { return new this.GMSetting("testPageResolversResult", ""); }
+	
+	//Appearance settings
+	static get APPEARANCE_FONT_SIZE() { return new this.GMSetting("appearanceFontSize", "md"); }
+	static get APPEARANCE_CONTROL_SIZE() { return new this.GMSetting("appearanceControlSize", "small"); }
 
     //Page resolver settings
     static get PAGE_CURRENT() { return new this.GMSetting("pageCurrent", Pages.UNKNOWN); }
