@@ -1,4 +1,4 @@
-//v18
+//v19
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -47,6 +47,7 @@ class GMSettings {
     static get SCHS_BID_PERIOD_STICKY_ENABLE() { return new this.GMSetting("schsBidPeriodStickyEnable", false); }
     static get SCHS_ACTION_TYPE() { return new this.GMSetting("schsActionType", ""); }
     static get SCHS_ACTION_DEFAULT_VALUE() { return new this.GMSetting("schsActionDefaultValue", ""); }
+    static get SCHS_HISTORY_PILOT_VIEWED_TYPE() { return new this.GMSetting("schsHistoryPilotViewedType", ""); }
 
     static get MOTS_BID_PERIOD_STICKY_ENABLE() { return new this.GMSetting("motsBidPeriodStickyEnable", false); }
     static get MOTS_INSERT_A_ENABLE() { return new this.GMSetting("motsInsertAEnable", false); }
