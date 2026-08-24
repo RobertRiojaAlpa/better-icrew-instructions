@@ -1,4 +1,4 @@
-//v19
+//v20
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -145,6 +145,7 @@ class GMSettings {
     //Page settings
     static get PAGE_VALUE_SCHS_BID_PERIOD() { return new this.GMSetting("pageValueSchsBidPeriod", ""); }
     static get PAGE_VALUE_SCHS_ACTION() { return new this.GMSetting("pageValueSchsAction", ""); }
+    static get PAGE_VALUE_SCHS_HISTORY_PILOT_VIEWED() { return new this.GMSetting("pageValueSchsHistoryPilotViewed", ""); }
 
     static get PAGE_VALUE_SCHS_DATA_NAME() { return new this.GMSetting("pageValueSchsDataName", ""); }
     static get PAGE_VALUE_SCHS_DATA_BASE() { return new this.GMSetting("pageValueSchsDataBase", ""); }
