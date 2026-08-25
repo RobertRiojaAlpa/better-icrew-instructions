@@ -1,4 +1,4 @@
-//v23
+//v24
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -299,6 +299,7 @@ class Compile {
             outputText += name.toUpperCase();
             outputText += " ".repeat(spacesafterName);
         } else {
+            outputText += "\n";
 			spacesafterName += 5;
             outputText += " ".repeat(spacesafterName);
         }
