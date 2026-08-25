@@ -1,4 +1,4 @@
-//v22
+//v23
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -291,14 +291,15 @@ class Compile {
         outputText += TextUtils.outputUntil(rawText, "\n");
 
         //Name
-        outputText += "\n";
-        outputText += "NAME: "
         let spacesafterName = 45;
         if(name !== "") {
+            outputText += "\n";
+            outputText += "NAME: "
             spacesafterName -= name.length;
             outputText += name.toUpperCase();
             outputText += " ".repeat(spacesafterName);
         } else {
+			spacesafterName += 5;
             outputText += " ".repeat(spacesafterName);
         }
 
