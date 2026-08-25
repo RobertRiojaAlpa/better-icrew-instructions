@@ -1,4 +1,4 @@
-//v24
+//v25
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -300,7 +300,7 @@ class Compile {
             outputText += " ".repeat(spacesafterName);
         } else {
             outputText += "\n";
-			spacesafterName += 5;
+			spacesafterName += 6;
             outputText += " ".repeat(spacesafterName);
         }
 
