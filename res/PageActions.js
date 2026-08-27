@@ -1,8 +1,8 @@
-//v1
+//v2
 class PageActions {
 	static getPersistentActions() {
 		return [
-			new PageAction("skipTimeout", -110, Pages.LOGOUT, async (pageAction) => {
+			new PageAction("skipTimeout", -110, (p) => p === Pages.LOGOUT || p === Pages.GATEWAY_TIMEOUT, async (pageAction) => {
 				console.log("Better: Handling logout/timeout page");
 
 				//Manually clicked logout
@@ -19,7 +19,7 @@ class PageActions {
 				}
 
 				//Prevent loop
-				if(await GMSettings.PAGE_PREVIOUS.get() === Pages.LOGOUT) {
+				if(await GMSettings.PAGE_PREVIOUS.get() === Pages.LOGOUT || await GMSettings.PAGE_PREVIOUS.get() === Pages.GATEWAY_TIMEOUT) {
 					console.log("Better: Preventing skip timeout loop");
 					return true;
 				}

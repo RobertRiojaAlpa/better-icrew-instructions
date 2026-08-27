@@ -1,4 +1,4 @@
-//v9
+//v10
 class PageResolver {
     static isOnPilotMainMenuPage(menu) {
         return menu === Menus.PILOT_MENU;
@@ -37,6 +37,11 @@ class PageResolver {
     static isOnLockedOutPage(menu) {
         return menu === Menus.NONE
                && document.body.innerHTML.replace(/\r?\n|\r/g, " ").includes("Your iCrew account has been locked.");
+    }
+
+    static isOnGatewayTimeoutPage(menu) {
+        return menu === Menus.NONE
+               && document.body.innerHTML.replace(/\r?\n|\r/g, " ").includes("504 Gateway Time-out");
     }
 
     static isOnMainMenuPage(menu) {
@@ -362,6 +367,10 @@ class PageResolver {
 
         if(PageResolver.isOnLockedOutPage(menu)) {
             return Pages.LOCKED_OUT;
+        }
+
+        if(PageResolver.isOnGatewayTimeoutPage(menu)) {
+            return Pages.GATEWAY_TIMEOUT;
         }
 
         if(PageResolver.isOnSchsPage(menu)) {

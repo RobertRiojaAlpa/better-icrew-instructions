@@ -1,4 +1,4 @@
-//v6
+//v7
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -12,6 +12,7 @@ class Pages {
     static get LOGIN() { return "Login"; }
     static get LOGOUT() { return "Logout"; }
     static get LOCKED_OUT() { return "Locked out"; }
+    static get GATEWAY_TIMEOUT() { return "Gateway timeout"; }
 
     static get SCHS() { return "SCHS"; }
     static get SCHS_DATA() { return "SCHS data"; }
@@ -157,6 +158,7 @@ class Pages {
                && page !== Pages.LOGIN
                && page !== Pages.LOGOUT
                && page !== Pages.LOCKED_OUT
+               && page !== Pages.GATEWAY_TIMEOUT
                && page !== Pages.MUST_BE_N_OR_L;
     }
 
