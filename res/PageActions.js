@@ -1,4 +1,4 @@
-//v2
+//v3
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -108,7 +108,10 @@ class PageActions {
 				await GMSettings.COMPILED_23M7_RUNNING.set(false);
 
 				await GMSettings.COMPILED_MANY_SCHS_DATA_AND_MOTS_RUNNING.set(false);
+				await GMSettings.COMPILED_MANY_SCHS_DATA_AND_MOTS_LIST.set([]);
+				
 				await GMSettings.COMPILED_MANY_SCHS_HISTORY_RUNNING.set(false);
+				await GMSettings.COMPILED_MANY_SCHS_HISTORY_LIST.set([]);
 				
 				await GMSettings.SAVE_ALL_SCHS_DATA_LIST.set([]);
 
