@@ -1,4 +1,4 @@
-//v21
+//v22
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -74,7 +74,8 @@ class GMSettings {
     static get DTC_INSERT_SCRE_ENABLE() { return new this.GMSetting("dtcInsertScreEnable", false); }
 
     static get TEST_PAGE_RESOLVERS_RESULT() { return new this.GMSetting("testPageResolversResult", ""); }
-	static get TEST_TEMP_VALUE() { return new this.GMSetting("testTempValue", ""); }
+    static get TEST_SETTINGS_RESULT() { return new this.GMSetting("testSettingsResult", ""); }
+	static get TEST_SETTINGS_TEMP_VALUE() { return new this.GMSetting("testSettingsTempValue", ""); }
 	
 	//Appearance settings
 	static get APPEARANCE_FONT_SIZE() { return new this.GMSetting("appearanceFontSize", "md"); }
@@ -234,6 +235,11 @@ class GMSettings {
 	static async addPageResolverTestResult(page) {
 		let result = (await GMSettings.TEST_PAGE_RESOLVERS_RESULT.get() + "\n" + page + ": " + (await PageResolver.getMatchingPages(Menus.getMenu()))).trim();
         await GMSettings.TEST_PAGE_RESOLVERS_RESULT.set(result);
+	}
+	
+	static async addSettingsTestResult(setting, result) {
+		let result = (await GMSettings.TEST_SETTINGS_RESULT.get() + "\n" + setting + ": " + result).trim();
+        await GMSettings.TEST_SETTINGS_RESULT.set(result);
 	}
 
     static async getAllGMValues() {
