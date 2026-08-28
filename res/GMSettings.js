@@ -1,4 +1,4 @@
-//v20
+//v21
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -74,6 +74,7 @@ class GMSettings {
     static get DTC_INSERT_SCRE_ENABLE() { return new this.GMSetting("dtcInsertScreEnable", false); }
 
     static get TEST_PAGE_RESOLVERS_RESULT() { return new this.GMSetting("testPageResolversResult", ""); }
+	static get TEST_TEMP_VALUE() { return new this.GMSetting("testTempValue", ""); }
 	
 	//Appearance settings
 	static get APPEARANCE_FONT_SIZE() { return new this.GMSetting("appearanceFontSize", "md"); }
