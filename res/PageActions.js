@@ -1,4 +1,4 @@
-//v6
+//v7
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -782,6 +782,10 @@ class PageActions {
 				$("#var_OK").click();
 				return true;
 			}),
+			new PageAction("testPageBackDisabledSchsData3", index += 0.1, "", async (pageAction) => {
+				$("#PictureButton").click();
+				return true;
+			}),
 			new PageAction("testPageBackDisabledEnd", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack - disabled", currentPage === Pages.MAIN_MENU);
 				
@@ -810,6 +814,10 @@ class PageActions {
 				$(".txt5").eq(1).val("02JUL26");
 				$(".txt5").eq(2).val("i");
 				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageBackEnabledSchsData3", index += 0.1, "", async (pageAction) => {
+				$("#PictureButton").click();
 				return true;
 			}),
 			new PageAction("testPageBackEnabledEnd", index += 0.1, "", async (pageAction) => {
