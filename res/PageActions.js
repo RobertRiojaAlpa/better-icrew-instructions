@@ -1,4 +1,4 @@
-//v7
+//v8
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -827,6 +827,14 @@ class PageActions {
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testSettingsEnd", index += 0.1, "", async (pageAction) => {
+				let settingsResult = await GMSettings.TEST_SETTINGS_RESULT.get();
+
+				console.log("Settings test results:\n" + settingsResult);
+				alert("Results logged to console");
                 return true;
 			}),
 		];
