@@ -1,4 +1,4 @@
-//v9
+//v10
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -829,7 +829,7 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledEnd", index += 0.1, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("pageBack (enabled)", currentPage === Pages.SCHS_DATA);
+				await GMSettings.addSettingsTestResult("pageBack (enabled)", currentPage === Pages.SCHS);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
