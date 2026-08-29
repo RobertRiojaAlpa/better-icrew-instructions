@@ -1,4 +1,4 @@
-//v8
+//v9
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -783,11 +783,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledSchsData3", index += 0.1, "", async (pageAction) => {
+				$("#PictureButton001").click();
+				return true;
+			}),
+			new PageAction("testPageBackDisabledSchsData4", index += 0.1, "", async (pageAction) => {
 				$("#PictureButton").click();
 				return true;
 			}),
 			new PageAction("testPageBackDisabledEnd", index += 0.1, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("pageBack - disabled", currentPage === Pages.MAIN_MENU);
+				await GMSettings.addSettingsTestResult("pageBack (disabled)", currentPage === Pages.MAIN_MENU);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
@@ -817,11 +821,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledSchsData3", index += 0.1, "", async (pageAction) => {
+				$("#PictureButton001").click();
+				return true;
+			}),
+			new PageAction("testPageBackEnabledSchsData4", index += 0.1, "", async (pageAction) => {
 				$("#PictureButton").click();
 				return true;
 			}),
 			new PageAction("testPageBackEnabledEnd", index += 0.1, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("pageBack - enabled", currentPage !== Pages.MAIN_MENU);
+				await GMSettings.addSettingsTestResult("pageBack (enabled)", currentPage === Pages.SCHS_DATA);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
