@@ -1,4 +1,4 @@
-//v24
+//v25
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -238,8 +238,6 @@ class GMSettings {
 	}
 	
 	static async addSettingsTestResult(setting, result) {
-		let result = ((await GMSettings.TEST_SETTINGS_RESULT.get()) + "\n" + setting + ": " + result).trim();
-        await GMSettings.TEST_SETTINGS_RESULT.set(result);
 	}
 
     static async getAllGMValues() {
