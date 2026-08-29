@@ -1,4 +1,4 @@
-//v5
+//v6
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -175,7 +175,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMainMenu", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MAIN_MENU);
+				await GMSettings.addPageResolverTestResult(Pages.MAIN_MENU);
 				
 				Pages.clickMenu(0, 0);
                 return true;
@@ -183,7 +183,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchs", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHS);
+				await GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
 				$(".txt5").eq(0).val("504483");
 				$(".txt5").eq(1).val("02JUL26");
@@ -194,7 +194,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchsData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHS_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.SCHS_DATA);
 				
 				$(".better-rotation-number").eq(0).click();
 				return true;
@@ -202,7 +202,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRotation", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.ROTATION)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.ROTATION);
+				await GMSettings.addPageResolverTestResult(Pages.ROTATION);
 				
 				$("#var_OK").click();
 				return true;
@@ -216,7 +216,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMustBeNOrL", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MUST_BE_N_OR_L)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MUST_BE_N_OR_L);
+				await GMSettings.addPageResolverTestResult(Pages.MUST_BE_N_OR_L);
 				
 				Pages.clickMenu(0, 0);
 				return true;
@@ -233,7 +233,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchsHistory", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY);
+				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY);
 				
 				$(".btn9").eq(0).click();
 				return true;
@@ -250,7 +250,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY_SCROLL_MESSAGE)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_SCROLL_MESSAGE);
+				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_SCROLL_MESSAGE);
 				
 				$("#var_OK").click();
 				return true;
@@ -258,7 +258,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchsHistoryAlternate", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY_ALTERNATE)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_ALTERNATE);
+				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_ALTERNATE);
 				
 				Pages.clickMenu(0, 1);
 				return true;
@@ -266,7 +266,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMots", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MOTS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MOTS);
+				await GMSettings.addPageResolverTestResult(Pages.MOTS);
 				
 				$(".txt5").eq(0).val("504483");
 				$(".txt5").eq(1).val("02JUN26");
@@ -277,7 +277,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMotsData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MOTS_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MOTS_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.MOTS_DATA);
 				
 				Pages.clickMenu(0, 2);
 				return true;
@@ -285,7 +285,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMotv", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MOTV)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MOTV);
+				await GMSettings.addPageResolverTestResult(Pages.MOTV);
 				
 				$(".txt5").eq(0).val("504483");
 				$(".txt5").eq(1).val("02JUN26");
@@ -295,7 +295,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMotvData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MOTV_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MOTV_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.MOTV_DATA);
 				
 				Pages.clickMenu(0, 0);
 				return true;
@@ -318,7 +318,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSick", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SICK)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SICK);
+				await GMSettings.addPageResolverTestResult(Pages.SICK);
 				
 				$(".btn16").eq(0).click();
 				return true;
@@ -326,7 +326,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSickOccurrences", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SICK_OCCURRENCES)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SICK_OCCURRENCES);
+				await GMSettings.addPageResolverTestResult(Pages.SICK_OCCURRENCES);
 				
 				$(".btn9").eq(1).click();
 				return true;
@@ -340,7 +340,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRots", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.ROTS);
+				await GMSettings.addPageResolverTestResult(Pages.ROTS);
 				
 				$(".btn9").eq(1).click();
 				return true;
@@ -348,7 +348,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultPcs", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.PCS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.PCS);
+				await GMSettings.addPageResolverTestResult(Pages.PCS);
 				
 				$(".txt5").eq(0).val("o");
 				$("#var_OK").click();
@@ -357,7 +357,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResult23m7", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.$23M7)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.$23M7);
+				await GMSettings.addPageResolverTestResult(Pages.$23M7);
 				
 				$("#var_OK").click();
 				return true;
@@ -365,7 +365,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResult23m7Data", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.$23M7_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.$23M7_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.$23M7_DATA);
 				
 				Pages.clickMenu(1, 1);
 				return true;
@@ -373,7 +373,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultPres", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.PRES)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.PRES);
+				await GMSettings.addPageResolverTestResult(Pages.PRES);
 				
 				Pages.clickMenu(1, 2);
 				return true;
@@ -401,7 +401,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRotsHistory", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS_HISTORY)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.ROTS_HISTORY);
+				await GMSettings.addPageResolverTestResult(Pages.ROTS_HISTORY);
 				
 				$("#var_OK").click();
 				return true;
@@ -429,7 +429,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultReserveOpenTime", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.RESERVE_OPEN_TIME)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
+				await GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
 				
 				$(".txt5").eq(0).val("atl330a");
 				$(".txt5").eq(1).val("02JUN26");
@@ -440,7 +440,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultScAwds", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SC_AWDS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SC_AWDS);
+				await GMSettings.addPageResolverTestResult(Pages.SC_AWDS);
 				
 				Pages.clickMenu(2, 4);
 				return true;
@@ -448,7 +448,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultVtss", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.VTSS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.VTSS);
+				await GMSettings.addPageResolverTestResult(Pages.VTSS);
 				
 				Pages.clickMenu(3, 2);
 				return true;
@@ -456,7 +456,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultUdd", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.UDD)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.UDD);
+				await GMSettings.addPageResolverTestResult(Pages.UDD);
 				
 				Pages.clickMenu(4, 0);
 				return true;
@@ -464,7 +464,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSlp", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SLP)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SLP);
+				await GMSettings.addPageResolverTestResult(Pages.SLP);
 				
 				Pages.clickMenu(4, 1);
 				return true;
@@ -472,7 +472,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSwap", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SWAP)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SWAP);
+				await GMSettings.addPageResolverTestResult(Pages.SWAP);
 				
 				Pages.clickMenu(4, 3);
 				return true;
@@ -480,7 +480,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultLeav", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.LEAV)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.LEAV);
+				await GMSettings.addPageResolverTestResult(Pages.LEAV);
 				
 				Pages.clickMenu(4, 4);
 				return true;
@@ -488,7 +488,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultDty", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.DTY)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.DTY);
+				await GMSettings.addPageResolverTestResult(Pages.DTY);
 				
 				Pages.clickMenu(5, 2);
 				return true;
@@ -496,7 +496,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRsRr", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.RS_RR)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.RS_RR);
+				await GMSettings.addPageResolverTestResult(Pages.RS_RR);
 				
 				Pages.clickMenu(6, 1);
 				return true;
@@ -504,7 +504,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRph", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.RPH)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.RPH);
+				await GMSettings.addPageResolverTestResult(Pages.RPH);
 				
 				$(".txt2").eq(0).val("03JUL");
 				$(".txt2").eq(1).val("ATL");
@@ -515,7 +515,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultRphData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.RPH_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.RPH_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.RPH_DATA);
 				
 				Pages.clickMenu(6, 3);
 				return true;
@@ -523,7 +523,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMpi", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MPI)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MPI);
+				await GMSettings.addPageResolverTestResult(Pages.MPI);
 				
 				$(".txt2").eq(0).val("ATL");
 				$(".txt2").eq(1).val("A100");
@@ -534,7 +534,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMpiData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MPI_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MPI_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.MPI_DATA);
 				
 				Pages.clickMenu(7, 1);
 				return true;
@@ -542,7 +542,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultLayIoe", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.LAY_IOE)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.LAY_IOE);
+				await GMSettings.addPageResolverTestResult(Pages.LAY_IOE);
 				
 				Pages.clickMenu(7, 3);
 				return true;
@@ -550,7 +550,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultPmr", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.PMR)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.PMR);
+				await GMSettings.addPageResolverTestResult(Pages.PMR);
 				
 				Pages.clickMenu(7, 5);
 				return true;
@@ -558,7 +558,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultScSked", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SC_SKED)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SC_SKED);
+				await GMSettings.addPageResolverTestResult(Pages.SC_SKED);
 				
 				Pages.clickMenu(7, 7);
 				return true;
@@ -566,7 +566,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultConf", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.CONF)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.CONF);
+				await GMSettings.addPageResolverTestResult(Pages.CONF);
 				
 				Pages.clickMenu(7, 8);
 				return true;
@@ -574,7 +574,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultFxday", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.FXDAY)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.FXDAY);
+				await GMSettings.addPageResolverTestResult(Pages.FXDAY);
 				
 				Pages.clickMenu(7, 9);
 				return true;
@@ -582,7 +582,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultLayover", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.LAYOVER)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.LAYOVER);
+				await GMSettings.addPageResolverTestResult(Pages.LAYOVER);
 				
 				Pages.clickMenu(7, 10);
 				return true;
@@ -590,7 +590,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultNqps", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.NQPS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.NQPS);
+				await GMSettings.addPageResolverTestResult(Pages.NQPS);
 				
 				Pages.clickMenu(8, 3);
 				return true;
@@ -598,7 +598,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultObws", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.OBWS)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.OBWS);
+				await GMSettings.addPageResolverTestResult(Pages.OBWS);
 				
 				Pages.clickMenu(8, 4);
 				return true;
@@ -606,7 +606,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultPscr", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.PSCR)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.PSCR);
+				await GMSettings.addPageResolverTestResult(Pages.PSCR);
 				
 				Pages.clickMenu(8, 8);
 				return true;
@@ -614,7 +614,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultInverse", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.INVERSE)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.INVERSE);
+				await GMSettings.addPageResolverTestResult(Pages.INVERSE);
 				
 				Pages.clickMenu(8, 9);
 				return true;
@@ -622,7 +622,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultMaxSc", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MAX_SC)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.MAX_SC);
+				await GMSettings.addPageResolverTestResult(Pages.MAX_SC);
 				
 				Pages.clickMenu(8, 11);
 				return true;
@@ -630,7 +630,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultSchsome", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHSOME)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.SCHSOME);
+				await GMSettings.addPageResolverTestResult(Pages.SCHSOME);
 				
 				Pages.clickMenu(8, 7);
 				return true;
@@ -638,7 +638,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultDtc", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.DTC)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.DTC);
+				await GMSettings.addPageResolverTestResult(Pages.DTC);
 				
 				$(".txt5").eq(0).val("ATL");
 				$(".txt5").eq(1).val("7ER");
@@ -653,7 +653,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultDtcConfirm", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.DTC_CONFIRM)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.DTC_CONFIRM);
+				await GMSettings.addPageResolverTestResult(Pages.DTC_CONFIRM);
 				
 				$("#var_OK").click();
 				return true;
@@ -661,7 +661,7 @@ class PageActions {
 			new PageAction("testPageResolverRecordResultDtcData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.DTC_DATA)) return true;
 				
-				GMSettings.addPageResolverTestResult(Pages.DTC_DATA);
+				await GMSettings.addPageResolverTestResult(Pages.DTC_DATA);
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
@@ -737,7 +737,7 @@ class PageActions {
 			actions.push(new PageAction(`testPageResolverRecordResultUnknown(${unknownPages[i][0]},${unknownPages[i][1]})`, index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.UNKNOWN)) return true;
 				
-				GMSettings.addPageResolverTestResult(`${pageAction.data.currentUnknownPage[0]}, ${pageAction.data.currentUnknownPage[1]}`);
+				await GMSettings.addPageResolverTestResult(`${pageAction.data.currentUnknownPage[0]}, ${pageAction.data.currentUnknownPage[1]}`);
 				
 				if(pageAction.data.nextUnknownPage !== undefined) {
 					Pages.clickMenu(pageAction.data.nextUnknownPage[0], pageAction.data.nextUnknownPage[1]);
