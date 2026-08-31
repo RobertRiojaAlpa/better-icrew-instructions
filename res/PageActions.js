@@ -1,4 +1,4 @@
-//v12
+//v13
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -878,6 +878,80 @@ class PageActions {
 			}),
 			new PageAction("testPageBackEnabledMots4", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack (MOTS, enabled)", currentPage === Pages.MOTS);
+				
+				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testPageBackDisabledDtc1", index += 0.1, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
+				
+				await GMSettings.PAGE_BACK_ENABLE.set(false);
+				
+				Pages.clickMenu(5, 7);
+				return true;
+			}),
+			new PageAction("testPageBackDisabledDtc2", index += 0.1, "", async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("7er");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("01may26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("N");
+				$(".txt5").eq(6).val("scre");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageBackDisabledDtc3", index += 0.1, "", async (pageAction) => {
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageBackDisabledDtc4", index += 0.1, "", async (pageAction) => {
+				$(".btn13").eq(5).click();
+				return true;
+			}),
+			new PageAction("testPageBackDisabledDtc5", index += 0.1, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("pageBack (DTC, disabled)", currentPage === Pages.MAIN_MENU);
+				
+				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testPageBackEnabledDtc1", index += 0.1, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
+				
+				await GMSettings.PAGE_BACK_ENABLE.set(true);
+				
+				Pages.clickMenu(5, 7);
+				return true;
+			}),
+			new PageAction("testPageBackEnabledDtc2", index += 0.1, "", async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("7er");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("01may26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("N");
+				$(".txt5").eq(6).val("scre");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageBackEnabledDtc3", index += 0.1, "", async (pageAction) => {
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testPageBackEnabledDtc4", index += 0.1, "", async (pageAction) => {
+				$(".btn13").eq(5).click();
+				return true;
+			}),
+			new PageAction("testPageBackDisabledDtc5", index += 0.1, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("pageBack (DTC, enabled)", currentPage === Pages.DTC);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
