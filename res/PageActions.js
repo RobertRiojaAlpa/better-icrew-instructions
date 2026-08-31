@@ -1,4 +1,4 @@
-//v25
+//v26
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -794,8 +794,6 @@ class PageActions {
 		actions.push(new PageAction("testSettingsEnd", index += 0.01, "", async (pageAction) => {
 			console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 			alert("Results logged to console");
-			//Back to main menu
-			Pages.clickMenu(0, 5);
             return true;
 		}));
 		
@@ -1018,8 +1016,6 @@ class PageActions {
 				if(!pageAction.isBeingRunTogether) {
 					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 					alert("Results logged to console");
-					//Back to main menu
-					Pages.clickMenu(0, 5);
 					return true;
 				}
 				
@@ -1096,8 +1092,6 @@ class PageActions {
 				if(!pageAction.isBeingRunTogether) {
 					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 					alert("Results logged to console");
-					//Back to main menu
-					Pages.clickMenu(0, 5);
 					return true;
 				}
 				
