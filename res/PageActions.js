@@ -1,4 +1,4 @@
-//v21
+//v22
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -788,13 +788,20 @@ class PageActions {
 		let index = 0;
 		let actions = [];
 		
-		actions.push(...this.getPageBackTestActions(index += 0.1));
-		actions.push(...this.getSkipConfirmTestActions());
+		actions.push(...this.getPageBackTestActions(index += 0.1, true));
+		actions.push(...this.getSkipConfirmTestActions(index = 91, true));
+		
+		actions.push(new PageAction("testSettingsEnd", index += 0.01, "", async (pageAction) => {
+			console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+			//Back to main menu
+			Pages.clickMenu(0, 5);
+            return true;
+		}));
 		
 		return actions;
 	}
 
-	static getPageBackTestActions(index = 0) {
+	static getPageBackTestActions(index = 0, isBeingRunTogether = false) {
 		return [
 			new PageAction("testPageBackDisabledSchs1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
@@ -1007,16 +1014,18 @@ class PageActions {
 			}),
 			
 			new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
-				console.log(await GMSettings.TEST_SETTINGS_RESULT.get());
-				alert("Results logged to console");
-                return true;
+				if(!isBeingRunTogether) {
+					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				}
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+				return true;
 			}),
 		];
 	}
 	
-	static getSkipConfirmTestActions() {
-		let index = 91;
-		
+	static getSkipConfirmTestActions(index = 91, isBeingRunTogether = false) {
 		return [
 			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
@@ -1081,8 +1090,12 @@ class PageActions {
 			}),
 			
 			new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
-				console.log(await GMSettings.TEST_SETTINGS_RESULT.get());
-				alert("Results logged to console");
+				if(!isBeingRunTogether) {
+					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				}
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
                 return true;
 			}),
 		];
