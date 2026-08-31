@@ -1,4 +1,4 @@
-//v17
+//v18
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -979,6 +979,8 @@ class PageActions {
 	}
 	
 	static getSkipConfirmTestActions() {
+		let index = 91;
+		
 		return [
 			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
