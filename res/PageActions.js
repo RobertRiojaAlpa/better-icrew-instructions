@@ -1,4 +1,4 @@
-//v11
+//v12
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -762,16 +762,11 @@ class PageActions {
 		let index = 0;
 		
 		let actions = [
-			new PageAction("testPageBackDisabledSchsStart", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackDisabledSchs1", index += 0.1, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(false);
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-                return true;
-			}),
-			new PageAction("testPageBackDisabledSchs1", index += 0.1, "", async (pageAction) => {
 				Pages.clickMenu(0, 0);
 				return true;
 			}),
@@ -790,7 +785,7 @@ class PageActions {
 				$("#PictureButton").click();
 				return true;
 			}),
-			new PageAction("testPageBackDisabledSchsEnd", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackDisabledSchs5", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack (SCHS, disabled)", currentPage === Pages.MAIN_MENU);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
@@ -800,16 +795,11 @@ class PageActions {
                 return true;
 			}),
 			
-			new PageAction("testPageBackEnabledSchsStart", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackEnabledSchs1", index += 0.1, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(true);
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-                return true;
-			}),
-			new PageAction("testPageBackEnabledSchs1", index += 0.1, "", async (pageAction) => {
 				Pages.clickMenu(0, 0);
 				return true;
 			}),
@@ -828,7 +818,7 @@ class PageActions {
 				$("#PictureButton").click();
 				return true;
 			}),
-			new PageAction("testPageBackEnabledSchsEnd", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackEnabledSchs5", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack (SCHS, enabled)", currentPage === Pages.SCHS);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
@@ -838,16 +828,11 @@ class PageActions {
                 return true;
 			}),
 			
-			new PageAction("testPageBackDisabledMotsStart", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackDisabledMots1", index += 0.1, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(false);
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-                return true;
-			}),
-			new PageAction("testPageBackDisabledMots1", index += 0.1, "", async (pageAction) => {
 				Pages.clickMenu(0, 1);
 				return true;
 			}),
@@ -862,7 +847,7 @@ class PageActions {
 				$("#PictureButton").click();
 				return true;
 			}),
-			new PageAction("testPageBackDisabledMotsEnd", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackDisabledMots4", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack (MOTS, disabled)", currentPage === Pages.MAIN_MENU);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
@@ -872,16 +857,11 @@ class PageActions {
                 return true;
 			}),
 			
-			new PageAction("testPageBackEnabledMotsStart", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackEnabledMots1", index += 0.1, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(true);
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-                return true;
-			}),
-			new PageAction("testPageBackEnabledMots1", index += 0.1, "", async (pageAction) => {
 				Pages.clickMenu(0, 1);
 				return true;
 			}),
@@ -896,7 +876,7 @@ class PageActions {
 				$("#PictureButton").click();
 				return true;
 			}),
-			new PageAction("testPageBackEnabledMotsEnd", index += 0.1, "", async (pageAction) => {
+			new PageAction("testPageBackEnabledMots4", index += 0.1, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("pageBack (MOTS, enabled)", currentPage === Pages.MOTS);
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
