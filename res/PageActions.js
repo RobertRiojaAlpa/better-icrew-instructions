@@ -1,4 +1,4 @@
-//v23
+//v24
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1016,11 +1016,13 @@ class PageActions {
 			new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
 				if(!pageAction.isBeingRunTogether) {
 					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				
+					//Back to main menu
+					Pages.clickMenu(0, 5);
+					return true;
 				}
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-				return true;
+				return false;
 			}).withData({ isBeingRunTogether: isBeingRunTogether, }),
 		];
 	}
@@ -1092,11 +1094,13 @@ class PageActions {
 			new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
 				if(!pageAction.isBeingRunTogether) {
 					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				
+					//Back to main menu
+					Pages.clickMenu(0, 5);
+					return true;
 				}
 				
-				//Back to main menu
-				Pages.clickMenu(0, 5);
-                return true;
+				return false;
 			}).withData({ isBeingRunTogether: isBeingRunTogether, }),
 		];
 	}
