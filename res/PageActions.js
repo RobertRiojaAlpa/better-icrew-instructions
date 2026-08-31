@@ -1,4 +1,4 @@
-//v27
+//v28
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1015,7 +1015,7 @@ class PageActions {
 			
 		];
 		
-		if(!pageAction.isBeingRunTogether) {
+		if(!isBeingRunTogether) {
 			actions.push(new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
@@ -1091,7 +1091,7 @@ class PageActions {
 			}),
 		];
 		
-		if(!pageAction.isBeingRunTogether) {
+		if(!isBeingRunTogether) {
 			actions.push(new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
