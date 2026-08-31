@@ -1,4 +1,4 @@
-//v26
+//v27
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -788,7 +788,7 @@ class PageActions {
 		let index = 0;
 		let actions = [];
 		
-		actions.push(...this.getPageBackTestActions(index += 0.1, true));
+		actions.push(...this.getPageBackTestActions(index += 1, true));
 		actions.push(...this.getSkipConfirmTestActions(index = 91, true));
 		
 		actions.push(new PageAction("testSettingsEnd", index += 0.01, "", async (pageAction) => {
@@ -801,7 +801,7 @@ class PageActions {
 	}
 
 	static getPageBackTestActions(index = 0, isBeingRunTogether = false) {
-		return [
+		let actions = [
 			new PageAction("testPageBackDisabledSchs1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
 				
@@ -1012,20 +1012,22 @@ class PageActions {
                 return true;
 			}),
 			
-			new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
-				if(!pageAction.isBeingRunTogether) {
-					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
-					alert("Results logged to console");
-					return true;
-				}
-				
-				return false;
-			}).withData({ isBeingRunTogether: isBeingRunTogether, }),
+			
 		];
+		
+		if(!pageAction.isBeingRunTogether) {
+			actions.push(new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
 	}
 	
 	static getSkipConfirmTestActions(index = 91, isBeingRunTogether = false) {
-		return [
+		let actions = [
 			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
 				
@@ -1087,16 +1089,16 @@ class PageActions {
 				Pages.clickMenu(0, 5);
                 return true;
 			}),
-			
-			new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
-				if(!pageAction.isBeingRunTogether) {
-					console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
-					alert("Results logged to console");
-					return true;
-				}
-				
-				return false;
-			}).withData({ isBeingRunTogether: isBeingRunTogether, }),
 		];
+		
+		if(!pageAction.isBeingRunTogether) {
+			actions.push(new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
 	}
 }
