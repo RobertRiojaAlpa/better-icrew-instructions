@@ -1,4 +1,4 @@
-//v20
+//v21
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -185,9 +185,11 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUL26");
-				$(".txt5").eq(2).val("i");
+				let inputData = InputConstants.SCHS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -224,9 +226,11 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
 				
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUN26");
-				$(".txt5").eq(2).val("n");
+				let inputData = InputConstants.SCHS_HISTORY;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -241,9 +245,11 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
 				
-				$(".txt5").eq(0).val("792096");
-				$(".txt5").eq(1).val("01NOV25");
-				$(".txt5").eq(2).val("n");
+				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -268,9 +274,11 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTS);
 				
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUN26");
-				$(".txt5").eq(2).val("a");
+				let inputData = InputConstants.MOTS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -287,8 +295,10 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTV);
 				
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUN26");
+				let inputData = InputConstants.MOTV_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -303,9 +313,11 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsData", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
 				
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUN26");
-				$(".txt5").eq(2).val("i");
+				let inputData = InputConstants.SCHS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -381,20 +393,22 @@ class PageActions {
 			new PageAction("testPageResolverGoToRotsHistory", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
 				
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("330");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("02JUN26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("n");
-				$(".txt5").eq(6).val("a102");
-				$(".txt5").eq(7).val("");
-				$(".txt5").eq(8).val("");
-				$(".txt5").eq(9).val("y");
-				$(".txt5").eq(10).val("");
-				$(".txt5").eq(11).val("");
-				$(".txt5").eq(12).val("");
-				$(".txt5").eq(13).val("");
+				let inputData = InputConstants.ROTS_HISTORY;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.reserveOpenTime);
+				$(".txt5").eq(6).val(inputData.rotationNumber);
+				$(".txt5").eq(7).val(inputData.rotationLengthStart);
+				$(".txt5").eq(8).val(inputData.rotationLengthEnd);
+				$(".txt5").eq(9).val(inputData.history);
+				$(".txt5").eq(10).val(inputData.count1);
+				$(".txt5").eq(11).val(inputData.count2);
+				$(".txt5").eq(12).val(inputData.download);
+				$(".txt5").eq(13).val(inputData.printerAddress);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -409,20 +423,22 @@ class PageActions {
 			new PageAction("testPageResolverGoToReserveOpenTime", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
 				
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("330");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("y");
-				$(".txt5").eq(6).val("a102");
-				$(".txt5").eq(7).val("");
-				$(".txt5").eq(8).val("");
-				$(".txt5").eq(9).val("");
-				$(".txt5").eq(10).val("");
-				$(".txt5").eq(11).val("");
-				$(".txt5").eq(12).val("");
-				$(".txt5").eq(13).val("");
+				let inputData = InputConstants.RESERVE_OPEN_TIME;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.reserveOpenTime);
+				$(".txt5").eq(6).val(inputData.rotationNumber);
+				$(".txt5").eq(7).val(inputData.rotationLengthStart);
+				$(".txt5").eq(8).val(inputData.rotationLengthEnd);
+				$(".txt5").eq(9).val(inputData.history);
+				$(".txt5").eq(10).val(inputData.count1);
+				$(".txt5").eq(11).val(inputData.count2);
+				$(".txt5").eq(12).val(inputData.download);
+				$(".txt5").eq(13).val(inputData.printerAddress);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -431,9 +447,11 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
 				
-				$(".txt5").eq(0).val("atl330a");
-				$(".txt5").eq(1).val("02JUN26");
-				$(".txt5").eq(2).val("d");
+				let inputData = InputConstants.SC_AWDS;
+				
+				$(".txt5").eq(0).val(inputData.category);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -506,9 +524,12 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.RPH);
 				
-				$(".txt2").eq(0).val("03JUL");
-				$(".txt2").eq(1).val("ATL");
-				$(".txt2").eq(2).val("A100");
+				let inputData = InputConstants.RPH_DATA;
+				
+				$(".txt2").eq(0).val(inputData.date);
+				$(".txt2").eq(1).val(inputData.base);
+				$(".txt2").eq(2).val(inputData.rotationNumber);
+				$(".txt2").eq(3).val(inputData.dupeNumber);
 				$("#btnOK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -525,9 +546,12 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MPI);
 				
-				$(".txt2").eq(0).val("ATL");
-				$(".txt2").eq(1).val("A100");
-				$(".txt2").eq(2).val("p");
+				let inputData = InputConstants.MPI_DATA;
+				
+				$(".txt2").eq(0).val(inputData.base);
+				$(".txt2").eq(1).val(inputData.rotationNumber);
+				$(".txt2").eq(2).val(inputData.direction);
+				$(".txt2").eq(3).val(inputData.date);
 				$("#btnOK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -640,13 +664,15 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTC);
 				
-				$(".txt5").eq(0).val("ATL");
-				$(".txt5").eq(1).val("7ER");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("01MAY26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("N");
-				$(".txt5").eq(6).val("scre");
+				let inputData = InputConstants.DTC_DATA;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.download);
+				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
@@ -814,9 +840,11 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledSchs2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUL26");
-				$(".txt5").eq(2).val("i");
+				let inputData = InputConstants.SCHS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -847,9 +875,11 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledMots2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUL26");
-				$(".txt5").eq(2).val("a");
+				let inputData = InputConstants.MOTS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -876,9 +906,11 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledMots2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUL26");
-				$(".txt5").eq(2).val("a");
+				let inputData = InputConstants.MOTS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -905,13 +937,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledDtc2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("7er");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("01may26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("N");
-				$(".txt5").eq(6).val("scre");
+				let inputData = InputConstants.DTC_DATA;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.download);
+				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -942,13 +976,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledDtc2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("7er");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("01may26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("N");
-				$(".txt5").eq(6).val("scre");
+				let inputData = InputConstants.DTC_DATA;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.download);
+				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -991,13 +1027,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmDisabledDtc2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("7er");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("01may26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("N");
-				$(".txt5").eq(6).val("scre");
+				let inputData = InputConstants.DTC_DATA;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.download);
+				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1020,13 +1058,15 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmEnabledDtc2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("atl");
-				$(".txt5").eq(1).val("7er");
-				$(".txt5").eq(2).val("a");
-				$(".txt5").eq(3).val("01may26");
-				$(".txt5").eq(4).val("");
-				$(".txt5").eq(5).val("N");
-				$(".txt5").eq(6).val("scre");
+				let inputData = InputConstants.DTC_DATA;
+				
+				$(".txt5").eq(0).val(inputData.base);
+				$(".txt5").eq(1).val(inputData.equipment);
+				$(".txt5").eq(2).val(inputData.position);
+				$(".txt5").eq(3).val(inputData.beginDate);
+				$(".txt5").eq(4).val(inputData.endDate);
+				$(".txt5").eq(5).val(inputData.download);
+				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
 			}),
