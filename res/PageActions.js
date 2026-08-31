@@ -1,4 +1,4 @@
-//v15
+//v16
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -763,6 +763,7 @@ class PageActions {
 		let actions = [];
 		
 		actions.push(...this.#getPageBackTestActions(index += 0.1));
+		actions.push(...this.#getSkipConfirmTestActions());
 		
 		return actions;
 	}
@@ -972,6 +973,68 @@ class PageActions {
 
 				console.log("Settings test results:\n" + settingsResult);
 				alert("Results logged to console");
+                return true;
+			}),
+		];
+	}
+	
+	static #getSkipConfirmTestActions() {
+		return [
+			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(false);
+				
+				Pages.clickMenu(8, 7);
+				return true;
+			}),
+			new PageAction("testSkipConfirmDisabledDtc2", index += 0.01, "", async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("7er");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("01may26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("N");
+				$(".txt5").eq(6).val("scre");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testSkipConfirmDisabledDtc3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("skipConfirm (DTC, disabled)", currentPage === Pages.DTC_CONFIRM);
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testSkipConfirmEnabledDtc1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(true);
+				
+				Pages.clickMenu(8, 7);
+				return true;
+			}),
+			new PageAction("testSkipConfirmEnabledDtc2", index += 0.01, "", async (pageAction) => {
+				$(".txt5").eq(0).val("atl");
+				$(".txt5").eq(1).val("7er");
+				$(".txt5").eq(2).val("a");
+				$(".txt5").eq(3).val("01may26");
+				$(".txt5").eq(4).val("");
+				$(".txt5").eq(5).val("N");
+				$(".txt5").eq(6).val("scre");
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testSkipConfirmEnabledDtc3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("skipConfirm (DTC, enabled)", currentPage === Pages.DTC_DATA);
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
                 return true;
 			}),
 		];
