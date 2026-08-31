@@ -1,4 +1,4 @@
-//v28
+//v29
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -791,7 +791,7 @@ class PageActions {
 		actions.push(...this.getPageBackTestActions(index += 1, true));
 		actions.push(...this.getSkipConfirmTestActions(index = 91, true));
 		
-		actions.push(new PageAction("testSettingsEnd", index += 0.01, "", async (pageAction) => {
+		actions.push(new PageAction("testSettingsEnd", index += 1, "", async (pageAction) => {
 			console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 			alert("Results logged to console");
             return true;
