@@ -1,4 +1,4 @@
-//v16
+//v17
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -762,13 +762,13 @@ class PageActions {
 		let index = 0;
 		let actions = [];
 		
-		actions.push(...this.#getPageBackTestActions(index += 0.1));
-		actions.push(...this.#getSkipConfirmTestActions());
+		actions.push(...this.getPageBackTestActions(index += 0.1));
+		actions.push(...this.getSkipConfirmTestActions());
 		
 		return actions;
 	}
 
-	static #getPageBackTestActions(index) {
+	static getPageBackTestActions(index = 0) {
 		return [
 			new PageAction("testPageBackDisabledSchs1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.PAGE_BACK_ENABLE.get());
@@ -978,7 +978,7 @@ class PageActions {
 		];
 	}
 	
-	static #getSkipConfirmTestActions() {
+	static getSkipConfirmTestActions() {
 		return [
 			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
