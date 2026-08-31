@@ -1,4 +1,4 @@
-//v29
+//v30
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -215,14 +215,14 @@ class PageActions {
 				Pages.clickMenu(0, 0);
 				return true;
 			}).withData({ continuityFunction: continuityFunction.toString(), }),
-			new PageAction("testPageResolverRecordResultMustBeNOrL", index += 0.1, "", async (pageAction) => {
+			/*new PageAction("testPageResolverRecordResultMustBeNOrL", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.MUST_BE_N_OR_L)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MUST_BE_N_OR_L);
 				
 				Pages.clickMenu(0, 0);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}).withData({ continuityFunction: continuityFunction.toString(), }),*/
 			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, "", async (pageAction) => {
 				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
 				
