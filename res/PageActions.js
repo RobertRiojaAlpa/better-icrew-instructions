@@ -1,4 +1,4 @@
-//v30
+//v31
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1082,6 +1082,60 @@ class PageActions {
 			}),
 			new PageAction("testSkipConfirmEnabledDtc3", index += 0.01, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("skipConfirm (DTC, enabled)", currentPage === Pages.DTC_DATA);
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testSkipConfirmDisabledSchsHistoryScrollMessage1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(false);
+				
+				Pages.clickMenu(0, 0);
+				return true;
+			}),
+			new PageAction("testSkipConfirmDisabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
+				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testSkipConfirmDisabledSchsHistoryScrollMessage3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("skipConfirm (SCHS History Alternate, disabled)", currentPage === Pages.SCHS_HISTORY_SCROLL_MESSAGE);
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testSkipConfirmEnabledSchsHistoryScrollMessage1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
+				
+				await GMSettings.SKIP_CONFIRM_ENABLE.set(true);
+				
+				Pages.clickMenu(0, 0);
+				return true;
+			}),
+			new PageAction("testSkipConfirmEnabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
+				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
+				$("#var_OK").click();
+				return true;
+			}),
+			new PageAction("testSkipConfirmEnabledSchsHistoryScrollMessage3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("skipConfirm (SCHS History Alternate, disabled)", currentPage === Pages.SCHS_HISTORY_ALTERNATE);
 				
 				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
