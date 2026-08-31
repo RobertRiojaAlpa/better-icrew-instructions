@@ -1,4 +1,4 @@
-//v18
+//v19
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -968,7 +968,7 @@ class PageActions {
                 return true;
 			}),
 			
-			new PageAction("testSettingsEnd", index += 0.01, "", async (pageAction) => {
+			new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
 				let settingsResult = await GMSettings.TEST_SETTINGS_RESULT.get();
 
 				console.log("Settings test results:\n" + settingsResult);
@@ -1037,6 +1037,14 @@ class PageActions {
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
+                return true;
+			}),
+			
+			new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
+				let settingsResult = await GMSettings.TEST_SETTINGS_RESULT.get();
+
+				console.log("Settings test results:\n" + settingsResult);
+				alert("Results logged to console");
                 return true;
 			}),
 		];
