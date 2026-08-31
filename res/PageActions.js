@@ -1,4 +1,4 @@
-//v13
+//v14
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -891,7 +891,7 @@ class PageActions {
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(false);
 				
-				Pages.clickMenu(5, 7);
+				Pages.clickMenu(8, 7);
 				return true;
 			}),
 			new PageAction("testPageBackDisabledDtc2", index += 0.1, "", async (pageAction) => {
@@ -928,7 +928,7 @@ class PageActions {
 				
 				await GMSettings.PAGE_BACK_ENABLE.set(true);
 				
-				Pages.clickMenu(5, 7);
+				Pages.clickMenu(8, 7);
 				return true;
 			}),
 			new PageAction("testPageBackEnabledDtc2", index += 0.1, "", async (pageAction) => {
