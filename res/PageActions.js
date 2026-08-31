@@ -1,4 +1,4 @@
-//v19
+//v20
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -779,9 +779,11 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledSchs2", index += 0.01, "", async (pageAction) => {
-				$(".txt5").eq(0).val("504483");
-				$(".txt5").eq(1).val("02JUL26");
-				$(".txt5").eq(2).val("i");
+				let inputData = InputConstants.SCHS_DATA;
+				
+				$(".txt5").eq(0).val(inputData.employeeNumber);
+				$(".txt5").eq(1).val(inputData.bidPeriod);
+				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
 			}),
@@ -969,9 +971,7 @@ class PageActions {
 			}),
 			
 			new PageAction("testPageBackEnd", index += 0.01, "", async (pageAction) => {
-				let settingsResult = await GMSettings.TEST_SETTINGS_RESULT.get();
-
-				console.log("Settings test results:\n" + settingsResult);
+				console.log(await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
                 return true;
 			}),
@@ -1041,9 +1041,7 @@ class PageActions {
 			}),
 			
 			new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
-				let settingsResult = await GMSettings.TEST_SETTINGS_RESULT.get();
-
-				console.log("Settings test results:\n" + settingsResult);
+				console.log(await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
                 return true;
 			}),
