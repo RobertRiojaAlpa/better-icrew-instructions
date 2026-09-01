@@ -1,4 +1,4 @@
-//v37
+//v38
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -789,6 +789,7 @@ class PageActions {
 		let actions = [];
 		
 		actions.push(...this.getPageBackTestActions(index += 1, true));
+		actions.push(...this.getSchsBidPeriodStickyTestActions(index += 1, true));
 		
 		actions.push(...this.getSkipConfirmTestActions(true));
 		index = 92;
@@ -1016,8 +1017,6 @@ class PageActions {
 				Pages.clickMenu(0, 5);
                 return true;
 			}),
-			
-			
 		];
 		
 		if(!isBeingRunTogether) {
@@ -1181,7 +1180,7 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testStartingPageNone3", 101, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("startPage (none)", currentPage === Pages.MAIN_MENU);
+				await GMSettings.addSettingsTestResult("startingPage (none)", currentPage === Pages.MAIN_MENU);
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
@@ -1193,7 +1192,7 @@ class PageActions {
 		];
 		
 		if(!isBeingRunTogether) {
-			actions.push(new PageAction("testSkipConfirmEnd", 101.1, "", async (pageAction) => {
+			actions.push(new PageAction("testStartingPageEnd", 101.1, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
 				return true;
@@ -1215,7 +1214,7 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testStartingPageSchs2", 101, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("startPage (SCHS)", currentPage === Pages.SCHS);
+				await GMSettings.addSettingsTestResult("startingPage (SCHS)", currentPage === Pages.SCHS);
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
@@ -1224,5 +1223,46 @@ class PageActions {
                 return true;
 			}),
 		];
+	}
+
+	static getSchsBidPeriodStickyTestActions(index = 0, isBeingRunTogether = false) {
+		let actions = [
+			new PageAction("testSchsBidPeriodSticky1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.get());
+				
+				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(false);
+				
+				Pages.clickMenu(0, 0);
+				return true;
+			}),
+			new PageAction("testSchsBidPeriodSticky2", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
+				
+				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(true);
+				$(".txt5").eq(1).val(InputConstants.SCHS_DATA.bidPeriod);
+				
+				Pages.clickMenu(0, 0);
+                return true;
+			}),
+			new PageAction("testSchsBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.SCHS_DATA.bidPeriod);
+				
+				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+		];
+		
+		if(!isBeingRunTogether) {
+			actions.push(new PageAction("testSchsBidPeriodStickyEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
 	}
 }
