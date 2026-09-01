@@ -1,4 +1,4 @@
-//v42
+//v43
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1353,7 +1353,7 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed3", index += 0.01, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (sticky)", $(".txt5").eq(2).val() === "y");
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (sticky)", $(".txt5").eq(4).val() === "y");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("y");
 				
@@ -1361,7 +1361,7 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed4", index += 0.01, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (Y)", $(".txt5").eq(2).val() === "Y");
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (Y)", $(".txt5").eq(4).val() === "Y");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("n");
 				
@@ -1369,7 +1369,7 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed5", index += 0.01, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (N)", $(".txt5").eq(2).val() === "N");
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (N)", $(".txt5").eq(4).val() === "N");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
