@@ -1,4 +1,4 @@
-//v32
+//v33
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1186,7 +1186,7 @@ class PageActions {
 		];
 		
 		if(!isBeingRunTogether) {
-			actions.push(new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
+			actions.push(new PageAction("testSkipConfirmEnd", 101.1, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
 				return true;
