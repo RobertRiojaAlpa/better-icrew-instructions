@@ -1,4 +1,4 @@
-//v29
+//v30
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -76,6 +76,7 @@ class GMSettings {
     static get TEST_PAGE_RESOLVERS_RESULT() { return new this.GMSetting("testPageResolversResult", ""); }
     static get TEST_SETTINGS_RESULT() { return new this.GMSetting("testSettingsResult", ""); }
 	static get TEST_SETTINGS_TEMP_VALUE() { return new this.GMSetting("testSettingsTempValue", ""); }
+	static get TEST_SETTINGS_TEMP_VALUE_2() { return new this.GMSetting("testSettingsTempValue2", ""); }
 	
 	//Appearance settings
 	static get APPEARANCE_FONT_SIZE() { return new this.GMSetting("appearanceFontSize", "md"); }
