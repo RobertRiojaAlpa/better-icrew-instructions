@@ -1,4 +1,4 @@
-//v35
+//v36
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1181,7 +1181,7 @@ class PageActions {
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
-				GMSettings.addAction(pageAction.data.actions2);
+				GMSettings.addAction(...pageAction.data.actions2);
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
