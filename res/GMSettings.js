@@ -1,4 +1,4 @@
-//v28
+//v29
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -226,9 +226,9 @@ class GMSettings {
         console.log("Better: Done");
     }
 	
-	static async addAction(action) {
+	static async addAction(...newActions) {
 		let actions = await GMSettings.ACTIONS_CONSUMABLE.get();
-		actions.push(action);
+		actions.push(...newActions);
 		await GMSettings.ACTIONS_CONSUMABLE.set(actions);
 	}
 	
