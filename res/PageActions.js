@@ -1,4 +1,4 @@
-//v34
+//v35
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1181,7 +1181,7 @@ class PageActions {
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
-				GMSettings.addAction(pageAction.actions2);
+				GMSettings.addAction(pageAction.data.actions2);
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
@@ -1212,7 +1212,7 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testStartingPageSchs2", 101, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("startPage (none)", currentPage === Pages.MAIN_MENU);
+				await GMSettings.addSettingsTestResult("startPage (SCHS)", currentPage === Pages.SCHS);
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
