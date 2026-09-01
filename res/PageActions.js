@@ -1,4 +1,4 @@
-//v38
+//v39
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1240,6 +1240,7 @@ class PageActions {
 				
 				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(true);
 				$(".txt5").eq(1).val(InputConstants.SCHS_DATA.bidPeriod);
+				$(".txt5").eq(1).trigger('input');
 				
 				Pages.clickMenu(0, 0);
                 return true;
