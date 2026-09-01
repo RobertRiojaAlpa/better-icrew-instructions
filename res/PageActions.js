@@ -1,4 +1,4 @@
-//v40
+//v41
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1311,8 +1311,8 @@ class PageActions {
 			new PageAction("testSchsAction5", index += 0.01, "", async (pageAction) => {
 				await GMSettings.addSettingsTestResult("schsAction (sticky)", $(".txt5").eq(2).val() === "i");
 				
-				await GMSettings.SCHS_ACTION_TYPE.set(await GMSettings.SCHS_ACTION_TYPE.get());
-				await GMSettings.SCHS_ACTION_DEFAULT_VALUE.set(await GMSettings.SCHS_ACTION_DEFAULT_VALUE.get());
+				await GMSettings.SCHS_ACTION_TYPE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				await GMSettings.SCHS_ACTION_DEFAULT_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE_2.get());
 				
 				Pages.clickMenu(0, 0);
                 return true;
