@@ -1,4 +1,4 @@
-//v41
+//v42
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -791,6 +791,7 @@ class PageActions {
 		actions.push(...this.getPageBackTestActions(index += 1, true));
 		actions.push(...this.getSchsBidPeriodStickyTestActions(index += 1, true));
 		actions.push(...this.getSchsActionTestActions(index += 1, true));
+		actions.push(...this.getSchsHistoryPilotViewedTestActions(index += 1, true));
 		
 		actions.push(...this.getSkipConfirmTestActions(true));
 		index = 92;
@@ -1281,7 +1282,7 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSchsAction2", index += 0.01, "", async (pageAction) => {
-				await GMSettings.addSettingsTestResult("schsAction (disabled)", $(".txt5").eq(2).val() === "");
+				await GMSettings.addSettingsTestResult("schsAction (none)", $(".txt5").eq(2).val() === "");
 				
 				await GMSettings.SCHS_ACTION_TYPE.set("default");
 				await GMSettings.SCHS_ACTION_DEFAULT_VALUE.set("n");
@@ -1321,6 +1322,64 @@ class PageActions {
 		
 		if(!isBeingRunTogether) {
 			actions.push(new PageAction("testSchsActionEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
+	}
+	
+	static getSchsHistoryPilotViewedTestActions(index = 0, isBeingRunTogether = false) {
+		let actions = [
+			new PageAction("testSchsHistoryPilotViewed1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.get());
+				
+				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("");
+				
+				Pages.clickMenu(0, 0);
+				return true;
+			}),
+			new PageAction("testSchsHistoryPilotViewed2", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (none)", $(".txt5").eq(4).val() === "Y");
+				
+				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("sticky");
+				
+				$(".txt5").eq(4).val("y");
+				$(".txt5").eq(4).trigger('input');
+				
+				Pages.clickMenu(0, 0);
+                return true;
+			}),
+			new PageAction("testSchsHistoryPilotViewed3", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (sticky)", $(".txt5").eq(2).val() === "y");
+				
+				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("y");
+				
+				Pages.clickMenu(0, 0);
+                return true;
+			}),
+			new PageAction("testSchsHistoryPilotViewed4", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (Y)", $(".txt5").eq(2).val() === "Y");
+				
+				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("n");
+				
+				Pages.clickMenu(0, 0);
+                return true;
+			}),
+			new PageAction("testSchsHistoryPilotViewed5", index += 0.01, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (N)", $(".txt5").eq(2).val() === "N");
+				
+				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				Pages.clickMenu(0, 0);
+                return true;
+			}),
+		];
+		
+		if(!isBeingRunTogether) {
+			actions.push(new PageAction("testSchsHistoryPilotViewedEnd", index += 0.01, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
 				return true;
