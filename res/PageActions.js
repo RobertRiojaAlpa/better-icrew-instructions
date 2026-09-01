@@ -1,4 +1,4 @@
-//v31
+//v32
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -789,9 +789,14 @@ class PageActions {
 		let actions = [];
 		
 		actions.push(...this.getPageBackTestActions(index += 1, true));
-		actions.push(...this.getSkipConfirmTestActions(index = 91, true));
 		
-		actions.push(new PageAction("testSettingsEnd", index += 1, "", async (pageAction) => {
+		actions.push(...this.getSkipConfirmTestActions(true));
+		index = 92;
+		
+		actions.push(...this.getStartingPageTestActions(true));
+		index = 102;
+		
+		actions.push(new PageAction("testSettingsEnd", index, "", async (pageAction) => {
 			console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 			alert("Results logged to console");
             return true;
@@ -1026,7 +1031,9 @@ class PageActions {
 		return actions;
 	}
 	
-	static getSkipConfirmTestActions(index = 91, isBeingRunTogether = false) {
+	static getSkipConfirmTestActions(isBeingRunTogether = false) {
+		let index = 91;
+		
 		let actions = [
 			new PageAction("testSkipConfirmDisabledDtc1", index += 0.01, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.SKIP_CONFIRM_ENABLE.get());
@@ -1138,6 +1145,39 @@ class PageActions {
 				await GMSettings.addSettingsTestResult("skipConfirm (SCHS History Alternate, disabled)", currentPage === Pages.SCHS_HISTORY_ALTERNATE);
 				
 				await GMSettings.SKIP_CONFIRM_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+		];
+		
+		if(!isBeingRunTogether) {
+			actions.push(new PageAction("testSkipConfirmEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
+	}
+	
+	static getStartingPageTestActions(isBeingRunTogether = false) {
+		let actions = [
+			new PageAction("testStartingPageNone1", 99, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.STARTING_PAGE_VALUE.get());
+				
+				await GMSettings.STARTING_PAGE_VALUE.set("");
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+				return true;
+			}),
+			new PageAction("testStartingPageNone2", 101, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("startPage (none)", currentPage === Pages.MAIN_MENU);
+				
+				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
