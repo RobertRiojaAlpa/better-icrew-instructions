@@ -1,4 +1,4 @@
-//v33
+//v34
 class PageActions {
 	static getPersistentActions() {
 		return [
@@ -1164,6 +1164,8 @@ class PageActions {
 	}
 	
 	static getStartingPageTestActions(isBeingRunTogether = false) {
+		let actions2 = this.$getStartingPageTestActions2();
+		
 		let actions = [
 			new PageAction("testStartingPageNone1", 99, "", async (pageAction) => {
 				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.STARTING_PAGE_VALUE.get());
@@ -1179,10 +1181,12 @@ class PageActions {
 				
 				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
+				GMSettings.addAction(pageAction.actions2);
+				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
                 return true;
-			}),
+			}).withData({ actions2: actions2, }),
 		];
 		
 		if(!isBeingRunTogether) {
@@ -1194,5 +1198,28 @@ class PageActions {
 		}
 		
 		return actions;
+	}
+	
+	static $getStartingPageTestActions2() {
+		return [
+			new PageAction("testStartingPageSchs1", 99, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.STARTING_PAGE_VALUE.get());
+				
+				await GMSettings.STARTING_PAGE_VALUE.set("0,0");
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+				return true;
+			}),
+			new PageAction("testStartingPageSchs2", 101, "", async (pageAction) => {
+				await GMSettings.addSettingsTestResult("startPage (none)", currentPage === Pages.MAIN_MENU);
+				
+				await GMSettings.STARTING_PAGE_VALUE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+		];
 	}
 }
