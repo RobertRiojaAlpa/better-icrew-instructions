@@ -1,4 +1,4 @@
-//v44
+//v45
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -1077,6 +1077,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmDisabledDtc2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC)) return true;
+				
 				let inputData = InputConstants.DTC_DATA;
 				
 				$(".txt5").eq(0).val(inputData.base);
@@ -1108,6 +1110,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmEnabledDtc2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC)) return true;
+				
 				let inputData = InputConstants.DTC_DATA;
 				
 				$(".txt5").eq(0).val(inputData.base);
@@ -1139,6 +1143,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmDisabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
@@ -1166,6 +1172,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSkipConfirmEnabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
