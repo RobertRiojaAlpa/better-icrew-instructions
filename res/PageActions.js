@@ -1,4 +1,4 @@
-//v51
+//v52
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -185,11 +185,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
-				let inputData = InputConstants.SCHS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -226,11 +222,7 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_HISTORY;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_HISTORY.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -245,11 +237,7 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_HISTORY_ALTERNATE.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -274,11 +262,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTS);
 				
-				let inputData = InputConstants.MOTS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.option);
+				InputConstants.MOTS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -295,10 +279,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTV);
 				
-				let inputData = InputConstants.MOTV_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
+				InputConstants.MOTV_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -313,11 +294,7 @@ class PageActions {
 			new PageAction("testPageResolverGoToSchsData", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -393,22 +370,7 @@ class PageActions {
 			new PageAction("testPageResolverGoToRotsHistory", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
 				
-				let inputData = InputConstants.ROTS_HISTORY;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.reserveOpenTime);
-				$(".txt5").eq(6).val(inputData.rotationNumber);
-				$(".txt5").eq(7).val(inputData.rotationLengthStart);
-				$(".txt5").eq(8).val(inputData.rotationLengthEnd);
-				$(".txt5").eq(9).val(inputData.history);
-				$(".txt5").eq(10).val(inputData.count1);
-				$(".txt5").eq(11).val(inputData.count2);
-				$(".txt5").eq(12).val(inputData.download);
-				$(".txt5").eq(13).val(inputData.printerAddress);
+				InputConstants.ROTS_HISTORY.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -423,22 +385,7 @@ class PageActions {
 			new PageAction("testPageResolverGoToReserveOpenTime", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
 				
-				let inputData = InputConstants.RESERVE_OPEN_TIME;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.reserveOpenTime);
-				$(".txt5").eq(6).val(inputData.rotationNumber);
-				$(".txt5").eq(7).val(inputData.rotationLengthStart);
-				$(".txt5").eq(8).val(inputData.rotationLengthEnd);
-				$(".txt5").eq(9).val(inputData.history);
-				$(".txt5").eq(10).val(inputData.count1);
-				$(".txt5").eq(11).val(inputData.count2);
-				$(".txt5").eq(12).val(inputData.download);
-				$(".txt5").eq(13).val(inputData.printerAddress);
+				InputConstants.RESERVE_OPEN_TIME.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -447,11 +394,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
 				
-				let inputData = InputConstants.SC_AWDS;
-				
-				$(".txt5").eq(0).val(inputData.category);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.option);
+				InputConstants.SC_AWDS.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -524,12 +467,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.RPH);
 				
-				let inputData = InputConstants.RPH_DATA;
-				
-				$(".txt2").eq(0).val(inputData.date);
-				$(".txt2").eq(1).val(inputData.base);
-				$(".txt2").eq(2).val(inputData.rotationNumber);
-				$(".txt2").eq(3).val(inputData.dupeNumber);
+				InputConstants.RPH_DATA.insert();
 				$("#btnOK").click();
 				return true;
 			}),
@@ -546,12 +484,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.MPI);
 				
-				let inputData = InputConstants.MPI_DATA;
-				
-				$(".txt2").eq(0).val(inputData.base);
-				$(".txt2").eq(1).val(inputData.rotationNumber);
-				$(".txt2").eq(2).val(inputData.direction);
-				$(".txt2").eq(3).val(inputData.date);
+				InputConstants.MPI_DATA.insert();
 				$("#btnOK").click();
 				return true;
 			}),
@@ -664,15 +597,7 @@ class PageActions {
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTC);
 				
-				let inputData = InputConstants.DTC_DATA;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.download);
-				$(".txt5").eq(6).val(inputData.scre);
+				InputConstants.DTC_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -825,11 +750,7 @@ class PageActions {
 			new PageAction("testPageBackDisabledSchs2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -866,11 +787,7 @@ class PageActions {
 			new PageAction("testPageBackEnabledSchs2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -907,11 +824,7 @@ class PageActions {
 			new PageAction("testPageBackDisabledMots2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
 				
-				let inputData = InputConstants.MOTS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.option);
+				InputConstants.MOTS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -942,11 +855,7 @@ class PageActions {
 			new PageAction("testPageBackEnabledMots2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
 				
-				let inputData = InputConstants.MOTS_DATA;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.option);
+				InputConstants.MOTS_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -977,15 +886,7 @@ class PageActions {
 			new PageAction("testPageBackDisabledDtc2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.DTC)) return true;
 				
-				let inputData = InputConstants.DTC_DATA;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.download);
-				$(".txt5").eq(6).val(inputData.scre);
+				InputConstants.DTC_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1022,15 +923,7 @@ class PageActions {
 			new PageAction("testPageBackEnabledDtc2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.DTC)) return true;
 				
-				let inputData = InputConstants.DTC_DATA;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.download);
-				$(".txt5").eq(6).val(inputData.scre);
+				InputConstants.DTC_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1083,15 +976,7 @@ class PageActions {
 			new PageAction("testSkipConfirmDisabledDtc2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.DTC)) return true;
 				
-				let inputData = InputConstants.DTC_DATA;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.download);
-				$(".txt5").eq(6).val(inputData.scre);
+				InputConstants.DTC_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1116,15 +1001,7 @@ class PageActions {
 			new PageAction("testSkipConfirmEnabledDtc2", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.DTC)) return true;
 				
-				let inputData = InputConstants.DTC_DATA;
-				
-				$(".txt5").eq(0).val(inputData.base);
-				$(".txt5").eq(1).val(inputData.equipment);
-				$(".txt5").eq(2).val(inputData.position);
-				$(".txt5").eq(3).val(inputData.beginDate);
-				$(".txt5").eq(4).val(inputData.endDate);
-				$(".txt5").eq(5).val(inputData.download);
-				$(".txt5").eq(6).val(inputData.scre);
+				InputConstants.DTC_DATA.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1149,11 +1026,7 @@ class PageActions {
 			new PageAction("testSkipConfirmDisabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_HISTORY_ALTERNATE.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1178,11 +1051,7 @@ class PageActions {
 			new PageAction("testSkipConfirmEnabledSchsHistoryScrollMessage2", index += 0.1, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
-				
-				$(".txt5").eq(0).val(inputData.employeeNumber);
-				$(".txt5").eq(1).val(inputData.bidPeriod);
-				$(".txt5").eq(2).val(inputData.action);
+				InputConstants.SCHS_HISTORY_ALTERNATE.insert();
 				$("#var_OK").click();
 				return true;
 			}),
@@ -1287,7 +1156,7 @@ class PageActions {
 				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
 				
 				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(true);
-				$(".txt5").eq(1).val(InputConstants.SCHS_DATA.bidPeriod);
+				$(".txt5").eq(1).val(InputConstants.SCHS_DATA.data.bidPeriod);
 				$(".txt5").eq(1).trigger('input');
 				
 				Pages.clickMenu(0, 0);
@@ -1296,7 +1165,7 @@ class PageActions {
 			new PageAction("testSchsBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
-				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.SCHS_DATA.bidPeriod);
+				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.SCHS_DATA.data.bidPeriod);
 				
 				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
@@ -1469,7 +1338,7 @@ class PageActions {
 				await GMSettings.addSettingsTestResult("motsBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
 				
 				await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.set(true);
-				$(".txt5").eq(1).val(InputConstants.MOTS_DATA.bidPeriod);
+				$(".txt5").eq(1).val(InputConstants.MOTS_DATA.data.bidPeriod);
 				$(".txt5").eq(1).trigger('input');
 				
 				Pages.clickMenu(0, 1);
@@ -1478,7 +1347,7 @@ class PageActions {
 			new PageAction("testMotsBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
 				
-				await GMSettings.addSettingsTestResult("motsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.MOTS_DATA.bidPeriod);
+				await GMSettings.addSettingsTestResult("motsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.MOTS_DATA.data.bidPeriod);
 				
 				await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
@@ -1559,7 +1428,7 @@ class PageActions {
 				await GMSettings.addSettingsTestResult("motvBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
 				
 				await GMSettings.MOTV_BID_PERIOD_STICKY_ENABLE.set(true);
-				$(".txt5").eq(1).val(InputConstants.MOTV_DATA.bidPeriod);
+				$(".txt5").eq(1).val(InputConstants.MOTV_DATA.data.bidPeriod);
 				$(".txt5").eq(1).trigger('input');
 				
 				Pages.clickMenu(0, 2);
@@ -1568,7 +1437,7 @@ class PageActions {
 			new PageAction("testMotvBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.MOTV)) return true;
 				
-				await GMSettings.addSettingsTestResult("motvBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.MOTV_DATA.bidPeriod);
+				await GMSettings.addSettingsTestResult("motvBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.MOTV_DATA.data.bidPeriod);
 				
 				await GMSettings.MOTV_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				

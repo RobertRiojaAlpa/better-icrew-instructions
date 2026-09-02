@@ -1,4 +1,4 @@
-//v3
+//v4
 class InputConstants {
 	static ALL(pageFilter = null) {
 		return [
@@ -61,46 +61,90 @@ class InputConstants {
 	}
 	
     static get SCHS_DATA() {
-		return {
+		let data = {
 			employeeNumber: "504483",
 			bidPeriod:      "02JUL26",
 			action:         "i",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.employeeNumber);
+				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(2).val(data.action);
+			},
+		};
 	}
 	
     static get SCHS_HISTORY() {
-		return {
+		let data = {
 			employeeNumber: "504483",
 			bidPeriod:      "02JUL26",
 			action:         "n",
+		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.employeeNumber);
+				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(2).val(data.action);
+			},
 		};
 	}
 	
     static get SCHS_HISTORY_ALTERNATE() {
-		return {
+		let data = {
 			employeeNumber: "792096",
 			bidPeriod:      "01NOV25",
 			action:         "n",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.employeeNumber);
+				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(2).val(data.action);
+			},
+		};
 	}
 	
     static get MOTS_DATA() {
-		return {
+		let data = {
 			employeeNumber: "504483",
 			bidPeriod:      "02JUL26",
 			option:         "a",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.employeeNumber);
+				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(2).val(data.option);
+			},
+		};
 	}
 	
     static get MOTV_DATA() {
-		return {
+		let data = {
 			employeeNumber: "504483",
 			bidPeriod:      "02JUL26",
+		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.employeeNumber);
+				$(".txt5").eq(1).val(data.bidPeriod);
+			},
 		};
 	}
 	
     static get ROTS_HISTORY() {
-		return {
+		let data = {
 			base:                "atl",
 			equipment:           "330",
 			position:            "a",
@@ -116,10 +160,30 @@ class InputConstants {
 			download:            "",
 			printerAddress:      "",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.base);
+				$(".txt5").eq(1).val(data.equipment);
+				$(".txt5").eq(2).val(data.position);
+				$(".txt5").eq(3).val(data.beginDate);
+				$(".txt5").eq(4).val(data.endDate);
+				$(".txt5").eq(5).val(data.reserveOpenTime);
+				$(".txt5").eq(6).val(data.rotationNumber);
+				$(".txt5").eq(7).val(data.rotationLengthStart);
+				$(".txt5").eq(8).val(data.rotationLengthEnd);
+				$(".txt5").eq(9).val(data.history);
+				$(".txt5").eq(10).val(data.count1);
+				$(".txt5").eq(11).val(data.count2);
+				$(".txt5").eq(12).val(data.download);
+				$(".txt5").eq(13).val(data.printerAddress);
+			},
+		};
 	}
 	
     static get RESERVE_OPEN_TIME() {
-		return {
+		let data = {
 			base:                "atl",
 			equipment:           "330",
 			position:            "a",
@@ -135,36 +199,85 @@ class InputConstants {
 			download:            "",
 			printerAddress:      "",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.base);
+				$(".txt5").eq(1).val(data.equipment);
+				$(".txt5").eq(2).val(data.position);
+				$(".txt5").eq(3).val(data.beginDate);
+				$(".txt5").eq(4).val(data.endDate);
+				$(".txt5").eq(5).val(data.reserveOpenTime);
+				$(".txt5").eq(6).val(data.rotationNumber);
+				$(".txt5").eq(7).val(data.rotationLengthStart);
+				$(".txt5").eq(8).val(data.rotationLengthEnd);
+				$(".txt5").eq(9).val(data.history);
+				$(".txt5").eq(10).val(data.count1);
+				$(".txt5").eq(11).val(data.count2);
+				$(".txt5").eq(12).val(data.download);
+				$(".txt5").eq(13).val(data.printerAddress);
+			},
+		};
 	}
 	
     static get SC_AWDS() {
-		return {
+		let data = {
 			category:  "atl330a",
 			bidPeriod: "02JUN26",
 			option:    "d",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.category);
+				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(2).val(data.option);
+			},
+		};
 	}
 	
     static get RPH_DATA() {
-		return {
+		let data = {
 			date:           "03JUL",
 			base:           "ATL",
 			rotationNumber: "A100",
 			dupeNumber:     "",
+		},
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt2").eq(0).val(data.date);
+				$(".txt2").eq(1).val(data.base);
+				$(".txt2").eq(2).val(data.rotationNumber);
+				$(".txt2").eq(3).val(data.dupeNumber);
+			},
 		};
 	}
 	
     static get MPI_DATA() {
-		return {
+		let data = {
 			base:           "ATL",
 			rotationNumber: "A100",
 			direction:      "p",
 			date:           "",
 		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt2").eq(0).val(data.base);
+				$(".txt2").eq(1).val(data.rotationNumber);
+				$(".txt2").eq(2).val(data.direction);
+				$(".txt2").eq(3).val(data.date);
+			},
+		};
 	}
 	
     static get DTC_DATA() {
-		return {
+		let data = {
 			base:      "atl",
 			equipment: "7er",
 			position:  "a",
@@ -172,6 +285,19 @@ class InputConstants {
 			endDate:   "",
 			download:  "N",
 			scre:      "scre",
+		};
+		
+		return {
+			data: data,
+			insert: () => {
+				$(".txt5").eq(0).val(data.base);
+				$(".txt5").eq(1).val(data.equipment);
+				$(".txt5").eq(2).val(data.position);
+				$(".txt5").eq(3).val(data.beginDate);
+				$(".txt5").eq(4).val(data.endDate);
+				$(".txt5").eq(5).val(data.download);
+				$(".txt5").eq(6).val(data.scre);
+			},
 		};
 	}
 }
