@@ -1,4 +1,4 @@
-//v4
+//v5
 class InputConstants {
 	static ALL(pageFilter = null) {
 		return [
@@ -244,7 +244,7 @@ class InputConstants {
 			base:           "ATL",
 			rotationNumber: "A100",
 			dupeNumber:     "",
-		},
+		};
 		
 		return {
 			data: data,
