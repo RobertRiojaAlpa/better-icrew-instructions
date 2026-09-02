@@ -1,4 +1,4 @@
-//v5
+//v6
 class InputConstants {
 	static ALL(pageFilter = null) {
 		return [
@@ -61,18 +61,16 @@ class InputConstants {
 	}
 	
     static get SCHS_DATA() {
-		let data = {
-			employeeNumber: "504483",
-			bidPeriod:      "02JUL26",
-			action:         "i",
-		};
-		
 		return {
-			data: data,
+			data: {
+				employeeNumber: "504483",
+				bidPeriod:      "02JUL26",
+				action:         "i",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.employeeNumber);
-				$(".txt5").eq(1).val(data.bidPeriod);
-				$(".txt5").eq(2).val(data.action);
+				$(".txt5").eq(0).val(InputConstants.SCHS_DATA.data.employeeNumber);
+				$(".txt5").eq(1).val(InputConstants.SCHS_DATA.data.bidPeriod);
+				$(".txt5").eq(2).val(InputConstants.SCHS_DATA.data.action);
 			},
 		};
 	}
