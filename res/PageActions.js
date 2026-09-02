@@ -1,5 +1,15 @@
-//v43
+//v44
 class PageActions {
+	static async continuityFunction(page) {
+		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
+			alert("Unexpected page in test action - see console for more information");
+			await GMSettings.ACTIONS_CONSUMABLE.set([]);
+			return true;
+		}
+		
+		return false;
+	}
+	
 	static getPersistentActions() {
 		return [
 			new PageAction("skipTimeout", -110, (p) => p === Pages.LOGOUT || p === Pages.GATEWAY_TIMEOUT, async (pageAction) => {
@@ -159,29 +169,19 @@ class PageActions {
 	}
 	
 	static getPageResolverTestActions() {
-		let continuityFunction = async (page) => {
-			if(await PageResolver.getPage(Menus.getMenu()) !== page) {
-				alert("Unexpected page in page resolver test action - see console for more information");
-				await GMSettings.ACTIONS_CONSUMABLE.set([]);
-				return true;
-			}
-			
-			return false;
-		}
-		
 		let index = 0;
 		
 		let actions = [
 			new PageAction("testPageResolverRecordResultMainMenu", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
+				if(await PageActions.continuityFunction(Pages.MAIN_MENU)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MAIN_MENU);
 				
 				Pages.clickMenu(0, 0);
                 return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchs", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS);
 				
@@ -192,39 +192,39 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchsData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS_DATA);
 				
 				$(".better-rotation-number").eq(0).click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRotation", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.ROTATION)) return true;
+				if(await PageActions.continuityFunction(Pages.ROTATION)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.ROTATION);
 				
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToSchs", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_DATA)) return true;
 				
 				Pages.clickMenu(0, 0);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			/*new PageAction("testPageResolverRecordResultMustBeNOrL", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MUST_BE_N_OR_L)) return true;
+				if(await PageActions.continuityFunction(Pages.MUST_BE_N_OR_L)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MUST_BE_N_OR_L);
 				
 				Pages.clickMenu(0, 0);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),*/
+			}),*/
 			new PageAction("testPageResolverGoToSchsHistory", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
 				let inputData = InputConstants.SCHS_HISTORY;
 				
@@ -233,17 +233,17 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchsHistory", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_HISTORY)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY);
 				
 				$(".btn9").eq(0).click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
 				let inputData = InputConstants.SCHS_HISTORY_ALTERNATE;
 				
@@ -252,25 +252,25 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchsHistoryScrollMessage", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY_SCROLL_MESSAGE)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_HISTORY_SCROLL_MESSAGE)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_SCROLL_MESSAGE);
 				
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchsHistoryAlternate", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_HISTORY_ALTERNATE)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_HISTORY_ALTERNATE)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHS_HISTORY_ALTERNATE);
 				
 				Pages.clickMenu(0, 1);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMots", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MOTS)) return true;
+				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTS);
 				
@@ -281,17 +281,17 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMotsData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MOTS_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.MOTS_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTS_DATA);
 				
 				Pages.clickMenu(0, 2);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMotv", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MOTV)) return true;
+				if(await PageActions.continuityFunction(Pages.MOTV)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTV);
 				
@@ -301,17 +301,17 @@ class PageActions {
 				$(".txt5").eq(1).val(inputData.bidPeriod);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMotvData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MOTV_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.MOTV_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MOTV_DATA);
 				
 				Pages.clickMenu(0, 0);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToSchsData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
 				
 				let inputData = InputConstants.SCHS_DATA;
 				
@@ -320,78 +320,78 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.action);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToSick", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHS_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHS_DATA)) return true;
 				
 				$("#PictureButton006").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSick", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SICK)) return true;
+				if(await PageActions.continuityFunction(Pages.SICK)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SICK);
 				
 				$(".btn16").eq(0).click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSickOccurrences", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SICK_OCCURRENCES)) return true;
+				if(await PageActions.continuityFunction(Pages.SICK_OCCURRENCES)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SICK_OCCURRENCES);
 				
 				$(".btn9").eq(1).click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToRots", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SICK)) return true;
+				if(await PageActions.continuityFunction(Pages.SICK)) return true;
 				
 				Pages.clickMenu(1, 2);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRots", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
+				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.ROTS);
 				
 				$(".btn9").eq(1).click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultPcs", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.PCS)) return true;
+				if(await PageActions.continuityFunction(Pages.PCS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.PCS);
 				
 				$(".txt5").eq(0).val("o");
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResult23m7", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.$23M7)) return true;
+				if(await PageActions.continuityFunction(Pages.$23M7)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.$23M7);
 				
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResult23m7Data", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.$23M7_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.$23M7_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.$23M7_DATA);
 				
 				Pages.clickMenu(1, 1);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultPres", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.PRES)) return true;
+				if(await PageActions.continuityFunction(Pages.PRES)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.PRES);
 				
 				Pages.clickMenu(1, 2);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToRotsHistory", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
+				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
 				
 				let inputData = InputConstants.ROTS_HISTORY;
 				
@@ -411,17 +411,17 @@ class PageActions {
 				$(".txt5").eq(13).val(inputData.printerAddress);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRotsHistory", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS_HISTORY)) return true;
+				if(await PageActions.continuityFunction(Pages.ROTS_HISTORY)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.ROTS_HISTORY);
 				
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverGoToReserveOpenTime", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.ROTS)) return true;
+				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
 				
 				let inputData = InputConstants.RESERVE_OPEN_TIME;
 				
@@ -441,9 +441,9 @@ class PageActions {
 				$(".txt5").eq(13).val(inputData.printerAddress);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultReserveOpenTime", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.RESERVE_OPEN_TIME)) return true;
+				if(await PageActions.continuityFunction(Pages.RESERVE_OPEN_TIME)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.RESERVE_OPEN_TIME);
 				
@@ -454,73 +454,73 @@ class PageActions {
 				$(".txt5").eq(2).val(inputData.option);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultScAwds", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SC_AWDS)) return true;
+				if(await PageActions.continuityFunction(Pages.SC_AWDS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SC_AWDS);
 				
 				Pages.clickMenu(2, 4);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultVtss", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.VTSS)) return true;
+				if(await PageActions.continuityFunction(Pages.VTSS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.VTSS);
 				
 				Pages.clickMenu(3, 2);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultUdd", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.UDD)) return true;
+				if(await PageActions.continuityFunction(Pages.UDD)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.UDD);
 				
 				Pages.clickMenu(4, 0);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSlp", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SLP)) return true;
+				if(await PageActions.continuityFunction(Pages.SLP)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SLP);
 				
 				Pages.clickMenu(4, 1);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSwap", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SWAP)) return true;
+				if(await PageActions.continuityFunction(Pages.SWAP)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SWAP);
 				
 				Pages.clickMenu(4, 3);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultLeav", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.LEAV)) return true;
+				if(await PageActions.continuityFunction(Pages.LEAV)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.LEAV);
 				
 				Pages.clickMenu(4, 4);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultDty", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.DTY)) return true;
+				if(await PageActions.continuityFunction(Pages.DTY)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTY);
 				
 				Pages.clickMenu(5, 2);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRsRr", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.RS_RR)) return true;
+				if(await PageActions.continuityFunction(Pages.RS_RR)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.RS_RR);
 				
 				Pages.clickMenu(6, 1);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRph", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.RPH)) return true;
+				if(await PageActions.continuityFunction(Pages.RPH)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.RPH);
 				
@@ -532,17 +532,17 @@ class PageActions {
 				$(".txt2").eq(3).val(inputData.dupeNumber);
 				$("#btnOK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultRphData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.RPH_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.RPH_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.RPH_DATA);
 				
 				Pages.clickMenu(6, 3);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMpi", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MPI)) return true;
+				if(await PageActions.continuityFunction(Pages.MPI)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MPI);
 				
@@ -554,113 +554,113 @@ class PageActions {
 				$(".txt2").eq(3).val(inputData.date);
 				$("#btnOK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMpiData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MPI_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.MPI_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MPI_DATA);
 				
 				Pages.clickMenu(7, 1);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultLayIoe", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.LAY_IOE)) return true;
+				if(await PageActions.continuityFunction(Pages.LAY_IOE)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.LAY_IOE);
 				
 				Pages.clickMenu(7, 3);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultPmr", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.PMR)) return true;
+				if(await PageActions.continuityFunction(Pages.PMR)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.PMR);
 				
 				Pages.clickMenu(7, 5);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultScSked", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SC_SKED)) return true;
+				if(await PageActions.continuityFunction(Pages.SC_SKED)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SC_SKED);
 				
 				Pages.clickMenu(7, 7);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultConf", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.CONF)) return true;
+				if(await PageActions.continuityFunction(Pages.CONF)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.CONF);
 				
 				Pages.clickMenu(7, 8);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultFxday", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.FXDAY)) return true;
+				if(await PageActions.continuityFunction(Pages.FXDAY)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.FXDAY);
 				
 				Pages.clickMenu(7, 9);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultLayover", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.LAYOVER)) return true;
+				if(await PageActions.continuityFunction(Pages.LAYOVER)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.LAYOVER);
 				
 				Pages.clickMenu(7, 10);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultNqps", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.NQPS)) return true;
+				if(await PageActions.continuityFunction(Pages.NQPS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.NQPS);
 				
 				Pages.clickMenu(8, 3);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultObws", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.OBWS)) return true;
+				if(await PageActions.continuityFunction(Pages.OBWS)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.OBWS);
 				
 				Pages.clickMenu(8, 4);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultPscr", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.PSCR)) return true;
+				if(await PageActions.continuityFunction(Pages.PSCR)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.PSCR);
 				
 				Pages.clickMenu(8, 8);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultInverse", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.INVERSE)) return true;
+				if(await PageActions.continuityFunction(Pages.INVERSE)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.INVERSE);
 				
 				Pages.clickMenu(8, 9);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultMaxSc", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.MAX_SC)) return true;
+				if(await PageActions.continuityFunction(Pages.MAX_SC)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.MAX_SC);
 				
 				Pages.clickMenu(8, 11);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultSchsome", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.SCHSOME)) return true;
+				if(await PageActions.continuityFunction(Pages.SCHSOME)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.SCHSOME);
 				
 				Pages.clickMenu(8, 7);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultDtc", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.DTC)) return true;
+				if(await PageActions.continuityFunction(Pages.DTC)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTC);
 				
@@ -675,24 +675,24 @@ class PageActions {
 				$(".txt5").eq(6).val(inputData.scre);
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultDtcConfirm", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.DTC_CONFIRM)) return true;
+				if(await PageActions.continuityFunction(Pages.DTC_CONFIRM)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTC_CONFIRM);
 				
 				$("#var_OK").click();
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 			new PageAction("testPageResolverRecordResultDtcData", index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.DTC_DATA)) return true;
+				if(await PageActions.continuityFunction(Pages.DTC_DATA)) return true;
 				
 				await GMSettings.addPageResolverTestResult(Pages.DTC_DATA);
 				
 				//Back to main menu
 				Pages.clickMenu(0, 5);
 				return true;
-			}).withData({ continuityFunction: continuityFunction.toString(), }),
+			}),
 		];
 		
 		let unknownPages = [
@@ -753,15 +753,15 @@ class PageActions {
 		];
 		
 		actions.push(new PageAction("testPageResolverGoToFirstUnknown", index += 0.1, "", async (pageAction) => {
-			if(await eval(pageAction.data.continuityFunction)(Pages.MAIN_MENU)) return true;
+			if(await PageActions.continuityFunction(Pages.MAIN_MENU)) return true;
 			
 			Pages.clickMenu(pageAction.data.firstUnknownPage[0], pageAction.data.firstUnknownPage[1]);
 			return true;
-		}).withData({ firstUnknownPage: unknownPages[0], continuityFunction: continuityFunction.toString(), }));
+		}).withData({ firstUnknownPage: unknownPages[0], }));
 		
 		for(let i = 0; i < unknownPages.length; i++) {
 			actions.push(new PageAction(`testPageResolverRecordResultUnknown(${unknownPages[i][0]},${unknownPages[i][1]})`, index += 0.1, "", async (pageAction) => {
-				if(await eval(pageAction.data.continuityFunction)(Pages.UNKNOWN)) return true;
+				if(await PageActions.continuityFunction(Pages.UNKNOWN)) return true;
 				
 				await GMSettings.addPageResolverTestResult(`${pageAction.data.currentUnknownPage[0]}, ${pageAction.data.currentUnknownPage[1]}`);
 				
@@ -778,7 +778,7 @@ class PageActions {
 					alert("Results logged to console");
 				}
 				return true;
-			}).withData({ currentUnknownPage: unknownPages[i], nextUnknownPage: unknownPages[i + 1], continuityFunction: continuityFunction.toString(), }));
+			}).withData({ currentUnknownPage: unknownPages[i], nextUnknownPage: unknownPages[i + 1], }));
 		}
 		
 		return actions;
@@ -819,6 +819,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledSchs2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				let inputData = InputConstants.SCHS_DATA;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
@@ -828,10 +830,14 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledSchs3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS_DATA)) return true;
+				
 				$("#PictureButton001").click();
 				return true;
 			}),
 			new PageAction("testPageBackDisabledSchs4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS_DATA)) return true;
+				
 				$("#PictureButton").click();
 				return true;
 			}),
@@ -854,6 +860,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledSchs2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				let inputData = InputConstants.SCHS_DATA;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
@@ -863,10 +871,14 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledSchs3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS_DATA)) return true;
+				
 				$("#PictureButton001").click();
 				return true;
 			}),
 			new PageAction("testPageBackEnabledSchs4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS_DATA)) return true;
+				
 				$("#PictureButton").click();
 				return true;
 			}),
@@ -889,6 +901,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledMots2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
+				
 				let inputData = InputConstants.MOTS_DATA;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
@@ -898,6 +912,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledMots3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS_DATA)) return true;
+				
 				$("#PictureButton").click();
 				return true;
 			}),
@@ -920,6 +936,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledMots2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
+				
 				let inputData = InputConstants.MOTS_DATA;
 				
 				$(".txt5").eq(0).val(inputData.employeeNumber);
@@ -929,6 +947,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledMots3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS_DATA)) return true;
+				
 				$("#PictureButton").click();
 				return true;
 			}),
@@ -951,6 +971,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledDtc2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC)) return true;
+				
 				let inputData = InputConstants.DTC_DATA;
 				
 				$(".txt5").eq(0).val(inputData.base);
@@ -964,10 +986,14 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackDisabledDtc3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC_CONFIRM)) return true;
+				
 				$("#var_OK").click();
 				return true;
 			}),
 			new PageAction("testPageBackDisabledDtc4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC_DATA)) return true;
+				
 				$(".btn13").eq(5).click();
 				return true;
 			}),
@@ -990,6 +1016,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledDtc2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC)) return true;
+				
 				let inputData = InputConstants.DTC_DATA;
 				
 				$(".txt5").eq(0).val(inputData.base);
@@ -1003,10 +1031,14 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testPageBackEnabledDtc3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC_CONFIRM)) return true;
+				
 				$("#var_OK").click();
 				return true;
 			}),
 			new PageAction("testPageBackEnabledDtc4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.DTC_DATA)) return true;
+				
 				$(".btn13").eq(5).click();
 				return true;
 			}),
