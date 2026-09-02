@@ -1,4 +1,4 @@
-//v45
+//v46
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -1278,6 +1278,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSchsBidPeriodSticky2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
 				
 				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(true);
@@ -1288,6 +1290,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.SCHS_DATA.bidPeriod);
 				
 				await GMSettings.SCHS_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
@@ -1322,6 +1326,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSchsAction2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsAction (none)", $(".txt5").eq(2).val() === "");
 				
 				await GMSettings.SCHS_ACTION_TYPE.set("default");
@@ -1331,6 +1337,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsAction3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsAction (default, part 1)", $(".txt5").eq(2).val() === "n");
 				
 				$(".txt5").eq(2).val("i");
@@ -1340,6 +1348,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsAction4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsAction (default, part 2)", $(".txt5").eq(2).val() === "n");
 				
 				await GMSettings.SCHS_ACTION_TYPE.set("sticky");
@@ -1350,6 +1360,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsAction5", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsAction (sticky)", $(".txt5").eq(2).val() === "i");
 				
 				await GMSettings.SCHS_ACTION_TYPE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
@@ -1382,6 +1394,8 @@ class PageActions {
 				return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (none)", $(".txt5").eq(4).val() === "Y");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("sticky");
@@ -1393,6 +1407,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (sticky)", $(".txt5").eq(4).val() === "y");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("y");
@@ -1401,6 +1417,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed4", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (Y)", $(".txt5").eq(4).val() === "Y");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set("n");
@@ -1409,6 +1427,8 @@ class PageActions {
                 return true;
 			}),
 			new PageAction("testSchsHistoryPilotViewed5", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.SCHS)) return true;
+				
 				await GMSettings.addSettingsTestResult("schsHistoryPilotViewed (N)", $(".txt5").eq(4).val() === "N");
 				
 				await GMSettings.SCHS_HISTORY_PILOT_VIEWED_TYPE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
