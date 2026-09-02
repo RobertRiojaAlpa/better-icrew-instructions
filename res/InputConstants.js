@@ -1,4 +1,4 @@
-//v6
+//v7
 class InputConstants {
 	static ALL(pageFilter = null) {
 		return [
@@ -10,12 +10,12 @@ class InputConstants {
 			{
 				name: "schsHistory",
 				value: this.SCHS_HISTORY,
-				page: Pages.SCHS_HISTORY,
+				page: Pages.SCHS,
 			},
 			{
 				name: "schsHistoryAlternate",
 				value: this.SCHS_HISTORY_ALTERNATE,
-				page: Pages.SCHS_HISTORY,
+				page: Pages.SCHS,
 			},
 			{
 				name: "motsData",
@@ -76,225 +76,205 @@ class InputConstants {
 	}
 	
     static get SCHS_HISTORY() {
-		let data = {
-			employeeNumber: "504483",
-			bidPeriod:      "02JUL26",
-			action:         "n",
-		};
-		
 		return {
-			data: data,
+			data: {
+				employeeNumber: "504483",
+				bidPeriod:      "02JUL26",
+				action:         "n",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.employeeNumber);
-				$(".txt5").eq(1).val(data.bidPeriod);
-				$(".txt5").eq(2).val(data.action);
+				$(".txt5").eq(0).val(InputConstants.SCHS_HISTORY.data.employeeNumber);
+				$(".txt5").eq(1).val(InputConstants.SCHS_HISTORY.data.bidPeriod);
+				$(".txt5").eq(2).val(InputConstants.SCHS_HISTORY.data.action);
 			},
 		};
 	}
 	
     static get SCHS_HISTORY_ALTERNATE() {
-		let data = {
-			employeeNumber: "792096",
-			bidPeriod:      "01NOV25",
-			action:         "n",
-		};
-		
 		return {
-			data: data,
+			data: {
+				employeeNumber: "792096",
+				bidPeriod:      "01NOV25",
+				action:         "n",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.employeeNumber);
-				$(".txt5").eq(1).val(data.bidPeriod);
-				$(".txt5").eq(2).val(data.action);
+				$(".txt5").eq(0).val(InputConstants.SCHS_HISTORY_ALTERNATE.data.employeeNumber);
+				$(".txt5").eq(1).val(InputConstants.SCHS_HISTORY_ALTERNATE.data.bidPeriod);
+				$(".txt5").eq(2).val(InputConstants.SCHS_HISTORY_ALTERNATE.data.action);
 			},
 		};
 	}
 	
     static get MOTS_DATA() {
-		let data = {
-			employeeNumber: "504483",
-			bidPeriod:      "02JUL26",
-			option:         "a",
-		};
-		
 		return {
-			data: data,
+			data: {
+				employeeNumber: "504483",
+				bidPeriod:      "02JUL26",
+				option:         "a",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.employeeNumber);
-				$(".txt5").eq(1).val(data.bidPeriod);
-				$(".txt5").eq(2).val(data.option);
+				$(".txt5").eq(0).val(InputConstants.MOTS_DATA.data.employeeNumber);
+				$(".txt5").eq(1).val(InputConstants.MOTS_DATA.data.bidPeriod);
+				$(".txt5").eq(2).val(InputConstants.MOTS_DATA.data.option);
 			},
 		};
 	}
 	
     static get MOTV_DATA() {
-		let data = {
-			employeeNumber: "504483",
-			bidPeriod:      "02JUL26",
-		};
-		
 		return {
-			data: data,
+			data: {
+				employeeNumber: "504483",
+				bidPeriod:      "02JUL26",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.employeeNumber);
-				$(".txt5").eq(1).val(data.bidPeriod);
+				$(".txt5").eq(0).val(InputConstants.MOTV_DATA.data.employeeNumber);
+				$(".txt5").eq(1).val(InputConstants.MOTV_DATA.data.bidPeriod);
 			},
 		};
 	}
 	
     static get ROTS_HISTORY() {
-		let data = {
-			base:                "atl",
-			equipment:           "330",
-			position:            "a",
-			beginDate:           "02JUN26",
-			endDate:             "",
-			reserveOpenTime:     "n",
-			rotationNumber:      "a102",
-			rotationLengthStart: "",
-			rotationLengthEnd:   "",
-			history:             "y",
-			count1:              "",
-			count2:              "",
-			download:            "",
-			printerAddress:      "",
-		};
-		
 		return {
-			data: data,
+			data: {
+				base:                "atl",
+				equipment:           "330",
+				position:            "a",
+				beginDate:           "02JUN26",
+				endDate:             "",
+				reserveOpenTime:     "n",
+				rotationNumber:      "a102",
+				rotationLengthStart: "",
+				rotationLengthEnd:   "",
+				history:             "y",
+				count1:              "",
+				count2:              "",
+				download:            "",
+				printerAddress:      "",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.base);
-				$(".txt5").eq(1).val(data.equipment);
-				$(".txt5").eq(2).val(data.position);
-				$(".txt5").eq(3).val(data.beginDate);
-				$(".txt5").eq(4).val(data.endDate);
-				$(".txt5").eq(5).val(data.reserveOpenTime);
-				$(".txt5").eq(6).val(data.rotationNumber);
-				$(".txt5").eq(7).val(data.rotationLengthStart);
-				$(".txt5").eq(8).val(data.rotationLengthEnd);
-				$(".txt5").eq(9).val(data.history);
-				$(".txt5").eq(10).val(data.count1);
-				$(".txt5").eq(11).val(data.count2);
-				$(".txt5").eq(12).val(data.download);
-				$(".txt5").eq(13).val(data.printerAddress);
+				$(".txt5").eq(0 ).val(InputConstants.ROTS_HISTORY.data.base);
+				$(".txt5").eq(1 ).val(InputConstants.ROTS_HISTORY.data.equipment);
+				$(".txt5").eq(2 ).val(InputConstants.ROTS_HISTORY.data.position);
+				$(".txt5").eq(3 ).val(InputConstants.ROTS_HISTORY.data.beginDate);
+				$(".txt5").eq(4 ).val(InputConstants.ROTS_HISTORY.data.endDate);
+				$(".txt5").eq(5 ).val(InputConstants.ROTS_HISTORY.data.reserveOpenTime);
+				$(".txt5").eq(6 ).val(InputConstants.ROTS_HISTORY.data.rotationNumber);
+				$(".txt5").eq(7 ).val(InputConstants.ROTS_HISTORY.data.rotationLengthStart);
+				$(".txt5").eq(8 ).val(InputConstants.ROTS_HISTORY.data.rotationLengthEnd);
+				$(".txt5").eq(9 ).val(InputConstants.ROTS_HISTORY.data.history);
+				$(".txt5").eq(10).val(InputConstants.ROTS_HISTORY.data.count1);
+				$(".txt5").eq(11).val(InputConstants.ROTS_HISTORY.data.count2);
+				$(".txt5").eq(12).val(InputConstants.ROTS_HISTORY.data.download);
+				$(".txt5").eq(13).val(InputConstants.ROTS_HISTORY.data.printerAddress);
 			},
 		};
 	}
 	
     static get RESERVE_OPEN_TIME() {
-		let data = {
-			base:                "atl",
-			equipment:           "330",
-			position:            "a",
-			beginDate:           "",
-			endDate:             "",
-			reserveOpenTime:     "y",
-			rotationNumber:      "a102",
-			rotationLengthStart: "",
-			rotationLengthEnd:   "",
-			history:             "",
-			count1:              "",
-			count2:              "",
-			download:            "",
-			printerAddress:      "",
-		};
-		
 		return {
-			data: data,
+			data: {
+				base:                "atl",
+				equipment:           "330",
+				position:            "a",
+				beginDate:           "",
+				endDate:             "",
+				reserveOpenTime:     "y",
+				rotationNumber:      "a102",
+				rotationLengthStart: "",
+				rotationLengthEnd:   "",
+				history:             "",
+				count1:              "",
+				count2:              "",
+				download:            "",
+				printerAddress:      "",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.base);
-				$(".txt5").eq(1).val(data.equipment);
-				$(".txt5").eq(2).val(data.position);
-				$(".txt5").eq(3).val(data.beginDate);
-				$(".txt5").eq(4).val(data.endDate);
-				$(".txt5").eq(5).val(data.reserveOpenTime);
-				$(".txt5").eq(6).val(data.rotationNumber);
-				$(".txt5").eq(7).val(data.rotationLengthStart);
-				$(".txt5").eq(8).val(data.rotationLengthEnd);
-				$(".txt5").eq(9).val(data.history);
-				$(".txt5").eq(10).val(data.count1);
-				$(".txt5").eq(11).val(data.count2);
-				$(".txt5").eq(12).val(data.download);
-				$(".txt5").eq(13).val(data.printerAddress);
+				$(".txt5").eq(0 ).val(InputConstants.RESERVE_OPEN_TIME.data.base);
+				$(".txt5").eq(1 ).val(InputConstants.RESERVE_OPEN_TIME.data.equipment);
+				$(".txt5").eq(2 ).val(InputConstants.RESERVE_OPEN_TIME.data.position);
+				$(".txt5").eq(3 ).val(InputConstants.RESERVE_OPEN_TIME.data.beginDate);
+				$(".txt5").eq(4 ).val(InputConstants.RESERVE_OPEN_TIME.data.endDate);
+				$(".txt5").eq(5 ).val(InputConstants.RESERVE_OPEN_TIME.data.reserveOpenTime);
+				$(".txt5").eq(6 ).val(InputConstants.RESERVE_OPEN_TIME.data.rotationNumber);
+				$(".txt5").eq(7 ).val(InputConstants.RESERVE_OPEN_TIME.data.rotationLengthStart);
+				$(".txt5").eq(8 ).val(InputConstants.RESERVE_OPEN_TIME.data.rotationLengthEnd);
+				$(".txt5").eq(9 ).val(InputConstants.RESERVE_OPEN_TIME.data.history);
+				$(".txt5").eq(10).val(InputConstants.RESERVE_OPEN_TIME.data.count1);
+				$(".txt5").eq(11).val(InputConstants.RESERVE_OPEN_TIME.data.count2);
+				$(".txt5").eq(12).val(InputConstants.RESERVE_OPEN_TIME.data.download);
+				$(".txt5").eq(13).val(InputConstants.RESERVE_OPEN_TIME.data.printerAddress);
 			},
 		};
 	}
 	
     static get SC_AWDS() {
-		let data = {
-			category:  "atl330a",
-			bidPeriod: "02JUN26",
-			option:    "d",
-		};
-		
 		return {
-			data: data,
+			data: {
+				category:  "atl330a",
+				bidPeriod: "02JUN26",
+				option:    "d",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.category);
-				$(".txt5").eq(1).val(data.bidPeriod);
-				$(".txt5").eq(2).val(data.option);
+				$(".txt5").eq(0).val(InputConstants.SC_AWDS.data.category);
+				$(".txt5").eq(1).val(InputConstants.SC_AWDS.data.bidPeriod);
+				$(".txt5").eq(2).val(InputConstants.SC_AWDS.data.option);
 			},
 		};
 	}
 	
     static get RPH_DATA() {
-		let data = {
-			date:           "03JUL",
-			base:           "ATL",
-			rotationNumber: "A100",
-			dupeNumber:     "",
-		};
-		
 		return {
-			data: data,
+			data: {
+				date:           "03JUL",
+				base:           "ATL",
+				rotationNumber: "A100",
+				dupeNumber:     "",
+			},
 			insert: () => {
-				$(".txt2").eq(0).val(data.date);
-				$(".txt2").eq(1).val(data.base);
-				$(".txt2").eq(2).val(data.rotationNumber);
-				$(".txt2").eq(3).val(data.dupeNumber);
+				$(".txt2").eq(0).val(InputConstants.RPH_DATA.data.date);
+				$(".txt2").eq(1).val(InputConstants.RPH_DATA.data.base);
+				$(".txt2").eq(2).val(InputConstants.RPH_DATA.data.rotationNumber);
+				$(".txt2").eq(3).val(InputConstants.RPH_DATA.data.dupeNumber);
 			},
 		};
 	}
 	
     static get MPI_DATA() {
-		let data = {
-			base:           "ATL",
-			rotationNumber: "A100",
-			direction:      "p",
-			date:           "",
-		};
-		
 		return {
-			data: data,
+			data: {
+				base:           "ATL",
+				rotationNumber: "A100",
+				direction:      "p",
+				date:           "",
+			},
 			insert: () => {
-				$(".txt2").eq(0).val(data.base);
-				$(".txt2").eq(1).val(data.rotationNumber);
-				$(".txt2").eq(2).val(data.direction);
-				$(".txt2").eq(3).val(data.date);
+				$(".txt2").eq(0).val(InputConstants.MPI_DATA.data.base);
+				$(".txt2").eq(1).val(InputConstants.MPI_DATA.data.rotationNumber);
+				$(".txt2").eq(2).val(InputConstants.MPI_DATA.data.direction);
+				$(".txt2").eq(3).val(InputConstants.MPI_DATA.data.date);
 			},
 		};
 	}
 	
     static get DTC_DATA() {
-		let data = {
-			base:      "atl",
-			equipment: "7er",
-			position:  "a",
-			beginDate: "01may26",
-			endDate:   "",
-			download:  "N",
-			scre:      "scre",
-		};
-		
 		return {
-			data: data,
+			data: {
+				base:      "atl",
+				equipment: "7er",
+				position:  "a",
+				beginDate: "01may26",
+				endDate:   "",
+				download:  "N",
+				scre:      "scre",
+			},
 			insert: () => {
-				$(".txt5").eq(0).val(data.base);
-				$(".txt5").eq(1).val(data.equipment);
-				$(".txt5").eq(2).val(data.position);
-				$(".txt5").eq(3).val(data.beginDate);
-				$(".txt5").eq(4).val(data.endDate);
-				$(".txt5").eq(5).val(data.download);
-				$(".txt5").eq(6).val(data.scre);
+				$(".txt5").eq(0).val(InputConstants.DTC_DATA.data.base);
+				$(".txt5").eq(1).val(InputConstants.DTC_DATA.data.equipment);
+				$(".txt5").eq(2).val(InputConstants.DTC_DATA.data.position);
+				$(".txt5").eq(3).val(InputConstants.DTC_DATA.data.beginDate);
+				$(".txt5").eq(4).val(InputConstants.DTC_DATA.data.endDate);
+				$(".txt5").eq(5).val(InputConstants.DTC_DATA.data.download);
+				$(".txt5").eq(6).val(InputConstants.DTC_DATA.data.scre);
 			},
 		};
 	}
