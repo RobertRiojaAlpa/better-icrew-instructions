@@ -1,4 +1,4 @@
-//v48
+//v49
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -1520,7 +1520,7 @@ class PageActions {
 			new PageAction("testMotsOptionInsertA3", index += 0.01, "", async (pageAction) => {
 				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
 				
-				await GMSettings.addSettingsTestResult("motsOptionInsertA (enabled)", $(".txt5").eq(1).val() === "a");
+				await GMSettings.addSettingsTestResult("motsOptionInsertA (enabled)", $(".txt5").eq(2).val() === "a");
 				
 				await GMSettings.MOTS_INSERT_A_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
 				
