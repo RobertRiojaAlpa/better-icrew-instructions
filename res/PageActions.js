@@ -1,4 +1,4 @@
-//v50
+//v51
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -795,6 +795,7 @@ class PageActions {
 		actions.push(...this.getMotsBidPeriodStickyTestActions(index += 1, true));
 		actions.push(...this.getMotsOptionInsertATestActions(index += 1, true));
 		actions.push(...this.getMotvBidPeriodStickyTestActions(index += 1, true));
+		actions.push(...this.getRotsHistoryInsertYTestActions(index += 1, true));
 		
 		actions.push(...this.getSkipConfirmTestActions(true));
 		index = 92;
@@ -1579,6 +1580,50 @@ class PageActions {
 		
 		if(!isBeingRunTogether) {
 			actions.push(new PageAction("testMotvBidPeriodStickyEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
+	}
+
+	static getRotsHistoryInsertYTestActions(index = 0, isBeingRunTogether = false) {
+		let actions = [
+			new PageAction("testRotsHistoryInsertY1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.ROTS_INSERT_Y_ENABLE.get());
+				
+				await GMSettings.ROTS_INSERT_Y_ENABLE.set(false);
+				
+				Pages.clickMenu(1, 2);
+				return true;
+			}),
+			new PageAction("testRotsHistoryInsertY2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
+				
+				await GMSettings.addSettingsTestResult("rotsHistoryInsertY (disabled)", $(".txt5").eq(9).val() === "");
+				
+				await GMSettings.ROTS_INSERT_Y_ENABLE.set(true);
+				
+				Pages.clickMenu(1, 2);
+                return true;
+			}),
+			new PageAction("testRotsHistoryInsertY3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.ROTS)) return true;
+				
+				await GMSettings.addSettingsTestResult("rotsHistoryInsertY (enabled)", $(".txt5").eq(9).val() === "y");
+				
+				await GMSettings.ROTS_INSERT_Y_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+		];
+		
+		if(!isBeingRunTogether) {
+			actions.push(new PageAction("testRotsHistoryInsertYEnd", index += 0.01, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
 				return true;
