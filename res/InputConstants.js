@@ -1,5 +1,65 @@
-//v2
+//v3
 class InputConstants {
+	static ALL(pageFilter = null) {
+		return [
+			{
+				name: "schsData",
+				value: this.SCHS_DATA,
+				page: Pages.SCHS,
+			},
+			{
+				name: "schsHistory",
+				value: this.SCHS_HISTORY,
+				page: Pages.SCHS_HISTORY,
+			},
+			{
+				name: "schsHistoryAlternate",
+				value: this.SCHS_HISTORY_ALTERNATE,
+				page: Pages.SCHS_HISTORY,
+			},
+			{
+				name: "motsData",
+				value: this.MOTS_DATA,
+				page: Pages.MOTS,
+			},
+			{
+				name: "motvData",
+				value: this.MOTV_DATA,
+				page: Pages.MOTV,
+			},
+			{
+				name: "rotsHistory",
+				value: this.ROTS_HISTORY,
+				page: Pages.ROTS,
+			},
+			{
+				name: "reserveOpenTime",
+				value: this.RESERVE_OPEN_TIME,
+				page: Pages.ROTS,
+			},
+			{
+				name: "scAwds",
+				value: this.SC_AWDS,
+				page: Pages.RESERVE_OPEN_TIME,
+			},
+			{
+				name: "rphData",
+				value: this.RPH_DATA,
+				page: Pages.RPH,
+			},
+			{
+				name: "mpiData",
+				value: this.MPI_DATA,
+				page: Pages.MPI,
+			},
+			{
+				name: "dtcData",
+				value: this.DTC_DATA,
+				page: Pages.DTC,
+			},
+		].filter(e => pageFilter === null || e.page === pageFilter);
+	}
+	
     static get SCHS_DATA() {
 		return {
 			employeeNumber: "504483",
