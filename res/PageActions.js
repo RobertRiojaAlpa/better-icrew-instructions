@@ -1,4 +1,4 @@
-//v46
+//v47
 class PageActions {
 	static async continuityFunction(page) {
 		if(await PageResolver.getPage(Menus.getMenu()) !== page) {
@@ -792,6 +792,7 @@ class PageActions {
 		actions.push(...this.getSchsBidPeriodStickyTestActions(index += 1, true));
 		actions.push(...this.getSchsActionTestActions(index += 1, true));
 		actions.push(...this.getSchsHistoryPilotViewedTestActions(index += 1, true));
+		actions.push(...this.getMotsBidPeriodStickyTestActions(index += 1, true));
 		
 		actions.push(...this.getSkipConfirmTestActions(true));
 		index = 92;
@@ -1440,6 +1441,52 @@ class PageActions {
 		
 		if(!isBeingRunTogether) {
 			actions.push(new PageAction("testSchsHistoryPilotViewedEnd", index += 0.01, "", async (pageAction) => {
+				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
+				alert("Results logged to console");
+				return true;
+			}));
+		}
+		
+		return actions;
+	}
+	
+	static getMotsBidPeriodStickyTestActions(index = 0, isBeingRunTogether = false) {
+		let actions = [
+			new PageAction("testMotsBidPeriodSticky1", index += 0.01, "", async (pageAction) => {
+				await GMSettings.TEST_SETTINGS_TEMP_VALUE.set(await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.get());
+				
+				await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.set(false);
+				
+				Pages.clickMenu(0, 1);
+				return true;
+			}),
+			new PageAction("testMotsBidPeriodSticky2", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
+				
+				await GMSettings.addSettingsTestResult("motsBidPeriodSticky (disabled)", $(".txt5").eq(1).val() === "");
+				
+				await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.set(true);
+				$(".txt5").eq(1).val(InputConstants.MOTS_DATA.bidPeriod);
+				$(".txt5").eq(1).trigger('input');
+				
+				Pages.clickMenu(0, 1);
+                return true;
+			}),
+			new PageAction("testMotsBidPeriodSticky3", index += 0.01, "", async (pageAction) => {
+				if(await PageActions.continuityFunction(Pages.MOTS)) return true;
+				
+				await GMSettings.addSettingsTestResult("motsBidPeriodSticky (enabled)", $(".txt5").eq(1).val() === InputConstants.MOTS_DATA.bidPeriod);
+				
+				await GMSettings.MOTS_BID_PERIOD_STICKY_ENABLE.set(await GMSettings.TEST_SETTINGS_TEMP_VALUE.get());
+				
+				//Back to main menu
+				Pages.clickMenu(0, 5);
+                return true;
+			}),
+		];
+		
+		if(!isBeingRunTogether) {
+			actions.push(new PageAction("testMotsBidPeriodStickyEnd", index += 0.01, "", async (pageAction) => {
 				console.log("Settings test results:\n" + await GMSettings.TEST_SETTINGS_RESULT.get());
 				alert("Results logged to console");
 				return true;
