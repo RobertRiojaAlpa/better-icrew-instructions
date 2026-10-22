@@ -1,4 +1,4 @@
-//v25
+//v26
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -13,7 +13,7 @@ class Compile {
     <head>
     <title>${tabTitle}</title>
         <style>
-            body { padding: 0; overflow: hidden; display: grid; grid-template-rows: min-content 1fr; justify-items: start; grid-gap: 0.5rem; margin-right: 0; }
+            body { padding: 0; overflow: hidden; display: grid; grid-template-rows: min-content 1fr; justify-items: start; grid-gap: 0.5rem; margin-right: 0; height: 100%; }
             iframe { width: 100%; height: 100%; border: none; }
         </style>
     </head>
