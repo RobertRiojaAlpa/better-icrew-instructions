@@ -1,4 +1,4 @@
-//v30
+//v31
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -214,6 +214,9 @@ class GMSettings {
     static get ACTIONS_CONSUMABLE() { return new this.GMSetting("actionsConsumable", []); }
 
     static get LOGOUT_CLICKED() { return new this.GMSetting("logoutClicked", false); }
+
+	//Interop settings
+	static get INTEROP_ACTION() { return new this.GMSetting("interopAction", {}); }
 
     static ALL() { return Object.entries(Object.getOwnPropertyDescriptors(GMSettings))
                                   .filter(([key, descriptor]) => typeof descriptor.get === "function")
