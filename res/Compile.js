@@ -1,4 +1,4 @@
-//v28
+//v29
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -18,8 +18,10 @@ class Compile {
         </style>
     </head>
     <body>
-        <button onclick="document.getElementById('iframe').contentWindow.print();">Print</button>
-		<button onclick="">Add side-by-side</button>
+		<div style="display: flex; flex-direction: column;">
+        	<button onclick="document.getElementById('iframe').contentWindow.print();">Print</button>
+			<button onclick="">Add side-by-side</button>
+		</div>
         <iframe id="iframe" src="${blobUrl}"></iframe>
     </body>
 </html>
