@@ -1,4 +1,4 @@
-//v27
+//v28
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -19,6 +19,7 @@ class Compile {
     </head>
     <body>
         <button onclick="document.getElementById('iframe').contentWindow.print();">Print</button>
+		<button onclick="">Add side-by-side</button>
         <iframe id="iframe" src="${blobUrl}"></iframe>
     </body>
 </html>
