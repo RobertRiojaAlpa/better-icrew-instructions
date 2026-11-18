@@ -1,4 +1,4 @@
-//v32
+//v33
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -180,6 +180,7 @@ class GMSettings {
     static get PAGE_VALUE_ROTS_EQUIPMENT() { return new this.GMSetting("pageValueRotsEquipment", ""); }
     static get PAGE_VALUE_ROTS_POSITION() { return new this.GMSetting("pageValueRotsPosition", ""); }
     static get PAGE_VALUE_ROTS_ROTATION_NUMBER() { return new this.GMSetting("pageValueRotsRotationNumber", ""); }
+    static get PAGE_VALUE_ROTS_START_DATE() { return new this.GMSetting("pageValueRotsStartDate", ""); }
 
     static get PAGE_VALUE_23M7_BASE() { return new this.GMSetting("pageValue23m7Base", ""); }
     static get PAGE_VALUE_23M7_EQUIPMENT() { return new this.GMSetting("pageValue23m7Equipment", ""); }
