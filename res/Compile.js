@@ -1,4 +1,4 @@
-//v30
+//v31
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -15,18 +15,28 @@ class Compile {
         <style>
 			:root { --num-iframes: 1; }
             body { padding: 0.5rem; display: grid; grid-template-rows: min-content 1fr; justify-items: start; grid-gap: 0.5rem; height: 100%; box-sizing: border-box; margin: 0; }
+			#content-parent { width: 100%; }
             iframe { width: calc(100% / var(--num-iframes)); height: 100%; border: none; }
         </style>
     </head>
     <body>
 		<div style="display: flex; flex-direction: row; gap: 1em;">
         	<button onclick="document.getElementById('iframe').contentWindow.print();">Print</button>
-			<button onclick="">Add side-by-side</button>
+			<button onclick="addSideBySide()">Add side-by-side</button>
 		</div>
-		<div>
+		<div id="content-parent">
         	<iframe id="iframe" src="${blobUrl}"></iframe>
 		</div>
     </body>
+	<script>
+		function addSideBySide() {
+			let parent = document.getElementById("content-parent");
+			let toClone = document.getElementsByTagName("iframe")[0];
+			let clone = toClone.cloneNode(true);
+
+			parent.appendChild(clone);
+		}
+	</script>
 </html>
 `);
             newTab.document.close();
