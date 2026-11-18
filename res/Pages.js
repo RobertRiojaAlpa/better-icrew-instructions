@@ -1,4 +1,4 @@
-//v7
+//v8
 class Pages {
     static get UNKNOWN() { return "Unknown"; }
 
@@ -118,7 +118,9 @@ class Pages {
     }
 
     static hasOpenInNewTab(page) {
-        return page === Pages.SCHS_DATA || page === Pages.ROTATION;
+        return page === Pages.SCHS_DATA
+			   || page === Pages.ROTATION
+			   || page === Pages.ROTS_HISTORY;
     }
 
     static hasBidPeriodInput(page) {
