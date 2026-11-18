@@ -1,4 +1,4 @@
-//v32
+//v33
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -13,12 +13,11 @@ class Compile {
     <head>
     <title>${tabTitle}</title>
         <style>
-			:root { --num-iframes: 1; }
             body { padding: 0.5rem; display: grid; grid-template-rows: min-content 1fr; justify-items: start; grid-gap: 0.5rem; height: 100%; box-sizing: border-box; margin: 0; }
 			#buttons-wrapper { width: 100%; display: flex; flex-direction: row; justify-content: space-between; gap: 2em; }
 			#side-by-side-buttons-wrapper { display: flex; flex-direction: row; gap: 1em; }
-			#content-parent { width: 100%; }
-            iframe { width: calc(100% / var(--num-iframes)); height: 100%; border: none; }
+			#content-parent { width: 100%; display: flex; flex-direction: row; }
+            iframe { width: 100%; height: 100%; border: none; }
         </style>
     </head>
     <body>
@@ -49,7 +48,7 @@ class Compile {
 
 			parent.lastElementChild.remove();
 
-			document.getElementById("remove-side-by-side-button").disabled = true;
+			document.getElementById("remove-side-by-side-button").disabled = parent.childElementCount <= 1;
 		}
 	</script>
 </html>
