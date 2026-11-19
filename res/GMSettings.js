@@ -1,4 +1,4 @@
-//v33
+//v34
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -232,6 +232,10 @@ class GMSettings {
 		let actions = await GMSettings.ACTIONS_CONSUMABLE.get();
 		actions.push(...newActions);
 		await GMSettings.ACTIONS_CONSUMABLE.set(actions);
+	}
+
+	static async getNumberOfActions() {
+		return (await GMSettings.ACTIONS_CONSUMABLE.get())?.length ?? 0;
 	}
 	
 	static async addPageResolverTestResult(page) {
