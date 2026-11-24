@@ -1,4 +1,4 @@
-//v33
+//v34
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -102,7 +102,7 @@ class Compile {
         ]);
     };
 
-    static savePdf(textBlocks, filename, fontSize = "11") {
+    static getPdf(textBlocks, fontSize = "11") {
         const doc = new jspdf.jsPDF();
         doc.addFileToVFS("CourierNew-Normal.ttf", GM_getResourceText("CourierNewBase64"));
         doc.addFont("CourierNew-Normal.ttf", "CourierNew", "normal");
@@ -138,7 +138,27 @@ class Compile {
             }
         }
 
-        doc.save(filename);
+        return doc;
+    }
+
+	static savePdf(textBlocks, filename, fontSize = "11") {
+		getPdf(textBlocks, fontSize).save(filename);
+	}
+
+    static getPdfAsDataTransfer(textBlocks, filename, fontSize = "11") {
+        let doc = createPdf(textBlocks, fontSize);
+
+		const pdfBlob = doc.output("blob");
+
+		const pdfFile = new File([pdfBlob], filename, {
+            type: "application/pdf",
+            lastModified: Date.now(),
+        });
+
+		const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(pdfFile);
+
+		return dataTransfer;
     }
 
     static testSavePdf() {
