@@ -1,4 +1,4 @@
-//v35
+//v36
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -139,6 +139,7 @@ class GMSettings {
     static get COMPILED_MANY_SCHS_DATA_AND_MOTS_RUNNING() { return new this.GMSetting("compiledManySchsDataAndMotsRunning", false); }
     static get COMPILED_MANY_SCHS_DATA_AND_MOTS_PARTIAL_VALUE() { return new this.GMSetting("compiledManySchsDataAndMotsPartialValue", []); }
     static get COMPILED_MANY_SCHS_DATA_AND_MOTS_VALUE() { return new this.GMSetting("compiledManySchsDataAndMotsValue", []); }
+    static get COMPILED_MANY_SCHS_DATA_AND_MOTS_PDF_VALUE() { return new this.GMSetting("compiledManySchsDataAndMotsPdfValue", null); }
 
     static get COMPILED_MANY_SCHS_HISTORY_LIST() { return new this.GMSetting("compiledManySchsHistoryList", []); }
     static get COMPILED_MANY_SCHS_HISTORY_RUNNING() { return new this.GMSetting("compiledManySchsHistoryRunning", false); }
