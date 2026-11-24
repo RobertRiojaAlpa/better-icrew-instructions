@@ -1,4 +1,4 @@
-//v36
+//v37
 class GMSettings {
     static GMSetting = class {
         constructor(name, defaultValue) {
@@ -17,6 +17,10 @@ class GMSettings {
         delete() {
             GM.deleteValue(this.name);
         }
+
+		async addValueChangeListener(callback) {
+            return GM.addValueChangeListener(this.name, callback);
+		}
     }
 
     //Pane settings
