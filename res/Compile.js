@@ -1,4 +1,4 @@
-//v34
+//v35
 class Compile {
     static viewInNewTab(textBlocks, tabTitle) {
         let html = "<style>body {margin: 0px;}</style>" + TextBlock.getHtmlFromTextBlocks(textBlocks);
@@ -100,7 +100,7 @@ class Compile {
                 "text/plain": new Blob([plain], { type: "text/plain" })
             })
         ]);
-    };
+    }
 
     static getPdf(textBlocks, fontSize = "11") {
         const doc = new jspdf.jsPDF();
@@ -142,11 +142,11 @@ class Compile {
     }
 
 	static savePdf(textBlocks, filename, fontSize = "11") {
-		getPdf(textBlocks, fontSize).save(filename);
+		this.getPdf(textBlocks, fontSize).save(filename);
 	}
 
     static getPdfAsDataTransfer(textBlocks, filename, fontSize = "11") {
-        let doc = createPdf(textBlocks, fontSize);
+        let doc = this.getPdf(textBlocks, fontSize);
 
 		const pdfBlob = doc.output("blob");
 
